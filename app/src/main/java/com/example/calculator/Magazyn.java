@@ -1,39 +1,68 @@
 package com.example.calculator;
 
+
+import java.util.ArrayList;
+
 public class Magazyn {
     String magazyn = "";
 
-    void dodajZnakDoStringa(String znak){
+    void dodajZnakDoStringa(String znak) {
+
         this.magazyn += znak;
 
 
     }
 
+    void StringOdNowa(String znak) {
+        this.magazyn = znak;
 
-    String zwrocStringa(){
+
+    }
+
+
+    String zwrocStringa() {
         return magazyn;
 
 
     }
 
-    int zwrocWynik(){
-        try{
-            int cos = Character.getNumericValue(magazyn.charAt(0));
-            int cos2 = Character.getNumericValue(magazyn.charAt(1));
-            return cos+ cos2;
+    String zwrocWynik() {
+        String tmp = "";
+        ArrayList<String> lista = new ArrayList<>();
+        // 19+4+6
+        for (int i = 0; i < magazyn.length(); i++) {
+            //Jeśli znak jest cyfrą, wrzuć do tmp
+            if (isInteger(Character.toString(magazyn.charAt(i))))
+                tmp += magazyn.charAt(i);
+            //else kiedy znak nie jest cyfrą
+            else {
+                lista.add(tmp);
+                lista.add(Character.toString(magazyn.charAt(i)));
+                tmp = "";
 
-        } catch (NullPointerException e){
-            e.printStackTrace();
+            }
+
         }
-        return 0;
+
+        /// obliczanie
+        // [23, +, 12, =]
 
 
+
+
+
+        return "";
 
     }
 
-
-
-
+    public boolean isInteger(String input) { //Pass in string
+        try { //Try to make the input into an integer
+            Integer.parseInt(input);
+            return true; //Return true if it works
+        } catch (Exception e) {
+            return false; //If it doesn't work return false
+        }
+    }
 
 
 }

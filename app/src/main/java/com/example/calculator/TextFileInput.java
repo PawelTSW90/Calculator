@@ -18,15 +18,18 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if(magazyn.magazyn == "0"){
+            magazyn.StringOdNowa(((Button)v).getText().toString());
+            this.txt.setText(magazyn.zwrocStringa());
+        } else
         magazyn.dodajZnakDoStringa(((Button) v).getText().toString());
         this.txt.setText(magazyn.zwrocStringa());
-        //Log.i("Pawel","id = " + v.getResources().getResourceName(v.getId()));
 
 
-        if(v.getResources().getResourceName(v.getId()).contains("button_result")){
-            int cos = magazyn.zwrocWynik();
-            this.txt.setText(Integer.toString(cos));
-        }
+if(v.getResources().getResourceName(v.getId()).contains("C")){
+    magazyn.magazyn = "0";
+    this.txt.setText(magazyn.zwrocStringa());
+}
 
 
 
