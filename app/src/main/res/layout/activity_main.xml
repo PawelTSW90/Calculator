@@ -69,6 +69,13 @@
                 android:text="+" />
 
             <Button
+                android:id="@+id/button_multiply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/button_multiply" />
+
+            <Button
                 android:id="@+id/button_result"
                 style="@android:style/Widget.Button"
                 android:layout_width="wrap_content"

@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new TextFileInput(txt, magazyn));
         final Button button_add = findViewById(R.id.button_add);
         button_add.setOnClickListener(new TextFileInput(txt, magazyn));
+        final Button button_multiply = findViewById(R.id.button_multiply);
+        button_multiply.setOnClickListener(new TextFileInput(txt, magazyn));
         final Button button_C = findViewById(R.id.button_C);
         button_C.setOnClickListener(new TextFileInput(txt, magazyn));
         final Button button_result = findViewById(R.id.button_result);
