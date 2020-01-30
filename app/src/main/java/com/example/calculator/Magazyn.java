@@ -8,7 +8,6 @@ import java.util.Stack;
 
 public class Magazyn {
     String magazyn = "";
-    int priorytet;
 
     void dodajZnakDoStringa(String znak) {
 
@@ -31,9 +30,6 @@ public class Magazyn {
     }
 
 
-
-
-
     String zwrocWynik() {
         String tmp = "";
         ArrayList<String> listaWartosci = new ArrayList<>();
@@ -53,40 +49,45 @@ public class Magazyn {
 
                 listaWartosci.add(Character.toString(magazyn.charAt(i))); //dodanie operatora do listyWartosci
 
-                if(stos.isEmpty()){ //jeśli na stosie nie ma jeszcze żadnych operatorów
+                if (stos.isEmpty()) { //jeśli na stosie nie ma jeszcze żadnych operatorów
                     stos.add(Character.toString(magazyn.charAt(i))); //dodajemy nasz operator na stos jako pierwszy
-                    //kiedy na stosie są już operatory
-                } else{
+
+                } else {                         //kiedy na stosie są już operatory
                     String last = stos.peek();//przypisanie do "last" ostatniego operatora na stosie
+                    if(Character.toString(magazyn.charAt(i)).equals("=")){
+                        continue;
+                    }
 
-                    if (!isLowPriority(Character.toString(magazyn.charAt(i)))){//jeśli nasz operator ma wysoki priorytet
+                    if (!isLowPriority(Character.toString(magazyn.charAt(i)))) {//jeśli nasz operator ma wysoki priorytet
 
-                        if(isLowPriority(last)){ // a ostatni operator na stosie ma niższy priorytet
+                        if (isLowPriority(last)) { // a ostatni operator na stosie ma niższy priorytet
 
                             stos.add(Character.toString(magazyn.charAt(i))); //to dodajemy nasz operator na stos
 
-                        } else{ //jeśli ostatni operator na stosie ma również wysoki priorytet
+                        } else { //jeśli ostatni operator na stosie ma również wysoki priorytet
 
-                            while (!stos.isEmpty()){            //odkładamy operatory o wysokim indeksie na wyjście
-                                if(isLowPriority(stos.peek())){//dopóki nie natrafimy na operator o niskim indeksie
-                                    stos.push(Character.toString(magazyn.charAt(i)));
-                                    break;
-                                }
-                                wyjscie.add(stos.pop());
+                            while (!isLowPriority(last)) {//dopóki na stosie jest operator z wysokim priorytetem
+                                wyjscie.add(last);        //odkładamy go na wyjście
+
                             }
-
+                            stos.push(Character.toString(magazyn.charAt(i))); //gdy operator na stosie ma niższy priorytet, odkłądamy
+                            //nasz operator na wierzch stosu
                         }
+
+                    } else { //jeśli nasz operator ma niski priorytet
+                        while (!stos.isEmpty()) {
+                            wyjscie.add(stos.pop());
+                        }
+                        stos.add(Character.toString(magazyn.charAt(i)));
 
                     }
 
 
-
-
-
-
                 }
-                Log.i("paweł", wyjscie.toString());
+
+
                 tmp = "";
+
 
             }
 
@@ -96,9 +97,21 @@ public class Magazyn {
 
         /// obliczanie
         // [23, +, 12, =]
+        while (!stos.isEmpty()){
+            wyjscie.add(stos.pop());
 
+        }
+
+
+
+
+
+
+        Log.i("paweł", "wyjscie=" + wyjscie.toString());
+        Log.i("paweł", "stos= " + stos.toString());
 
         return "";
+
 
     }
 
@@ -112,15 +125,13 @@ public class Magazyn {
     }
 
     public boolean isLowPriority(String input) {
-        if(input.equals("+")|| input.equals("-")){
+        if (input.equals("+") || input.equals("-")) {
             return true;
         } else
             return false;
 
 
-
     }
-
 
 
 }
