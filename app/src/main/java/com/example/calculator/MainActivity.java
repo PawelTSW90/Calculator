@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         button_result.setOnClickListener(new ResultClass(txt, magazyn));
 
 
+
     }
 
 

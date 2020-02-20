@@ -9,28 +9,28 @@ import java.util.Stack;
 public class Magazyn {
     String magazyn = "";
 
-    void dodajZnakDoStringa(String znak) {
+    void dodajZnakDoStringa(String znak) {     //metoda dodająca kolejne znaki do już istniejącego
 
         this.magazyn += znak;
 
 
     }
 
-    void StringOdNowa(String znak) {
+    void StringOdNowa(String znak) {          // metoda zastępująca wyświetlane 0 na znak który wybraliśmy
         this.magazyn = znak;
 
 
     }
 
 
-    String zwrocStringa() {
+    String zwrocStringa() {                  // metoda wyświetlająca całą zawartość magazynu
         return magazyn;
 
 
     }
 
 
-    String zwrocWynik() {
+    ArrayList<String> PrzygotujWynik() {                //metoda zapisu naszego równania pod obliczenie
         String tmp = "";
         ArrayList<String> listaWartosci = new ArrayList<>();
         Stack<String> stos = new Stack<>();
@@ -105,12 +105,12 @@ public class Magazyn {
         Log.i("paweł", "wyjscie=" + wyjscie.toString());
         Log.i("paweł", "stos= " + stos.toString());
 
-        return "";
+        return wyjscie;
 
 
     }
 
-    public boolean isInteger(String input) {
+    public boolean isInteger(String input) {       // metoda sprawdzająca czy wartość jest libczą
         try {
             Integer.parseInt(input);
             return true;
@@ -119,7 +119,7 @@ public class Magazyn {
         }
     }
 
-    public boolean isLowPriority(String input) {
+    public boolean isLowPriority(String input) {      // metoda sprawdzająca który znak ma priorytet
         if (input.equals("+") || input.equals("-")) {
             return true;
         } else
