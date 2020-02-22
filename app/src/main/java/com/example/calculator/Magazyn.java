@@ -54,8 +54,8 @@ public class Magazyn {
 
                 } else {                         //kiedy na stosie są już operatory
                     String last = stos.peek();//przypisanie do "last" ostatniego operatora na stosie
-                    if (Character.toString(magazyn.charAt(i)).equals("=")) { //jeśli aktualnie przetwarzanym znakiem jest "=",
-                        continue;                                            // nie dodajemy go na stos ani do wyjścia
+                    if(Character.toString(magazyn.charAt(i)).equals("=")){
+                        continue;
                     }
 
                     if (!isLowPriority(Character.toString(magazyn.charAt(i)))) {//jeśli nasz operator ma wysoki priorytet
@@ -66,8 +66,8 @@ public class Magazyn {
 
                         } else { //jeśli ostatni operator na stosie ma również wysoki priorytet
 
-                            while (!isLowPriority(last)) {           //dopóki na stosie jest operator z wysokim priorytetem
-                                wyjscie.add(last);                   //odkładamy go na wyjście
+                            while (!isLowPriority(last)) {//dopóki na stosie jest operator z wysokim priorytetem
+                                wyjscie.add(last);        //odkładamy go na wyjście
 
                             }
                             stos.push(Character.toString(magazyn.charAt(i))); //gdy operator na stosie ma niższy priorytet, odkłądamy
@@ -76,9 +76,9 @@ public class Magazyn {
 
                     } else { //jeśli nasz operator ma niski priorytet
                         while (!stos.isEmpty()) {
-                            wyjscie.add(stos.pop());             //przenosimy wszystkie operatory do wyjścia aż stos pozostanie pusty
+                            wyjscie.add(stos.pop());
                         }
-                        stos.add(Character.toString(magazyn.charAt(i))); // na koniec przenosimy na stos nasz operator
+                        stos.add(Character.toString(magazyn.charAt(i)));
 
                     }
 
@@ -95,11 +95,16 @@ public class Magazyn {
         }
 
 
-
-        while (!stos.isEmpty()) {                       //przenoszenie wszystkich znaków pozostałych na stosie do wyjścia
+        /// obliczanie
+        // [23, +, 12, =]
+        while (!stos.isEmpty()){
             wyjscie.add(stos.pop());
 
         }
+
+
+
+
 
 
         Log.i("paweł", "wyjscie=" + wyjscie.toString());
