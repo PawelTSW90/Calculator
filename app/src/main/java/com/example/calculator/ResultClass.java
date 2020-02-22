@@ -18,7 +18,7 @@ public class ResultClass implements View.OnClickListener {
 
     public void onClick(View v) {
         magazyn.dodajZnakDoStringa("=");
-        String cos = magazyn.PrzygotujWynik();
+        String cos = magazyn.zwrocWynik();
         this.txt.setText(cos);
         magazyn.magazyn = (cos);
     }

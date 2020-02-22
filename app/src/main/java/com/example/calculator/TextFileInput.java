@@ -18,15 +18,15 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(magazyn.magazyn == "0"){                                  // jeśli magazyn to 0, pierwszy naciśnięty znak zastępuje to 0
+        if(magazyn.magazyn == "0"){
             magazyn.StringOdNowa(((Button)v).getText().toString());
             this.txt.setText(magazyn.zwrocStringa());
         } else
-        magazyn.dodajZnakDoStringa(((Button) v).getText().toString()); // jeśli magazyn nie jest 0, dodajemy kolejny znak do już istniejącego
+        magazyn.dodajZnakDoStringa(((Button) v).getText().toString());
         this.txt.setText(magazyn.zwrocStringa());
 
 
-if(v.getResources().getResourceName(v.getId()).contains("C")){       //jeśli naciskamy C, magazyn zamienia się w 0 i zostaje wyświetlony
+if(v.getResources().getResourceName(v.getId()).contains("C")){
     magazyn.magazyn = "0";
     this.txt.setText(magazyn.zwrocStringa());
 }
