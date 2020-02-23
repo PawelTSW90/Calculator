@@ -30,7 +30,10 @@ public class Magazyn {
     }
 
 
-    String zwrocWynik() {
+
+
+
+    ArrayList<String> zwrocWyjscie() {
         String tmp = "";
         ArrayList<String> listaWartosci = new ArrayList<>();
         Stack<String> stos = new Stack<>();
@@ -95,8 +98,7 @@ public class Magazyn {
         }
 
 
-        /// obliczanie
-        // [23, +, 12, =]
+
         while (!stos.isEmpty()){
             wyjscie.add(stos.pop());
 
@@ -110,7 +112,7 @@ public class Magazyn {
         Log.i("paweł", "wyjscie=" + wyjscie.toString());
         Log.i("paweł", "stos= " + stos.toString());
 
-        return "";
+        return wyjscie;
 
 
     }

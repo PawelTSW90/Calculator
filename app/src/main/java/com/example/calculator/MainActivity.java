@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Magazyn magazyn = new Magazyn();
+    private Obliczanie obliczanie = new Obliczanie();
 
 
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         final Button button_C = findViewById(R.id.button_C);
         button_C.setOnClickListener(new TextFileInput(txt, magazyn));
         final Button button_result = findViewById(R.id.button_result);
-        button_result.setOnClickListener(new ResultClass(txt, magazyn));
+        button_result.setOnClickListener(new ResultClass(txt, magazyn, obliczanie));
 
 
     }
