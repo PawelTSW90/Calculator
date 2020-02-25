@@ -6,11 +6,11 @@ import android.widget.TextView;
 
 public class TextFileInput implements View.OnClickListener {
     TextView txt;
-    Magazyn magazyn;
+    Storage storage;
 
-    TextFileInput(TextView text, Magazyn magazyn) {
+    TextFileInput(TextView text, Storage storage) {
         this.txt = text;
-        this.magazyn = magazyn;
+        this.storage = storage;
 
 
     }
@@ -18,17 +18,17 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(magazyn.magazyn == "0"){
-            magazyn.StringOdNowa(((Button)v).getText().toString());
-            this.txt.setText(magazyn.zwrocStringa());
+        if(storage.magazyn == "0"){
+            storage.stringZero(((Button)v).getText().toString());
+            this.txt.setText(storage.returnString());
         } else
-        magazyn.dodajZnakDoStringa(((Button) v).getText().toString());
-        this.txt.setText(magazyn.zwrocStringa());
+        storage.addCharToString(((Button) v).getText().toString());
+        this.txt.setText(storage.returnString());
 
 
 if(v.getResources().getResourceName(v.getId()).contains("C")){
-    magazyn.magazyn = "0";
-    this.txt.setText(magazyn.zwrocStringa());
+    storage.magazyn = "0";
+    this.txt.setText(storage.returnString());
 }
 
 

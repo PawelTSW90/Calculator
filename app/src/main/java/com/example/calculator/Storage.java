@@ -6,24 +6,24 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Magazyn {
+public class Storage {
     String magazyn = "";
 
-    void dodajZnakDoStringa(String znak) {
+    void addCharToString(String znak) {
 
         this.magazyn += znak;
 
 
     }
 
-    void StringOdNowa(String znak) {
+    void stringZero(String znak) {
         this.magazyn = znak;
 
 
     }
 
 
-    String zwrocStringa() {
+    String returnString() {
         return magazyn;
 
 
@@ -33,13 +33,13 @@ public class Magazyn {
 
 
 
-    ArrayList<String> zwrocWyjscie() {
+    ArrayList<String> returnWyjscie() {
         String tmp = "";
         ArrayList<String> listaWartosci = new ArrayList<>();
         Stack<String> stos = new Stack<>();
         ArrayList<String> wyjscie = new ArrayList<>();
 
-        // 19+4+6
+
         for (int i = 0; i < magazyn.length(); i++) {
 
             if (isInteger(Character.toString(magazyn.charAt(i)))) //Jeśli znak jest cyfrą, wrzuć do tmp

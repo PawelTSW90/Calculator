@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class ResultClass implements View.OnClickListener {
     TextView txt;
-    Magazyn magazyn;
-    Obliczanie obliczanie;
+    Storage storage;
+    Calculating calculating;
 
-    ResultClass(TextView text, Magazyn magazyn, Obliczanie obliczanie){
+    ResultClass(TextView text, Storage storage, Calculating calculating){
         this.txt = text;
-        this.magazyn = magazyn;
-        this.obliczanie = obliczanie;
+        this.storage = storage;
+        this.calculating = calculating;
 
     }
 
@@ -22,9 +22,9 @@ public class ResultClass implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        magazyn.dodajZnakDoStringa("=");
-        ArrayList<String> cos = magazyn.zwrocWyjscie();
-        this.txt.setText(obliczanie.OstatecznyWynik(magazyn));
+        storage.addCharToString("=");
+        ArrayList<String> cos = storage.returnWyjscie();
+        this.txt.setText(calculating.FinalResult(storage));
 
 
     }
