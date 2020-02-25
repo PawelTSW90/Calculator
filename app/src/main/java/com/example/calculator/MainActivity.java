@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         button_C.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
-        //siemano
+        //test comment from github
 
 
     }
