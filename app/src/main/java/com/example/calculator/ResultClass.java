@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class ResultClass implements View.OnClickListener {
     TextView txt;
-    Storage storage;
+    StorageClass StorageClass;
     Calculating calculating;
 
-    ResultClass(TextView text, Storage storage, Calculating calculating){
+    ResultClass(TextView text, StorageClass StorageClass, Calculating calculating){
         this.txt = text;
-        this.storage = storage;
+        this.StorageClass = StorageClass;
         this.calculating = calculating;
 
     }
@@ -22,10 +22,24 @@ public class ResultClass implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        storage.addCharToString("=");
-        ArrayList<String> cos = storage.returnWyjscie();
-        this.txt.setText(calculating.FinalResult(storage));
+        if(!isInteger(StorageClass.storage)) {
+            StorageClass.addCharToString("=");
+            ArrayList<String> cos = StorageClass.returnWyjscie();
+            this.txt.setText(calculating.FinalResult(StorageClass));
+        } else;
+
 
 
     }
+
+    public boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
 }

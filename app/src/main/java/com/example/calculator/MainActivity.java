@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Storage storage = new Storage();
+    private StorageClass storage = new StorageClass();
     private Calculating calculating = new Calculating();
 
 
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         button_C.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
+        final Button button_minus = findViewById(R.id.button_minus);
+        button_minus.setOnClickListener(new TextFileInput(txt, storage));
         //test comment from github
 
 

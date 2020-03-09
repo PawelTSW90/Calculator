@@ -3,10 +3,10 @@ package com.example.calculator;
 import java.util.ArrayList;
 
 public class Calculating {
-    Storage storage;
+    StorageClass storage;
 
 
-    String FinalResult(Storage storage) {
+    String FinalResult(StorageClass storage) {
         this.storage = storage;
 
         ArrayList znaki = storage.returnWyjscie();
