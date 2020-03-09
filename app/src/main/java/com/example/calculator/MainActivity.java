@@ -24,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new TextFileInput(txt, storage));
         final Button button3 = findViewById(R.id.button_3);
         button3.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button4 = findViewById(R.id.button_4);
+        button4.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button5 = findViewById(R.id.button_5);
+        button5.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button6 = findViewById(R.id.button_6);
+        button6.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button7 = findViewById(R.id.button_7);
+        button7.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button8 = findViewById(R.id.button_8);
+        button8.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button9 = findViewById(R.id.button_9);
+        button9.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_add = findViewById(R.id.button_add);
         button_add.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);

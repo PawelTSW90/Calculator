@@ -22,6 +22,7 @@ public class Calculating {
                     znaki.set(x - 2, sum);
                     znaki.remove(x - 1);
                     znaki.remove(x - 1);
+                    x=0;
                 }
 
 
@@ -32,12 +33,14 @@ public class Calculating {
                     znaki.set(x - 2, minus);
                     znaki.remove(x - 1);
                     znaki.remove(x - 1);
+                    x=0;
 
                 } else if (whatSign(znaki.get(x).toString()) == 2) {
                     int multiply = (Integer.parseInt(znaki.get(x - 2).toString()) * (Integer.parseInt(znaki.get(x - 1).toString())));
                     znaki.set(x - 2, multiply);
                     znaki.remove(x - 1);
                     znaki.remove(x - 1);
+                    x=0;
 
                 }
             }

@@ -22,17 +22,17 @@ public class ResultClass implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        if(!isInteger(StorageClass.storage)) {
-            StorageClass.addCharToString("=");
+        if(!isInteger(StorageClass.storage)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
+            StorageClass.addCharToString("=");                  //znak = i zaczynami liczenie.
             ArrayList<String> cos = StorageClass.returnWyjscie();
             this.txt.setText(calculating.FinalResult(StorageClass));
-        } else;
+        } else;                                                      //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
 
 
 
     }
 
-    public boolean isInteger(String input) {
+    public boolean isInteger(String input) {                          // metoda sprawdzająca czy dana wartość jest integerem
         try {
             Integer.parseInt(input);
             return true;
