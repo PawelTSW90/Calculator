@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         button8.setOnClickListener(new TextFileInput(txt, storage));
         final Button button9 = findViewById(R.id.button_9);
         button9.setOnClickListener(new TextFileInput(txt, storage));
+        final Button openBracket = findViewById(R.id.button_openBracket);
+        openBracket.setOnClickListener(new TextFileInput(txt, storage));
+        final Button closeBracket = findViewById(R.id.button_closeBracket);
+        closeBracket.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_add = findViewById(R.id.button_add);
         button_add.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);
