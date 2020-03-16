@@ -2,13 +2,14 @@ package com.example.calculator;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class TextFileInput implements View.OnClickListener {
     TextView txt;
     StorageClass storage;
 
-    TextFileInput(TextView text, StorageClass storage) {
+    TextFileInput(EditText text, StorageClass storage) {
         this.txt = text;
         this.storage = storage;
 
@@ -29,6 +30,17 @@ public class TextFileInput implements View.OnClickListener {
 if(v.getResources().getResourceName(v.getId()).contains("C")){     //if C has been clicked, display 0
     storage.storage = "0";
     this.txt.setText(storage.returnString());
+}
+
+if(v.getResources().getResourceName(v.getId()).contains("()")){
+    String bracketOpen = "(";
+    String bracketClose = ")";
+    int countOpenBracket = 0;
+    int countCloseBracket = 0;
+    for(int i =0; i<storage.storage.length();i++){
+
+
+    }
 }
 
 

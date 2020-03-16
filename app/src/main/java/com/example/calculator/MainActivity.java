@@ -1,8 +1,10 @@
 package com.example.calculator;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView txt = findViewById(R.id.text_View);
+        final EditText txt = findViewById(R.id.text_View);
+        txt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new TextFileInput(txt, storage));
         final Button button2 = findViewById(R.id.button_2);
@@ -36,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
         button8.setOnClickListener(new TextFileInput(txt, storage));
         final Button button9 = findViewById(R.id.button_9);
         button9.setOnClickListener(new TextFileInput(txt, storage));
-        final Button openBracket = findViewById(R.id.button_openBracket);
-        openBracket.setOnClickListener(new TextFileInput(txt, storage));
-        final Button closeBracket = findViewById(R.id.button_closeBracket);
-        closeBracket.setOnClickListener(new TextFileInput(txt, storage));
+        final Button brackets = findViewById(R.id.button_brackets);
+        brackets.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_add = findViewById(R.id.button_add);
         button_add.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
         final Button button_minus = findViewById(R.id.button_minus);
         button_minus.setOnClickListener(new TextFileInput(txt, storage));
+
         //test comment from github
 
 
