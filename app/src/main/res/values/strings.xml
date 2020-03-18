@@ -15,4 +15,6 @@
     <string name="button_divide">\</string>
     <string name="button_multiply">*</string>
     <string name="button_C">C</string>
+    <string name="button_result">=</string>
+    <string name="button_brackets">()</string>
 </resources>

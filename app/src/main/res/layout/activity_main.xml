@@ -19,6 +19,7 @@
 
         <EditText
             android:id="@+id/text_View"
+            android:background="@null"
             android:layout_width="431dp"
             android:layout_height="118dp"
             android:layout_marginStart="5dp"
@@ -76,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="5" />
+                android:text="@string/button_5" />
 
             <Button
                 android:id="@+id/button_6"
@@ -84,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="6" />
+                android:text="@string/button_6" />
 
         </LinearLayout>
 
@@ -99,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="7" />
+                android:text="@string/button_7" />
 
             <Button
                 android:id="@+id/button_8"
@@ -107,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="8" />
+                android:text="@string/button_8" />
 
             <Button
                 android:id="@+id/button_9"
@@ -115,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="9" />
+                android:text="@string/button_9" />
 
         </LinearLayout>
 
@@ -146,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="=" />
+                android:text="@string/button_result" />
 
         </LinearLayout>
 
@@ -172,10 +173,10 @@
             <Button
                 android:id="@+id/button_brackets"
                 style="@android:style/Widget.Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="()" />
+                android:text="@string/button_brackets" />
 
         </LinearLayout>
 
