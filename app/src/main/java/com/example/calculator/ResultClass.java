@@ -26,6 +26,7 @@ public class ResultClass implements View.OnClickListener {
             StorageClass.addCharToString("=");                  //znak = i zaczynami liczenie.
             ArrayList<String> cos = StorageClass.returnWyjscie();
             this.txt.setText(calculating.FinalResult(StorageClass));
+            txt.setSelection(txt.length());
         }                                                      //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
 
 
