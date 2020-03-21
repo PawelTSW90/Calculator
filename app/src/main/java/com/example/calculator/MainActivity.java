@@ -1,8 +1,6 @@
 package com.example.calculator;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,12 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final EditText txt = findViewById(R.id.text_Edit);
-        txt.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+        txt.setShowSoftInputOnFocus(false);
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new TextFileInput(txt, storage));
         final Button button2 = findViewById(R.id.button_2);

@@ -40,7 +40,7 @@
 
                 <Button
                     android:id="@+id/button_C"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Holo.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -48,7 +48,7 @@
 
                 <Button
                     android:id="@+id/button_brackets"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Holo.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -56,7 +56,7 @@
 
                 <Button
                     android:id="@+id/button"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Holo.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -77,12 +77,12 @@
                     android:text="@string/button_7" />
 
                 <Button
-                    android:id="@+id/button_multiply"
+                    android:id="@+id/button_8"
                     style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_multiply" />
+                    android:text="@string/button_8" />
 
                 <Button
                     android:id="@+id/button_9"
@@ -93,12 +93,13 @@
                     android:text="@string/button_9" />
 
                 <Button
-                    android:id="@+id/button_8"
+                    android:id="@+id/button_multiply"
                     style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_8" />
+                    android:text="@string/button_multiply" />
+
             </TableRow>
 
             <TableRow
@@ -123,6 +124,14 @@
                     android:text="@string/button_5" />
 
                 <Button
+                    android:id="@+id/button_6"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/button_6" />
+
+                <Button
                     android:id="@+id/button_minus"
                     style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
@@ -130,27 +139,12 @@
                     android:layout_weight="1"
                     android:text="@string/button_minus" />
 
-                <Button
-                    android:id="@+id/button_6"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/button_6" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/button_add"
-                    style="@android:style/Widget.Button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/button_add" />
 
                 <Button
                     android:id="@+id/button_1"
@@ -176,6 +170,14 @@
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:text="@string/button_3" />
+
+                <Button
+                    android:id="@+id/button_add"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/button_add" />
             </TableRow>
 
             <TableRow

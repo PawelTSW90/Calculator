@@ -1,16 +1,16 @@
 package com.example.calculator;
 
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
 public class ResultClass implements View.OnClickListener {
-    TextView txt;
+    EditText txt;
     StorageClass StorageClass;
     Calculating calculating;
 
-    ResultClass(TextView text, StorageClass StorageClass, Calculating calculating){
+    ResultClass(EditText text, StorageClass StorageClass, Calculating calculating){
         this.txt = text;
         this.StorageClass = StorageClass;
         this.calculating = calculating;
@@ -26,8 +26,7 @@ public class ResultClass implements View.OnClickListener {
             StorageClass.addCharToString("=");                  //znak = i zaczynami liczenie.
             ArrayList<String> cos = StorageClass.returnWyjscie();
             this.txt.setText(calculating.FinalResult(StorageClass));
-        } else;                                                      //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
-
+        }                                                      //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
 
 
     }

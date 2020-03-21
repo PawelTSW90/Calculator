@@ -22,6 +22,7 @@ public class TextFileInput implements View.OnClickListener {
         if(storage.storage == "0"){                               //if 0 is displaying, replace it with new value
             storage.stringZero(((Button)v).getText().toString());
             this.txt.setText(storage.returnString());
+
         } else
         storage.addCharToString(((Button) v).getText().toString()); //else, add new value to existing one
         this.txt.setText(storage.returnString());
