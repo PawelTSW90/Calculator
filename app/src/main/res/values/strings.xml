@@ -4,17 +4,18 @@
     <string name="button_1">1</string>
     <string name="button_2">2</string>
     <string name="button_3">3</string>
-    <string name="button_4">3</string>
-    <string name="button_5">3</string>
-    <string name="button_6">3</string>
-    <string name="button_7">3</string>
-    <string name="button_8">3</string>
-    <string name="button_9">3</string>
+    <string name="button_4">4</string>
+    <string name="button_5">5</string>
+    <string name="button_6">6</string>
+    <string name="button_7">7</string>
+    <string name="button_8">8</string>
+    <string name="button_9">9</string>
     <string name="button_add">+</string>
     <string name="button_minus">-</string>
     <string name="button_divide">\</string>
-    <string name="button_multiply">*</string>
+    <string name="button_multiply">×</string>
     <string name="button_C">C</string>
     <string name="button_result">=</string>
     <string name="button_brackets">()</string>
+    <string name="button_del">DEL</string>
 </resources>

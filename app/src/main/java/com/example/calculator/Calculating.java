@@ -69,7 +69,7 @@ public class Calculating {
             return 0;
         } else if (input.equals("-")) {
             return 1;
-        } else if (input.equals("*")) {
+        } else if (input.equals("×")) {
             return 2;
         } else return 3;             //(\)
     }
