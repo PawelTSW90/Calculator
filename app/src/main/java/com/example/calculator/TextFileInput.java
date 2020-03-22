@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +42,22 @@ public class TextFileInput implements View.OnClickListener {
             this.txt.setText(storage.returnString());
         }
 
+        if(v.getResources().getResourceName(v.getId()).contains("0")){
+            Log.i("First", String.valueOf(storage.storage.charAt(kursor-1)));
+            Log.i("Second", String.valueOf(storage.storage.charAt(kursor-2)));
+            if(storage.storage.charAt(kursor-1)==0){
+                if(!isInteger(Character.toString(storage.storage.charAt(kursor-2)))){
+                    this.txt.setText("Siemano");
+                    /*storage.addCharToString("");
+                    this.txt.setText(storage.returnString());
+                    txt.setSelection(kursor+1);
+*/
+
+
+                }
+            }
+        }
+
         if (v.getResources().getResourceName(v.getId()).contains("delete")) { //if delete has been touched:
 
             if (storage.storage.length() > 1) {
@@ -58,6 +75,15 @@ public class TextFileInput implements View.OnClickListener {
         }
 
 
+    }
+
+    public boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

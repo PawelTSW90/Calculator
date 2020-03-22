@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final EditText txt = findViewById(R.id.text_Edit);
         txt.setShowSoftInputOnFocus(false); //disable system keyobard
+        final Button button0 = findViewById(R.id.button_0);
+        button0.setOnClickListener(new TextFileInput(txt, storage));
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new TextFileInput(txt, storage));
         final Button button2 = findViewById(R.id.button_2);
