@@ -46,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
         final Button button_C = findViewById(R.id.button_C);
         button_C.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
-
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
         final Button button_minus = findViewById(R.id.button_minus);
         button_minus.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button_delete = findViewById(R.id.button_delete);
+        button_delete.setOnClickListener(new TextFileInput(txt, storage));
 
         //test comment from github
 

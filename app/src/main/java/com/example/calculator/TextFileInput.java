@@ -18,46 +18,44 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int kursor = txt.getSelectionEnd();                          //initialize cursor position
+        int kursor = txt.getSelectionEnd();                         //initialize cursor position
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
-        txt.setSelection(kursor+1);                                  //place cursor after last added value
+        txt.setSelection(kursor + 1);                              //set cursor position after last added value
+
+        if (kursor != storage.storage.length() - 1) {               //if cursor is not positioned as last:
+            String firstPart = storage.storage.substring(0, kursor);
+            String secondPart = storage.storage.substring(kursor, storage.storage.length() - 1); //split storage into two halves,
+            storage.storage = "";                                   //first one: all values before new value
+            storage.storage += firstPart;                             //second one: all values after new value
+            storage.addCharToString(((Button) v).getText().toString());  //merge new storage from first half, NEW VALUE and second half
+            storage.storage += secondPart;
+            this.txt.setText(storage.returnString());
+            txt.setSelection(kursor + 1);
+
+        }
 
 
-        if(kursor!=storage.storage.length()-1){                      //If we have more than one value
-             String firstPart = storage.storage.substring(0, kursor);
-             String secondPart = storage.storage.substring(kursor, storage.storage.length()-1); //split storage into two halves,
-             storage.storage = "";                                   //first one: all values before new value
-             storage.storage+=firstPart;                             //second one: all values after new value
-             storage.addCharToString(((Button) v).getText().toString());  //merge new storage from first half, NEW VALUE and second half
-             storage.storage+=secondPart;
-             this.txt.setText(storage.returnString());
-             txt.setSelection(kursor+1);
+        if (v.getResources().getResourceName(v.getId()).contains("C")) {     //if C has been touched, remove all values
+            storage.storage = "";
+            this.txt.setText(storage.returnString());
+        }
 
-         }
+        if (v.getResources().getResourceName(v.getId()).contains("delete")) { //if delete has been touched:
 
+            if (storage.storage.length() > 1) {
+                String tmp = storage.storage.substring(0, storage.storage.length() - 2);    //delete last value
+                storage.storage = "";
+                storage.storage += tmp;
+                this.txt.setText(storage.returnString());
+                txt.setSelection(storage.storage.length());
+            } else {
+                storage.storage = "";
+                this.txt.setText(storage.returnString());
 
+            }
 
-
-
-
-
-if(v.getResources().getResourceName(v.getId()).contains("C")){     //if C has been clicked, remove all values
-    storage.storage = "";
-    this.txt.setText(storage.returnString());
-}
-
-if(v.getResources().getResourceName(v.getId()).contains("()")){
-    String bracketOpen = "(";
-    String bracketClose = ")";
-    int countOpenBracket = 0;
-    int countCloseBracket = 0;
-    for(int i =0; i<storage.storage.length();i++){
-
-
-    }
-}
-
+        }
 
 
     }

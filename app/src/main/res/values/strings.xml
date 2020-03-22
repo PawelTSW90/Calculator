@@ -17,6 +17,6 @@
     <string name="button_C">C</string>
     <string name="button_result">=</string>
     <string name="button_brackets">()</string>
-    <string name="button_del">\u232b</string>
+    <string name="button_del">⌫</string>
     <string name="button_comma">,</string>
 </resources>
