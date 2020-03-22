@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class StorageClass {
-    String storage = "0";
+    String storage = "";
 
     void addCharToString(String znak) {
 

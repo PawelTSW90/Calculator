@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,18 +20,10 @@ public class TextFileInput implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int kursor = txt.getSelectionEnd();
-
-        if(storage.storage == "0"){                               //if 0 is displaying, replace it with new value
-            storage.stringZero(((Button)v).getText().toString());
-            this.txt.setText(storage.returnString());
-            txt.setSelection(storage.storage.length());
-
-
-        } else
-            kursor = txt.getSelectionEnd();
-        storage.addCharToString(((Button) v).getText().toString());//else, add new value to existing one
+        storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
         txt.setSelection(kursor+1);
+        Log.i("proba", storage.storage);
 
 
 
@@ -38,7 +31,7 @@ public class TextFileInput implements View.OnClickListener {
 
 
 
-if(v.getResources().getResourceName(v.getId()).contains("C")){     //if C has been clicked, display 0
+if(v.getResources().getResourceName(v.getId()).contains("C")){     //if C has been clicked, remove all values
     storage.storage = "";
     this.txt.setText(storage.returnString());
 }
