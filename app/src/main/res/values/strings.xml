@@ -12,10 +12,11 @@
     <string name="button_9">9</string>
     <string name="button_add">+</string>
     <string name="button_minus">-</string>
-    <string name="button_divide">\</string>
+    <string name="button_divide">÷</string>
     <string name="button_multiply">×</string>
     <string name="button_C">C</string>
     <string name="button_result">=</string>
     <string name="button_brackets">()</string>
-    <string name="button_del">DEL</string>
+    <string name="button_del">\u232b</string>
+    <string name="button_comma">,</string>
 </resources>

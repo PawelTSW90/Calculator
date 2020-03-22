@@ -17,7 +17,7 @@ public class Calculating {
             if (!isInteger(znaki.get(x).toString())) {
 
 
-                if (whatSign(znaki.get(x).toString()) == 0) {
+                if (whatSign(znaki.get(x).toString()) == 0) {                 //adding
                     int sum = (Integer.parseInt(znaki.get(x - 2).toString()) + (Integer.parseInt(znaki.get(x - 1).toString())));
                     znaki.set(x - 2, sum);
                     znaki.remove(x - 1);
@@ -28,14 +28,14 @@ public class Calculating {
 
 
 
-                else if (whatSign(znaki.get(x).toString()) == 1) {
+                else if (whatSign(znaki.get(x).toString()) == 1) {            //subtracting
                     int minus = (Integer.parseInt(znaki.get(x - 2).toString()) - (Integer.parseInt(znaki.get(x - 1).toString())));
                     znaki.set(x - 2, minus);
                     znaki.remove(x - 1);
                     znaki.remove(x - 1);
                     x=0;
 
-                } else if (whatSign(znaki.get(x).toString()) == 2) {
+                } else if (whatSign(znaki.get(x).toString()) == 2) {          //multiply
                     int multiply = (Integer.parseInt(znaki.get(x - 2).toString()) * (Integer.parseInt(znaki.get(x - 1).toString())));
                     znaki.set(x - 2, multiply);
                     znaki.remove(x - 1);

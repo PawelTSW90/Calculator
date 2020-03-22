@@ -40,7 +40,7 @@
 
                 <Button
                     android:id="@+id/button_C"
-                    style="@android:style/Widget.Holo.Button"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -48,19 +48,27 @@
 
                 <Button
                     android:id="@+id/button_brackets"
-                    style="@android:style/Widget.Holo.Button"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_brackets" />
 
                 <Button
-                    android:id="@+id/button"
-                    style="@android:style/Widget.Holo.Button"
+                    android:id="@+id/button_delete"
+                    style="@style/Widget.AppCompat.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_del" />
+
+                <Button
+                    android:id="@+id/button_divide"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/button_divide" />
             </TableRow>
 
             <TableRow
@@ -113,7 +121,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_4" />
+                    android:text="@string/button_4"
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_5"
@@ -184,6 +193,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button3"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/button_0" />
+
+                <Button
+                    android:id="@+id/button4"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/button_comma" />
 
                 <Button
                     android:id="@+id/button_result"
