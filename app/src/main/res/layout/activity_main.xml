@@ -26,7 +26,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:background="@null"
-            android:text="" />
+            android:text=""
+            android:textSize="30sp" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -40,35 +41,43 @@
 
                 <Button
                     android:id="@+id/button_C"
-                    style="@style/Widget.AppCompat.Button"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_C" />
+                    android:text="@string/button_C"
+                    android:textColor="#83221B"
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_brackets"
-                    style="@style/Widget.AppCompat.Button"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_brackets" />
+                    android:text="@string/button_brackets"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_delete"
-                    style="@style/Widget.AppCompat.Button"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_del" />
+                    android:text="@string/button_del"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_divide"
-                    style="@style/Widget.AppCompat.Button"
+                    style="@android:style/Widget.Button"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_divide" />
+                    android:text="@string/button_divide"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -82,7 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_7" />
+                    android:text="@string/button_7"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_8"
@@ -90,7 +100,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_8" />
+                    android:text="@string/button_8"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_9"
@@ -98,7 +109,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_9" />
+                    android:text="@string/button_9"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_multiply"
@@ -106,7 +118,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_multiply" />
+                    android:text="@string/button_multiply"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
 
             </TableRow>
 
@@ -130,7 +144,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_5" />
+                    android:text="@string/button_5"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_6"
@@ -138,7 +153,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_6" />
+                    android:text="@string/button_6"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_minus"
@@ -146,7 +162,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_minus" />
+                    android:text="@string/button_minus"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
 
             </TableRow>
 
@@ -161,7 +179,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_1" />
+                    android:text="@string/button_1"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_2"
@@ -169,7 +188,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_2" />
+                    android:text="@string/button_2"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_3"
@@ -178,7 +198,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
-                    android:text="@string/button_3" />
+                    android:text="@string/button_3"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_add"
@@ -186,7 +207,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_add" />
+                    android:text="@string/button_add"
+                    android:textColor="#3A4FC0"
+                    android:textSize="25sp" />
             </TableRow>
 
             <TableRow
@@ -200,7 +223,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_0" />
+                    android:text="@string/button_0"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button4"
@@ -208,7 +232,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_comma" />
+                    android:text="@string/button_comma"
+                    android:textSize="25sp"/>
 
                 <Button
                     android:id="@+id/button_result"
@@ -216,7 +241,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_result" />
+                    android:text="@string/button_result"
+                    android:textSize="25sp" />
+
+
             </TableRow>
         </TableLayout>
 
