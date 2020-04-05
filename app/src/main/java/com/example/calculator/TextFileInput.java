@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +13,7 @@ public class TextFileInput implements View.OnClickListener {
         this.storage = storage;
 
 
+
     }
 
 
@@ -22,7 +22,7 @@ public class TextFileInput implements View.OnClickListener {
         int kursor = txt.getSelectionEnd();                         //initialize cursor position
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
-        txt.setSelection(kursor + 1);                              //set cursor position after last added value
+        txt.setSelection(kursor+1);                       //set cursor position after last added value
 
         if (kursor != storage.storage.length() - 1) {               //if cursor is not positioned as last:
             String firstPart = storage.storage.substring(0, kursor);
@@ -37,26 +37,25 @@ public class TextFileInput implements View.OnClickListener {
         }
 
 
+
+
+
         if (v.getResources().getResourceName(v.getId()).contains("C")) {     //if C has been touched, remove all values
             storage.storage = "";
             this.txt.setText(storage.returnString());
         }
 
-        if(v.getResources().getResourceName(v.getId()).contains("0")){
-            Log.i("First", String.valueOf(storage.storage.charAt(kursor-1)));
-            Log.i("Second", String.valueOf(storage.storage.charAt(kursor-2)));
-            if(storage.storage.charAt(kursor-1)==0){
-                if(!isInteger(Character.toString(storage.storage.charAt(kursor-2)))){
-                    this.txt.setText("Siemano");
-                    /*storage.addCharToString("");
-                    this.txt.setText(storage.returnString());
-                    txt.setSelection(kursor+1);
-*/
+        /*if (v.getResources().getResourceName(v.getId()).contains("0") && storage.storage.length() == 2 &&
+        storage.storage.endsWith("0") && storage.storage.startsWith("0")){
+            storage.storage = "0";
+            this.txt.setText(storage.returnString());
+            kursor = txt.getSelectionEnd();
+            txt.setSelection(kursor + 1);
 
-
-                }
-            }
         }
+         */
+
+
 
         if (v.getResources().getResourceName(v.getId()).contains("delete")) { //if delete has been touched:
 

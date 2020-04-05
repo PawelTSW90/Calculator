@@ -6,16 +6,20 @@ import java.util.Stack;
 
 public class StorageClass {
     String storage = "";
+    TextFileInput txt;
 
     void addCharToString(String znak) {
+        if(storage.length()==1 && storage.startsWith("0")){
+            this.storage = znak;
+        } else
 
-        this.storage += znak;
+            this.storage += znak;
 
 
     }
 
-    void stringZero(String znak) {
-        this.storage = znak;
+    void stringZero() {                 //if there is no values displaying
+        this.storage = "0";
 
 
     }
@@ -26,9 +30,6 @@ public class StorageClass {
 
 
     }
-
-
-
 
 
     ArrayList<String> returnWyjscie() {
@@ -55,7 +56,7 @@ public class StorageClass {
 
                 } else {                         //kiedy na stosie są już operatory
                     String last = stos.peek();//przypisanie do "last" ostatniego operatora na stosie
-                    if(Character.toString(storage.charAt(i)).equals("=")){
+                    if (Character.toString(storage.charAt(i)).equals("=")) {
                         continue;
                     }
 
@@ -96,17 +97,10 @@ public class StorageClass {
         }
 
 
-
-        while (!stos.isEmpty()){
+        while (!stos.isEmpty()) {
             wyjscie.add(stos.pop());
 
         }
-
-
-
-
-
-
 
 
         return wyjscie;
