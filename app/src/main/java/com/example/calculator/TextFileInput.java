@@ -13,7 +13,6 @@ public class TextFileInput implements View.OnClickListener {
         this.storage = storage;
 
 
-
     }
 
 
@@ -22,9 +21,13 @@ public class TextFileInput implements View.OnClickListener {
         int kursor = txt.getSelectionEnd();                         //initialize cursor position
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
-        txt.setSelection(kursor+1);                       //set cursor position after last added value
-
-        if (kursor != storage.storage.length() - 1) {               //if cursor is not positioned as last:
+        int length = storage.storage.length() - 1;
+        if (kursor > length) {
+            txt.setSelection(length+1);
+        } else {
+            txt.setSelection(kursor + 1);                       //set cursor position after last added value
+        }
+        if (kursor != storage.storage.length() - 1 && storage.storage.length()>1) {               //if cursor is not positioned as last:
             String firstPart = storage.storage.substring(0, kursor);
             String secondPart = storage.storage.substring(kursor, storage.storage.length() - 1); //split storage into two halves,
             storage.storage = "";                                   //first one: all values before new value
@@ -35,9 +38,6 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);
 
         }
-
-
-
 
 
         if (v.getResources().getResourceName(v.getId()).contains("C")) {     //if C has been touched, remove all values
@@ -54,7 +54,6 @@ public class TextFileInput implements View.OnClickListener {
 
         }
          */
-
 
 
         if (v.getResources().getResourceName(v.getId()).contains("delete")) { //if delete has been touched:
