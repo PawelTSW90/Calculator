@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_C"
-                    android:textColor="#83221B"
+                    android:textColor="@color/colorClear"
                     android:textSize="25sp" />
 
                 <Button
@@ -65,8 +65,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="@string/button_del"
-                    android:textColor="#3A4FC0"
+                    android:text="@string/button_delete"
+                    android:textColor="@color/colorOperator"
                     android:textSize="25sp" />
 
                 <Button

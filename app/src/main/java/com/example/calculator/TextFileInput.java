@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,12 +23,14 @@ public class TextFileInput implements View.OnClickListener {
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
         int length = storage.storage.length() - 1;
-        if (kursor > length) {
-            txt.setSelection(length+1);
+        if (kursor > length) {                                   // if cursor position is bigger than storage length, set it after last value
+            txt.setSelection(length + 1);
         } else {
             txt.setSelection(kursor + 1);                       //set cursor position after last added value
         }
-        if (kursor != storage.storage.length() - 1 && storage.storage.length()>1) {               //if cursor is not positioned as last:
+
+
+        if (kursor != storage.storage.length() - 1 && storage.storage.length() > 1 && !(v.getResources().getResourceName(v.getId()).contains("del"))) {               //if cursor is not positioned as last and storage has more than 1 values:
             String firstPart = storage.storage.substring(0, kursor);
             String secondPart = storage.storage.substring(kursor, storage.storage.length() - 1); //split storage into two halves,
             storage.storage = "";                                   //first one: all values before new value
@@ -38,6 +41,27 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);
 
         }
+        Log.i("storage", storage.storage);
+        if (v.getResources().getResourceName(v.getId()).contains("del")) {
+            if (kursor == length && length != 0) {
+                String updatedStorage = storage.storage.substring(0, length - 1);
+                storage.storage = updatedStorage;
+                this.txt.setText(storage.returnString());
+                txt.setSelection(length - 1);
+            } else if (storage.storage.length() == 0) {
+                return;
+            } else {
+                String firstPart = storage.storage.substring(0, kursor);
+                String secondPart = storage.storage.substring(kursor);
+                storage.storage = "";
+                firstPart = firstPart.substring(0, firstPart.length() - 1);
+                storage.storage += firstPart;
+                storage.storage += secondPart;
+                this.txt.setText(storage.returnString());
+                txt.setSelection(kursor - 1);
+            }
+
+        }
 
 
         if (v.getResources().getResourceName(v.getId()).contains("C")) {     //if C has been touched, remove all values
@@ -45,43 +69,7 @@ public class TextFileInput implements View.OnClickListener {
             this.txt.setText(storage.returnString());
         }
 
-        /*if (v.getResources().getResourceName(v.getId()).contains("0") && storage.storage.length() == 2 &&
-        storage.storage.endsWith("0") && storage.storage.startsWith("0")){
-            storage.storage = "0";
-            this.txt.setText(storage.returnString());
-            kursor = txt.getSelectionEnd();
-            txt.setSelection(kursor + 1);
 
-        }
-         */
-
-
-        if (v.getResources().getResourceName(v.getId()).contains("delete")) { //if delete has been touched:
-
-            if (storage.storage.length() > 1) {
-                String tmp = storage.storage.substring(0, storage.storage.length() - 2);    //delete last value
-                storage.storage = "";
-                storage.storage += tmp;
-                this.txt.setText(storage.returnString());
-                txt.setSelection(storage.storage.length());
-            } else {
-                storage.storage = "";
-                this.txt.setText(storage.returnString());
-
-            }
-
-        }
-
-
-    }
-
-    public boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
 

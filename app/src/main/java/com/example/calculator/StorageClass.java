@@ -6,20 +6,16 @@ import java.util.Stack;
 
 public class StorageClass {
     String storage = "";
-    TextFileInput txt;
 
     void addCharToString(String znak) {
-        if(storage.length()==1 && storage.startsWith("0")){
+        if (znak.contains("⌫")) {
+            return;
+        }
+        if (storage.length() == 1 && storage.startsWith("0")) {
             this.storage = znak;
         } else
 
             this.storage += znak;
-
-
-    }
-
-    void stringZero() {                 //if there is no values displaying
-        this.storage = "0";
 
 
     }
