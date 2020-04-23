@@ -9,38 +9,32 @@ public class Calculating {
     String FinalResult(StorageClass storage) {
         this.storage = storage;
 
-        ArrayList znaki = storage.returnWyjscie();
+        ArrayList chars = storage.returnWyjscie();
 
 
-
-        for (int x = 0; x<znaki.size(); x++) {
-            if (!isInteger(znaki.get(x).toString())) {
-
-
-                if (whatSign(znaki.get(x).toString()) == 0) {                 //adding
-                    int sum = (Integer.parseInt(znaki.get(x - 2).toString()) + (Integer.parseInt(znaki.get(x - 1).toString())));
-                    znaki.set(x - 2, sum);
-                    znaki.remove(x - 1);
-                    znaki.remove(x - 1);
-                    x=0;
-                }
+        for (int x = 0; x < chars.size(); x++) {
+            if (!isInteger(chars.get(x).toString())) {
 
 
+                if (whatSign(chars.get(x).toString()) == 0) {                 //adding
+                    int sum = (Integer.parseInt(chars.get(x - 2).toString()) + (Integer.parseInt(chars.get(x - 1).toString())));
+                    chars.set(x - 2, sum);
+                    chars.remove(x - 1);
+                    chars.remove(x - 1);
+                    x = 0;
+                } else if (whatSign(chars.get(x).toString()) == 1) {            //subtracting
+                    int minus = (Integer.parseInt(chars.get(x - 2).toString()) - (Integer.parseInt(chars.get(x - 1).toString())));
+                    chars.set(x - 2, minus);
+                    chars.remove(x - 1);
+                    chars.remove(x - 1);
+                    x = 0;
 
-
-                else if (whatSign(znaki.get(x).toString()) == 1) {            //subtracting
-                    int minus = (Integer.parseInt(znaki.get(x - 2).toString()) - (Integer.parseInt(znaki.get(x - 1).toString())));
-                    znaki.set(x - 2, minus);
-                    znaki.remove(x - 1);
-                    znaki.remove(x - 1);
-                    x=0;
-
-                } else if (whatSign(znaki.get(x).toString()) == 2) {          //multiply
-                    int multiply = (Integer.parseInt(znaki.get(x - 2).toString()) * (Integer.parseInt(znaki.get(x - 1).toString())));
-                    znaki.set(x - 2, multiply);
-                    znaki.remove(x - 1);
-                    znaki.remove(x - 1);
-                    x=0;
+                } else if (whatSign(chars.get(x).toString()) == 2) {          //multiply
+                    int multiply = (Integer.parseInt(chars.get(x - 2).toString()) * (Integer.parseInt(chars.get(x - 1).toString())));
+                    chars.set(x - 2, multiply);
+                    chars.remove(x - 1);
+                    chars.remove(x - 1);
+                    x = 0;
 
                 }
             }
@@ -48,7 +42,7 @@ public class Calculating {
         }
 
         StringBuilder result = new StringBuilder();
-        result.append(znaki.toString());
+        result.append(chars.toString());
         result.deleteCharAt(0).deleteCharAt(result.length() - 1);
         storage.storage = result.toString();
 

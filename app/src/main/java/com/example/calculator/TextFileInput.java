@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,14 +18,14 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int kursor = txt.getSelectionEnd();                         //initialize cursor position
+        int kursor = txt.getSelectionEnd();                         //initialize selection position
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
         int length = storage.storage.length() - 1;
-        if (kursor > length) {                                   // if cursor position is bigger than storage length, set it after last value
+        if (kursor > length) {                                   // if selection position is bigger than storage length, set it after last value
             txt.setSelection(length + 1);
         } else {
-            txt.setSelection(kursor + 1);                       //set cursor position after last added value
+            txt.setSelection(kursor + 1);                       //set selection position after last added value
         }
 
 
@@ -41,11 +40,8 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);
 
         }
-        Log.i("storage", storage.storage);
         if (v.getResources().getResourceName(v.getId()).contains("del")) {
             if (kursor == length && length != 0) {
-                String updatedStorage = storage.storage.substring(0, length - 1);
-                storage.storage = updatedStorage;
                 this.txt.setText(storage.returnString());
                 txt.setSelection(length - 1);
             } else if (storage.storage.length() == 0) {

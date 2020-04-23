@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         button_minus.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_delete = findViewById(R.id.button_delete);
         button_delete.setOnClickListener(new TextFileInput(txt, storage));
+        final Button comma_button = findViewById(R.id.button_comma);
+        comma_button.setOnClickListener(new CommaClass(txt, storage));
 
         //test comment from github
 
