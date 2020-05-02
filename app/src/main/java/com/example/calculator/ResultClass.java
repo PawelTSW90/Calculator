@@ -10,7 +10,7 @@ public class ResultClass implements View.OnClickListener {
     StorageClass StorageClass;
     Calculating calculating;
 
-    ResultClass(EditText text, StorageClass StorageClass, Calculating calculating){
+    ResultClass(EditText text, StorageClass StorageClass, Calculating calculating) {
         this.txt = text;
         this.StorageClass = StorageClass;
         this.calculating = calculating;
@@ -18,11 +18,8 @@ public class ResultClass implements View.OnClickListener {
     }
 
 
-
-
-
     public void onClick(View v) {
-        if(!isInteger(StorageClass.storage)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
+        if (!isInteger(StorageClass.storage)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
             StorageClass.addCharToString("=");                  //znak = i zaczynami liczenie.
             ArrayList<String> cos = StorageClass.returnWyjscie();
             this.txt.setText(calculating.FinalResult(StorageClass));

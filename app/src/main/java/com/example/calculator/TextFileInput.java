@@ -29,7 +29,7 @@ public class TextFileInput implements View.OnClickListener {
         }
 
 
-        if (kursor != storage.storage.length() - 1 && storage.storage.length() > 1 && !(v.getResources().getResourceName(v.getId()).contains("del"))) {               //if cursor is not positioned as last and storage has more than 1 values:
+        if (kursor != storage.storage.length() - 1 && storage.storage.length() > 1) {      //if cursor is not positioned as last and storage has more than 1 values:
             String firstPart = storage.storage.substring(0, kursor);
             String secondPart = storage.storage.substring(kursor, storage.storage.length() - 1); //split storage into two halves,
             storage.storage = "";                                   //first one: all values before new value
@@ -38,24 +38,6 @@ public class TextFileInput implements View.OnClickListener {
             storage.storage += secondPart;
             this.txt.setText(storage.returnString());
             txt.setSelection(kursor + 1);
-
-        }
-        if (v.getResources().getResourceName(v.getId()).contains("del")) {
-            if (kursor == length && length != 0) {
-                this.txt.setText(storage.returnString());
-                txt.setSelection(length - 1);
-            } else if (storage.storage.length() == 0) {
-                return;
-            } else {
-                String firstPart = storage.storage.substring(0, kursor);
-                String secondPart = storage.storage.substring(kursor);
-                storage.storage = "";
-                firstPart = firstPart.substring(0, firstPart.length() - 1);
-                storage.storage += firstPart;
-                storage.storage += secondPart;
-                this.txt.setText(storage.returnString());
-                txt.setSelection(kursor - 1);
-            }
 
         }
 

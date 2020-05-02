@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final EditText txt = findViewById(R.id.text_Edit);
-        txt.setShowSoftInputOnFocus(false); //disable system keyobard
+        txt.setShowSoftInputOnFocus(false);                              //disable system keyobard
         final Button button0 = findViewById(R.id.button_0);
         button0.setOnClickListener(new TextFileInput(txt, storage));
         final Button button1 = findViewById(R.id.button_1);
@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
         final Button button_minus = findViewById(R.id.button_minus);
         button_minus.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_delete = findViewById(R.id.button_delete);
-        button_delete.setOnClickListener(new TextFileInput(txt, storage));
+        button_delete.setOnClickListener(new DeleteClass(txt, storage));
         final Button comma_button = findViewById(R.id.button_comma);
         comma_button.setOnClickListener(new CommaClass(txt, storage));
 
-        //test comment from github
+
 
 
     }
