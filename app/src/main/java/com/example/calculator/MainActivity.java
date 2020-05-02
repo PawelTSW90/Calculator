@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         button_add.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);
         button_multiply.setOnClickListener(new TextFileInput(txt, storage));
+        final Button button_divide = findViewById(R.id.button_divide);
+        button_divide.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_C = findViewById(R.id.button_C);
         button_C.setOnClickListener(new DeleteAllClass(txt, storage));
         final Button button_result = findViewById(R.id.button_result);

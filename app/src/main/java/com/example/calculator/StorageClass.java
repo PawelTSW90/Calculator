@@ -36,7 +36,7 @@ public class StorageClass {
 
         for (int i = 0; i < storage.length(); i++) {
 
-            if (isInteger(Character.toString(storage.charAt(i)))) //Jeśli znak jest cyfrą, wrzuć do tmp
+            if (isInteger(Character.toString(storage.charAt(i)))|| Character.toString(storage.charAt(i)).equals(",")) //Jeśli znak jest cyfrą, wrzuć do tmp
                 tmp += storage.charAt(i);
                 //else kiedy znak nie jest cyfrą
             else {
