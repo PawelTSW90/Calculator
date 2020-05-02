@@ -12,9 +12,7 @@ public class TextFileInput implements View.OnClickListener {
         this.txt = text;
         this.storage = storage;
 
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -28,7 +26,6 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);                       //set selection position after last added value
         }
 
-
         if (kursor != storage.storage.length() - 1 && storage.storage.length() > 1) {      //if cursor is not positioned as last and storage has more than 1 values:
             String firstPart = storage.storage.substring(0, kursor);
             String secondPart = storage.storage.substring(kursor, storage.storage.length() - 1); //split storage into two halves,
@@ -40,15 +37,5 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);
 
         }
-
-
-        if (v.getResources().getResourceName(v.getId()).contains("C")) {     //if C has been touched, remove all values
-            storage.storage = "";
-            this.txt.setText(storage.returnString());
-        }
-
-
     }
-
-
 }

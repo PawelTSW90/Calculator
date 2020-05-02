@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         final Button button_multiply = findViewById(R.id.button_multiply);
         button_multiply.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_C = findViewById(R.id.button_C);
-        button_C.setOnClickListener(new TextFileInput(txt, storage));
+        button_C.setOnClickListener(new DeleteAllClass(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
         final Button button_minus = findViewById(R.id.button_minus);

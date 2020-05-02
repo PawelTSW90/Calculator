@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +29,6 @@ public class CommaClass implements View.OnClickListener {
 
 
             for (int i = selection; i >= 0; i--) {
-                Log.i("siemano", "char:" + storage.storage.charAt(i));
                 if (!isInteger(String.valueOf(storage.storage.charAt(i)))) {
                     int notInt = storage.storage.charAt(i);
                     i = storage.storage.charAt(selection);

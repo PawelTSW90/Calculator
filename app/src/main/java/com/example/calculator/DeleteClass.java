@@ -14,7 +14,6 @@ public class DeleteClass implements View.OnClickListener {
         this.storage = storage;
     }
 
-
     @Override
     public void onClick(View v) {
         int cursor = txt.getSelectionEnd();
@@ -31,8 +30,6 @@ public class DeleteClass implements View.OnClickListener {
             this.txt.setText(storage.returnString());
             txt.setSelection(cursor - 1);
         }
-
-
     }
 }
 

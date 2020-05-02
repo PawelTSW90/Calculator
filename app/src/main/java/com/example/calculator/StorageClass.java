@@ -1,11 +1,14 @@
 package com.example.calculator;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class StorageClass {
     String storage = "";
+
 
     void addCharToString(String znak) {
         if (znak.contains("⌫")) {
@@ -17,23 +20,19 @@ public class StorageClass {
 
             this.storage += znak;
 
-
     }
 
 
     String returnString() {
         return storage;
 
-
     }
 
-
     ArrayList<String> returnWyjscie() {
-        String tmp = "";
         ArrayList<String> listaWartosci = new ArrayList<>();
         Stack<String> stos = new Stack<>();
         ArrayList<String> wyjscie = new ArrayList<>();
-
+        String tmp = "";
 
         for (int i = 0; i < storage.length(); i++) {
 
@@ -44,15 +43,18 @@ public class StorageClass {
                 listaWartosci.add(tmp); //dodanie pełnej liczby do listyWartosci
 
                 wyjscie.add(tmp); //dodanie pełnej liczby na wyjście
+                Log.i("tmp", "Wyjscie:" + wyjscie);
 
                 listaWartosci.add(Character.toString(storage.charAt(i))); //dodanie operatora do listyWartosci
+                Log.i("tmp", "ListaWartosci:" + listaWartosci);
 
                 if (stos.isEmpty()) { //jeśli na stosie nie ma jeszcze żadnych operatorów
                     stos.add(Character.toString(storage.charAt(i))); //dodajemy nasz operator na stos jako pierwszy
+                    Log.i("tmp", "Stos:" + stos);
 
                 } else {                         //kiedy na stosie są już operatory
                     String last = stos.peek();//przypisanie do "last" ostatniego operatora na stosie
-                    if (Character.toString(storage.charAt(i)).equals("=")) {
+                    if (Character.toString(storage.charAt(i)).equals("=") || Character.toString(storage.charAt(i)).equals(",")) {
                         continue;
                     }
 
@@ -61,47 +63,39 @@ public class StorageClass {
                         if (isLowPriority(last)) { // a ostatni operator na stosie ma niższy priorytet
 
                             stos.add(Character.toString(storage.charAt(i))); //to dodajemy nasz operator na stos
+                            Log.i("tmp", "Stos:" + stos);
 
                         } else { //jeśli ostatni operator na stosie ma również wysoki priorytet
 
                             while (!isLowPriority(last)) {//dopóki na stosie jest operator z wysokim priorytetem
                                 wyjscie.add(last);        //odkładamy go na wyjście
+                                Log.i("tmp", "Wyjscie:" + wyjscie);
 
                             }
                             stos.push(Character.toString(storage.charAt(i))); //gdy operator na stosie ma niższy priorytet, odkłądamy
+                            Log.i("tmp", "Stos:" + stos);
                             //nasz operator na wierzch stosu
                         }
 
                     } else { //jeśli nasz operator ma niski priorytet
                         while (!stos.isEmpty()) {
                             wyjscie.add(stos.pop());
+                            Log.i("tmp", "Wyjscie:" + wyjscie);
                         }
                         stos.add(Character.toString(storage.charAt(i)));
 
                     }
-
-
                 }
-
-
                 tmp = "";
-
-
             }
-
-
         }
-
-
         while (!stos.isEmpty()) {
             wyjscie.add(stos.pop());
+            Log.i("tmp", "Wyjscie:" + wyjscie);
 
         }
 
-
         return wyjscie;
-
-
     }
 
     public boolean isInteger(String input) {
@@ -118,9 +112,5 @@ public class StorageClass {
             return true;
         } else
             return false;
-
-
     }
-
-
 }

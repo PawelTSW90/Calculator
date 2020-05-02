@@ -13,24 +13,24 @@ public class Calculating {
 
 
         for (int x = 0; x < chars.size(); x++) {
-            if (!isInteger(chars.get(x).toString())) {
+            if (!isDouble(chars.get(x).toString())) {
 
 
                 if (whatSign(chars.get(x).toString()) == 0) {                 //adding
-                    int sum = (Integer.parseInt(chars.get(x - 2).toString()) + (Integer.parseInt(chars.get(x - 1).toString())));
+                    double sum = (Double.parseDouble(chars.get(x - 2).toString()) + (Double.parseDouble(chars.get(x - 1).toString())));
                     chars.set(x - 2, sum);
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
                 } else if (whatSign(chars.get(x).toString()) == 1) {            //subtracting
-                    int minus = (Integer.parseInt(chars.get(x - 2).toString()) - (Integer.parseInt(chars.get(x - 1).toString())));
+                    double minus = (Double.parseDouble(chars.get(x - 2).toString()) - (Double.parseDouble(chars.get(x - 1).toString())));
                     chars.set(x - 2, minus);
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
 
                 } else if (whatSign(chars.get(x).toString()) == 2) {          //multiply
-                    int multiply = (Integer.parseInt(chars.get(x - 2).toString()) * (Integer.parseInt(chars.get(x - 1).toString())));
+                    double multiply = (Double.parseDouble(chars.get(x - 2).toString()) * (Double.parseDouble(chars.get(x - 1).toString())));
                     chars.set(x - 2, multiply);
                     chars.remove(x - 1);
                     chars.remove(x - 1);
@@ -44,9 +44,20 @@ public class Calculating {
         StringBuilder result = new StringBuilder();
         result.append(chars.toString());
         result.deleteCharAt(0).deleteCharAt(result.length() - 1);
+
         storage.storage = result.toString();
 
+
         return storage.storage;
+    }
+
+    public boolean isDouble(String input) {
+        try {
+            Double.parseDouble(input);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public boolean isInteger(String input) {
@@ -57,6 +68,7 @@ public class Calculating {
             return false;
         }
     }
+
 
     public int whatSign(String input) {
         if (input.equals("+")) {
