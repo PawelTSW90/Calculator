@@ -11,13 +11,13 @@ public class Calculating {
 
         ArrayList<String> chars = storage.returnWyjscie();
         for (int x = 0; x < chars.size(); x++) {
-            chars.set(x, chars.get(x).replace(",", "."));
+            chars.set(x, chars.get(x).replace(",", "."));       //replace "," for "." for calculating
 
         }
 
 
         for (int x = 0; x < chars.size(); x++) {
-            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".")) {
+            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".")) {          //if character is nor number or dot, start calculating
 
 
                 if (whatSign(chars.get(x)) == 0) {           //adding
@@ -55,7 +55,7 @@ public class Calculating {
 
         StringBuilder result = new StringBuilder();
         double value = Double.parseDouble(chars.get(chars.size()-1));
-        double roundedValue = Math.round(value * 100.0) / 100.0;
+        double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
         result.append(roundedValue);
         storage.storage = storage.storage.replace(".", ",");
         storage.storage = result.toString();

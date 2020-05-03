@@ -17,7 +17,6 @@ public class DeleteClass implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int cursor = txt.getSelectionEnd();
-        int length = storage.storage.length() - 1;
         if (cursor == 0) {
             return;
         } else {
