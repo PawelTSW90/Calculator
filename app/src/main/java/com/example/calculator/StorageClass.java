@@ -14,7 +14,7 @@ public class StorageClass {
         if (znak.contains("⌫")) {
             return;
         }
-        if (storage.length() == 1 && storage.startsWith("0")) {
+        if (storage.length() == 1 && storage.startsWith("0") && !znak.equals(",")) {
             this.storage = znak;
         } else
 
