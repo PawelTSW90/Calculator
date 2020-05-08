@@ -29,7 +29,7 @@ public class StorageClass {
     }
 
     ArrayList<String> returnWyjscie() {
-        ArrayList<String> listaWartosci = new ArrayList<>();
+        ArrayList<String> valueList = new ArrayList<>();
         Stack<String> stos = new Stack<>();
         ArrayList<String> wyjscie = new ArrayList<>();
         String tmp = "";
@@ -40,13 +40,13 @@ public class StorageClass {
                 tmp += storage.charAt(i);
                 //else kiedy znak nie jest cyfrą
             else {
-                listaWartosci.add(tmp); //dodanie pełnej liczby do listyWartosci
+                valueList.add(tmp); //dodanie pełnej liczby do listyWartosci
 
                 wyjscie.add(tmp); //dodanie pełnej liczby na wyjście
                 Log.i("tmp", "Wyjscie:" + wyjscie);
 
-                listaWartosci.add(Character.toString(storage.charAt(i))); //dodanie operatora do listyWartosci
-                Log.i("tmp", "ListaWartosci:" + listaWartosci);
+                valueList.add(Character.toString(storage.charAt(i))); //dodanie operatora do listyWartosci
+                Log.i("tmp", "valueList:" + valueList);
 
                 if (stos.isEmpty()) { //jeśli na stosie nie ma jeszcze żadnych operatorów
                     stos.add(Character.toString(storage.charAt(i))); //dodajemy nasz operator na stos jako pierwszy
