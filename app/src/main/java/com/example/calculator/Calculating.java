@@ -1,9 +1,12 @@
 package com.example.calculator;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Calculating {
     StorageClass storage;
+    boolean cantCount = false;
 
 
     String FinalResult(StorageClass storage) {
@@ -17,10 +20,14 @@ public class Calculating {
 
 
         for (int x = 0; x < chars.size(); x++) {
-            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".")) {          //if character is nor number or dot, start calculating
+            Log.i("tmp", "storage: " + storage.storage);
+            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {   //if character is nor number or dot, start calculating
+
+                if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
+                    cantCount = true;
 
 
-                if (whatSign(chars.get(x)) == 0) {           //adding
+                } else if (whatSign(chars.get(x)) == 0) {           //adding
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
                     double tmp2 = Double.parseDouble(chars.get(x - 1));
                     Double sum = tmp1 + tmp2;
@@ -42,7 +49,7 @@ public class Calculating {
                     chars.remove(x - 1);
                     x = 0;
 
-                } else {
+                } else if (whatSign(chars.get(x)) == 3) {
                     Double divide = (Double.parseDouble(chars.get(x - 2)) / (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, divide.toString());
                     chars.remove(x - 1);
@@ -53,15 +60,22 @@ public class Calculating {
 
         }
 
-        StringBuilder result = new StringBuilder();
-        double value = Double.parseDouble(chars.get(chars.size()-1));
-        double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
-        result.append(roundedValue);
-        storage.storage = storage.storage.replace(".", ",");
-        storage.storage = result.toString();
+        if(cantCount){
+            return storage.storage;
 
-        return storage.storage;
+        } else {
+
+
+            StringBuilder result = new StringBuilder();
+            double value = Double.parseDouble(chars.get(chars.size() - 1));
+            double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
+            result.append(roundedValue);
+            storage.storage = storage.storage.replace(".", ",");
+            storage.storage = result.toString();
+            return storage.storage;
+        }
     }
+
 
     public boolean isDouble(String input) {
         try {
@@ -80,7 +94,11 @@ public class Calculating {
             return 1;
         } else if (input.equals("×")) {
             return 2;
-        } else return 3;             //(\)
+        } else if (input.equals("÷")) {
+            return 3;
+        } else {
+            return 4;                // no value
+        }
     }
 
 

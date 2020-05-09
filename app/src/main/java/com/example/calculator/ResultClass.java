@@ -5,35 +5,35 @@ import android.widget.EditText;
 
 public class ResultClass implements View.OnClickListener {
     EditText txt;
-    StorageClass StorageClass;
+    StorageClass storage;
     Calculating calculating;
 
     ResultClass(EditText text, StorageClass StorageClass, Calculating calculating) {
         this.txt = text;
-        this.StorageClass = StorageClass;
+        this.storage = StorageClass;
         this.calculating = calculating;
 
     }
 
 
     public void onClick(View v) {
-        if (!isInteger(StorageClass.storage)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
-            StorageClass.addCharToString("=");                  //znak = i zaczynami liczenie.
-            this.txt.setText(calculating.FinalResult(StorageClass));
+        int selection = txt.getSelectionEnd();
+
+        if (!isInteger(storage.storage) || (selection == 0)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
+            storage.addCharToString("=");                  //znak = i zaczynami liczenie.
+            this.txt.setText(calculating.FinalResult(storage));
             txt.setSelection(txt.length());
-        }                                                      //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
+        } else if (!isInteger(String.valueOf(storage.storage.charAt(selection - 1)))) {
+            return;
+        }                                                     //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
 
 
     }
 
-    public boolean isInteger(String input) {                          // metoda sprawdzająca czy dana wartość jest integerem
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+    private boolean isInteger(String input) {
+        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷") && !input.contains(",");
 
+
+    }
 
 }

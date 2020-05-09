@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,14 +28,28 @@ public class CommaClass implements View.OnClickListener {
         } else if (Character.toString(storage.storage.charAt(storage.storage.length() - 1)).equals(",")) { //if previous character is comma aswell, dont do nothing
             return;
 
-        } else if(Character.toString(storage.storage.charAt(selection-1)).equals("+")){ //SET OTHER Arithmetics!
+        } else if (selection == 0) {
+            int notInt;
+            for (int x = selection; x <= storage.storage.length() - 1; x++) {
+                if (!isInteger(String.valueOf(storage.storage.charAt(x)))) {
+                    notInt = x;
+
+                    for (int y = selection; y <= storage.storage.charAt(notInt); y++) {
+                        if (String.valueOf(storage.storage.charAt(y)).equals(",")) {
+                            commaNotAllowed();
+                        } else {
+                            commaAllowed(v);
+                        }
+
+                    }
+
+                }
+            }
+        } else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1)))) {
             storage.addCharToString("0,");
             this.txt.setText(storage.returnString());
-            this.txt.setSelection(selection+2);
-        }
-
-
-        else {
+            this.txt.setSelection(selection + 2);
+        } else {
             checkComma(v);
         }
 
@@ -44,15 +57,17 @@ public class CommaClass implements View.OnClickListener {
     }
 
     void checkComma(View v) {
+        int selectionZero = 0;
         int selection = txt.getSelectionEnd();
+        if (selection == 0) {
+            selectionZero = 1;
+        }
         int notIntBackward;
         int notIntForward;
         boolean isBackwardComma = false;
         boolean isForwardComma = false;
 
-
-        for (int i = selection-1; i >= 0; i--) {
-            Log.i("tmp", "." + i);
+        for (int i = Math.max(selection - 1, selectionZero); i >= 0; i--) {
 
             if (!isInteger(String.valueOf(storage.storage.charAt(i)))) {
                 notIntBackward = i;
@@ -63,6 +78,9 @@ public class CommaClass implements View.OnClickListener {
                     break;
                 }
 
+            } else if (String.valueOf(storage.storage.charAt(i)).equals(",")) {
+                isBackwardComma = true;
+                break;
             }
         }
 
@@ -109,7 +127,7 @@ public class CommaClass implements View.OnClickListener {
     }
 
     public boolean isInteger(String input) {
-        if (input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷") || input.contains(",")) {
+        if (input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷")) {
             return false;
         }
         return true;
