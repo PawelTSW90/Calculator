@@ -17,21 +17,32 @@ public class ResultClass implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        int selection = txt.getSelectionEnd();
 
-        if (!isInteger(storage.storage) || (selection == 0)) {                       //jeśli w storage występują jakiekolwiek operatory, to dodajemy na koniec
-            storage.addCharToString("=");                  //znak = i zaczynami liczenie.
-            this.txt.setText(calculating.FinalResult(storage));
-            txt.setSelection(txt.length());
-        } else if (!isInteger(String.valueOf(storage.storage.charAt(selection - 1)))) {
+
+        if (storage.storage.isEmpty()) {               //If there are no characters, dont do nothing
             return;
-        }                                                     //w przeciwnym wypadku program czeka bo bez operatorów nie ma czego liczyć
+        } else if (!isInteger(storage.storage)) {
+
+            storage.addCharToString("=");
+            calculating.FinalResult(storage);
+            if(calculating.cantCount){
+                calculating.cantCount = false;
+
+                return;
+            } else {
+
+
+
+                this.txt.setText(storage.storage);
+                txt.setSelection(txt.length());
+            }
+        }
 
 
     }
 
     private boolean isInteger(String input) {
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷") && !input.contains(",");
+        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
 
 
     }

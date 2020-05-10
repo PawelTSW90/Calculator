@@ -21,6 +21,7 @@ public class Calculating {
 
         for (int x = 0; x < chars.size(); x++) {
             Log.i("tmp", "storage: " + storage.storage);
+            Log.i("tmp", "chars" + chars);
             if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {   //if character is nor number or dot, start calculating
 
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
@@ -61,6 +62,11 @@ public class Calculating {
         }
 
         if(cantCount){
+
+            Log.i("tmp", "Storage" + storage.storage);
+            storage.removeLastChar();
+            Log.i("tmp", "Storage" + storage.storage);
+
             return storage.storage;
 
         } else {
@@ -70,8 +76,9 @@ public class Calculating {
             double value = Double.parseDouble(chars.get(chars.size() - 1));
             double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
             result.append(roundedValue);
-            storage.storage = storage.storage.replace(".", ",");
-            storage.storage = result.toString();
+            String tmp = result.toString();
+            tmp = tmp.replace(".", ",");
+            storage.storage = tmp;
             return storage.storage;
         }
     }

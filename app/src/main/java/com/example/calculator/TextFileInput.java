@@ -16,6 +16,7 @@ public class TextFileInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         int kursor = txt.getSelectionEnd();                         //initialize selection position
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
@@ -37,5 +38,11 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(kursor + 1);
 
         }
+    }
+
+    private boolean isInteger(String input) {
+        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
+
+
     }
 }
