@@ -25,27 +25,13 @@ public class CommaClass implements View.OnClickListener {
             this.txt.setText(storage.returnString());
             txt.setSelection(2);
 
-        } else if (Character.toString(storage.storage.charAt(storage.storage.length() - 1)).equals(",")) { //if previous character is comma aswell, dont do nothing
-            return;
+        }
 
-        } else if (selection == 0) {
-            int notInt;
-            for (int x = selection; x <= storage.storage.length() - 1; x++) {
-                if (!isInteger(String.valueOf(storage.storage.charAt(x)))) {
-                    notInt = x;
+        else if (selection == 0) {
+            checkComma(v);
+        }
 
-                    for (int y = selection; y <= storage.storage.charAt(notInt); y++) {
-                        if (String.valueOf(storage.storage.charAt(y)).equals(",")) {
-                            commaNotAllowed();
-                        } else {
-                            commaAllowed(v);
-                        }
-
-                    }
-
-                }
-            }
-        } else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1)))) {
+        else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1)))) {    //if previous character is arithmetic symbol, add "0,"
             storage.addCharToString("0,");
             this.txt.setText(storage.returnString());
             this.txt.setSelection(selection + 2);
@@ -56,24 +42,24 @@ public class CommaClass implements View.OnClickListener {
 
     }
 
-    void checkComma(View v) {
-        int selectionZero = 0;
+    void checkComma(View v) {                                                               //Method is checking if comma is allowed
+        int selectionZero = 0;                   //avoiding out of bound exception
         int selection = txt.getSelectionEnd();
         if (selection == 0) {
             selectionZero = 1;
         }
-        int notIntBackward;
-        int notIntForward;
+
         boolean isBackwardComma = false;
         boolean isForwardComma = false;
 
-        for (int i = Math.max(selection - 1, selectionZero); i >= 0; i--) {
+        for (int i = Math.max(selection - 1, selectionZero); i >= 0; i--) {      //Backward loop looking for comma between selection and first no-integer character
 
             if (!isInteger(String.valueOf(storage.storage.charAt(i)))) {
-                notIntBackward = i;
+
                 if (String.valueOf(storage.storage.charAt(i)).equals(",")) {
                     isBackwardComma = true;
-                    commaNotAllowed();
+                    break;
+
                 } else {
                     break;
                 }
@@ -84,22 +70,15 @@ public class CommaClass implements View.OnClickListener {
             }
         }
 
-        for (int x = selection - 1; x <= storage.storage.length() - 1; x++) {
-
-            if (!isInteger(String.valueOf(storage.storage.charAt(x)))) {
-                notIntForward = x;
-                if (String.valueOf(storage.storage.charAt(x)).equals(",")) {
-                    isForwardComma = true;
-                    commaNotAllowed();
-                } else {
-                    break;
-                }
-
+        for (int x = Math.max(selection - 1, selectionZero); x <= storage.storage.length() - 1; x++) {   //Forward Loop looking for comma between selection and first no-integer character
+            if(String.valueOf(storage.storage.charAt(x)).equals(",")){
+                isForwardComma = true;
+                break;
             }
         }
 
         if (isBackwardComma || isForwardComma) {
-            commaNotAllowed();
+            return;
         } else {
             commaAllowed(v);
         }
@@ -122,9 +101,7 @@ public class CommaClass implements View.OnClickListener {
     }
 
 
-    private void commaNotAllowed() {
-        return;
-    }
+
 
     public boolean isInteger(String input) {
         if (input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷")) {
@@ -135,3 +112,7 @@ public class CommaClass implements View.OnClickListener {
 
     }
 }
+
+//Bug 2,5+3,8 - usuwamy+, dodajemy na końcu znak arytmetyczny i naciskamy =
+
+

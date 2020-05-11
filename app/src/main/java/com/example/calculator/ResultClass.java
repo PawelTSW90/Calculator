@@ -21,15 +21,15 @@ public class ResultClass implements View.OnClickListener {
 
         if (storage.storage.isEmpty()) {               //If there are no characters, dont do nothing
             return;
-        } else if (!isInteger(storage.storage)) {
+        } else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
 
             storage.addCharToString("=");
             calculating.FinalResult(storage);
-            if(calculating.cantCount){
+            if(calculating.cantCount){                //if not, don't do nothing
                 calculating.cantCount = false;
 
                 return;
-            } else {
+            } else {                                 // else, display result
 
 
 
