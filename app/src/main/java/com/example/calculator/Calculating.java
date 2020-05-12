@@ -12,7 +12,6 @@ public class Calculating {
     void WrongFormatChecker(StorageClass storage){                    //Before calculating, method check if format is correct. If not, program waiting
         this.storage=storage;
 
-
         for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
             if(cantCount){
                 break;
@@ -86,12 +85,8 @@ public class Calculating {
 
         }
 
-        if(cantCount){
-
-
+        if(cantCount){                               //
             storage.removeLastChar();
-
-
             return storage.storage;
 
         } else {
@@ -107,6 +102,7 @@ public class Calculating {
             return storage.storage;
         }
     }
+
 
 
     public boolean isDouble(String input) {
