@@ -17,11 +17,20 @@ public class ResultClass implements View.OnClickListener {
 
 
     public void onClick(View v) {
+        calculating.WrongFormatChecker(storage);
 
 
         if (storage.storage.isEmpty()) {               //If there are no characters, dont do nothing
             return;
-        } else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
+        }
+        else if(calculating.cantCount){             //If format is not correct, dont do nothing
+            calculating.cantCount = false;
+            return;
+        }
+
+
+
+        else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
 
             storage.addCharToString("=");
             calculating.FinalResult(storage);

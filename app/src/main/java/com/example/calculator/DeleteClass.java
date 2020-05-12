@@ -15,7 +15,7 @@ public class DeleteClass implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v) {           //Method responsible for deleting one character and setting selection at right spot
         int cursor = txt.getSelectionEnd();
         if (cursor == 0) {
             return;

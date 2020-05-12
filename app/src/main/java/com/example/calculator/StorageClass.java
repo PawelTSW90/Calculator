@@ -15,20 +15,16 @@ public class StorageClass {
         if (storage.length() == 1 && storage.startsWith("0") && !znak.equals(",")) {
             this.storage = znak;
         } else
-
             this.storage += znak;
 
     }
 
-
     String returnString() {
         return storage;
-
     }
 
     void removeLastChar(){
         storage=storage.substring(0, storage.length()-1);
-
 
     }
 
@@ -48,13 +44,10 @@ public class StorageClass {
 
                 wyjscie.add(tmp); //dodanie pełnej liczby na wyjście
 
-
                 valueList.add(Character.toString(storage.charAt(i))); //dodanie operatora do listyWartosci
-
 
                 if (stos.isEmpty()) { //jeśli na stosie nie ma jeszcze żadnych operatorów
                     stos.add(Character.toString(storage.charAt(i))); //dodajemy nasz operator na stos jako pierwszy
-
 
                 } else {                         //kiedy na stosie są już operatory
                     String last = stos.peek();//przypisanie do "last" ostatniego operatora na stosie
@@ -68,12 +61,10 @@ public class StorageClass {
 
                             stos.add(Character.toString(storage.charAt(i))); //to dodajemy nasz operator na stos
 
-
                         } else { //jeśli ostatni operator na stosie ma również wysoki priorytet
 
                             while (!isLowPriority(last)) {//dopóki na stosie jest operator z wysokim priorytetem
                                 wyjscie.add(last);        //odkładamy go na wyjście
-
 
                             }
                             stos.push(Character.toString(storage.charAt(i))); //gdy operator na stosie ma niższy priorytet, odkłądamy
@@ -84,10 +75,8 @@ public class StorageClass {
                     } else { //jeśli nasz operator ma niski priorytet
                         while (!stos.isEmpty()) {
                             wyjscie.add(stos.pop());
-
                         }
                         stos.add(Character.toString(storage.charAt(i)));
-
                     }
                 }
                 tmp = "";
@@ -95,7 +84,6 @@ public class StorageClass {
         }
         while (!stos.isEmpty()) {
             wyjscie.add(stos.pop());
-
 
         }
         valueList.remove(valueList.size()-1);

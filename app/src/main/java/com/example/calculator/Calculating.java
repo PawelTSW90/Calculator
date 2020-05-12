@@ -9,8 +9,33 @@ public class Calculating {
     boolean cantCount = false;
 
 
+    void WrongFormatChecker(StorageClass storage){                    //Before calculating, method check if format is correct. If not, program waiting
+        this.storage=storage;
+
+
+        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
+            if(cantCount){
+                break;
+            }
+            if(String.valueOf(storage.storage.charAt(tmp)).equals(",")){
+
+                for(int tmp2 = tmp+1; tmp2<=storage.storage.length()-1; tmp2++){
+                    if(!isDouble(String.valueOf(storage.storage.charAt(tmp2))) && String.valueOf(storage.storage.charAt(tmp2)).equals(",")){
+                        cantCount = true;
+                        break;
+                    } else{
+                        tmp2++;
+                    }
+                }
+            }
+        }
+    }
+
+
     String FinalResult(StorageClass storage) {
         this.storage = storage;
+
+
 
         ArrayList<String> chars = storage.returnWyjscie();
         for (int x = 0; x < chars.size(); x++) {
@@ -63,9 +88,9 @@ public class Calculating {
 
         if(cantCount){
 
-            Log.i("tmp", "Storage" + storage.storage);
+
             storage.removeLastChar();
-            Log.i("tmp", "Storage" + storage.storage);
+
 
             return storage.storage;
 

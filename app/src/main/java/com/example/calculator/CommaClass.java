@@ -113,6 +113,5 @@ public class CommaClass implements View.OnClickListener {
     }
 }
 
-//Bug 2,5+3,8 - usuwamy+, dodajemy na końcu znak arytmetyczny i naciskamy =
 
 
