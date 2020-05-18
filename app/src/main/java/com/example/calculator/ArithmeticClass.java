@@ -4,19 +4,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class TextFileInput implements View.OnClickListener {
+public class ArithmeticClass implements View.OnClickListener {
     private EditText txt;
     private StorageClass storage;
 
-    TextFileInput(EditText text, StorageClass storage) {
-        this.txt = text;
+
+    ArithmeticClass(EditText txt, StorageClass storage) {
+        this.txt = txt;
         this.storage = storage;
 
     }
 
     @Override
     public void onClick(View v) {
-        int selection = txt.getSelectionEnd();                       //initialize selection position
+        int selection = txt.getSelectionEnd();
+        //if storage is empty, wait
+        if (storage.storage.isEmpty())
+            return;
+
+        //if selection positioned last, and previous char is arithmetic, wait
+        if (selection == storage.storage.length()) {
+            if (isInteger(String.valueOf(storage.storage.charAt(selection - 1)))) {
+
+                entryAllowed(v);
+            }
+         //if selection positioned first, and next char is arithmetic, wait
+        } else if (selection == 0) {
+            if (isInteger(String.valueOf(storage.storage.charAt(selection + 1)))) {
+                entryAllowed(v);
+
+
+            }
+
+
+        }
+
+    }
+
+    void entryAllowed(View v) {
+        int selection = txt.getSelectionEnd();
         storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
         int length = storage.storage.length() - 1;
@@ -40,4 +66,10 @@ public class TextFileInput implements View.OnClickListener {
     }
 
 
+    private boolean isInteger(String input) {
+        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
+
+
+    }
 }
+

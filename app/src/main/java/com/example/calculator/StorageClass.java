@@ -8,14 +8,14 @@ public class StorageClass {
     String storage = "";
 
 
-    void addCharToString(String znak) {
-        if (znak.contains("⌫")) {
+    void addCharToString(String input) {
+        if (input.contains("⌫")) {
             return;
         }
-        if (storage.length() == 1 && storage.startsWith("0") && !znak.equals(",")) {
-            this.storage = znak;
+        if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && isInteger(input)) {
+            this.storage = input;
         } else
-            this.storage += znak;
+            this.storage += input;
 
     }
 
@@ -36,9 +36,9 @@ public class StorageClass {
 
         for (int i = 0; i < storage.length(); i++) {
 
-            if (isInteger(Character.toString(storage.charAt(i)))|| Character.toString(storage.charAt(i)).equals(",")) //Jeśli znak jest cyfrą, wrzuć do tmp
+            if (isInteger(Character.toString(storage.charAt(i)))|| Character.toString(storage.charAt(i)).equals(",")) //Jeśli input jest cyfrą, wrzuć do tmp
                 tmp += storage.charAt(i);
-                //else kiedy znak nie jest cyfrą
+                //else kiedy input nie jest cyfrą
             else {
                 valueList.add(tmp); //dodanie pełnej liczby do listyWartosci
 

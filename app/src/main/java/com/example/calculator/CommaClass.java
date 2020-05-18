@@ -5,8 +5,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CommaClass implements View.OnClickListener {
-    EditText txt;
-    StorageClass storage;
+    private EditText txt;
+    private StorageClass storage;
 
 
     CommaClass(EditText txt, StorageClass storage) {

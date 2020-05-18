@@ -4,30 +4,35 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-public class Calculating {
-    StorageClass storage;
+class Calculating {
+   StorageClass storage;
     boolean cantCount = false;
 
 
     void WrongFormatChecker(StorageClass storage){                    //Before calculating, method check if format is correct. If not, program waiting
         this.storage=storage;
 
-        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
+        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){    //Loop that no allows to two commas between two arithmetic operators
             if(cantCount){
                 break;
             }
             if(String.valueOf(storage.storage.charAt(tmp)).equals(",")){
 
                 for(int tmp2 = tmp+1; tmp2<=storage.storage.length()-1; tmp2++){
+                    Log.i("tmp", " " + storage.storage.charAt(tmp2));
                     if(!isDouble(String.valueOf(storage.storage.charAt(tmp2))) && String.valueOf(storage.storage.charAt(tmp2)).equals(",")){
                         cantCount = true;
                         break;
-                    } else{
-                        tmp2++;
+                    }  else if (!isDouble(String.valueOf(storage.storage.charAt(tmp2)))) {
+                        break;
+
                     }
+
                 }
             }
         }
+
+
     }
 
 
@@ -52,7 +57,7 @@ public class Calculating {
                     cantCount = true;
 
 
-                } else if (whatSign(chars.get(x)) == 0) {           //adding
+                } else if (chars.get(x).equals("+")) {           //adding
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
                     double tmp2 = Double.parseDouble(chars.get(x - 1));
                     Double sum = tmp1 + tmp2;
@@ -131,3 +136,7 @@ public class Calculating {
 
 
 }
+
+
+
+

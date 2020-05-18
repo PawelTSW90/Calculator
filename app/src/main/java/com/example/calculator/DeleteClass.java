@@ -5,8 +5,8 @@ import android.widget.EditText;
 
 public class DeleteClass implements View.OnClickListener {
 
-    EditText txt;
-    StorageClass storage;
+    private EditText txt;
+    private StorageClass storage;
 
 
     DeleteClass(EditText txt, StorageClass storage) {
@@ -16,18 +16,18 @@ public class DeleteClass implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {           //Method responsible for deleting one character and setting selection at right spot
-        int cursor = txt.getSelectionEnd();
-        if (cursor == 0) {
+        int selection = txt.getSelectionEnd();
+        if (selection == 0) {
             return;
         } else {
-            String firstPart = storage.storage.substring(0, cursor);
-            String secondPart = storage.storage.substring(cursor);
+            String firstPart = storage.storage.substring(0, selection);
+            String secondPart = storage.storage.substring(selection);
             storage.storage = "";
             firstPart = firstPart.substring(0, firstPart.length() - 1);
             storage.storage += firstPart;
             storage.storage += secondPart;
             this.txt.setText(storage.returnString());
-            txt.setSelection(cursor - 1);
+            txt.setSelection(selection - 1);
         }
     }
 }

@@ -4,9 +4,9 @@ import android.view.View;
 import android.widget.EditText;
 
 public class ResultClass implements View.OnClickListener {
-    EditText txt;
-    StorageClass storage;
-    Calculating calculating;
+    private EditText txt;
+    private StorageClass storage;
+    private Calculating calculating;
 
     ResultClass(EditText text, StorageClass StorageClass, Calculating calculating) {
         this.txt = text;
@@ -20,24 +20,17 @@ public class ResultClass implements View.OnClickListener {
         calculating.WrongFormatChecker(storage);
 
 
-        if (storage.storage.isEmpty()) {               //If there are no characters, dont do nothing
-            return;
-        }
-        else if(calculating.cantCount){             //If format is not correct, dont do nothing
+
+         if(calculating.cantCount){             //If format is not correct, dont do nothing
             calculating.cantCount = false;
-            return;
-        }
-
-
-
-        else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
+        } else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
 
             storage.addCharToString("=");
             calculating.FinalResult(storage);
+
             if(calculating.cantCount){                //if not, don't do nothing
                 calculating.cantCount = false;
 
-                return;
             } else {                                 // else, display result
 
 

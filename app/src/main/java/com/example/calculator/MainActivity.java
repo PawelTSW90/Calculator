@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText txt = findViewById(R.id.text_Edit);
         txt.setShowSoftInputOnFocus(false);                              //disable system keyobard
         final Button button0 = findViewById(R.id.button_0);
-        button0.setOnClickListener(new TextFileInput(txt, storage));
+        button0.setOnClickListener(new ZeroClass(txt, storage, new TextFileInput(txt, storage) ));
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new TextFileInput(txt, storage));
         final Button button2 = findViewById(R.id.button_2);
@@ -42,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
         final Button brackets = findViewById(R.id.button_brackets);
         brackets.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_add = findViewById(R.id.button_add);
-        button_add.setOnClickListener(new TextFileInput(txt, storage));
+        button_add.setOnClickListener(new ArithmeticClass(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);
-        button_multiply.setOnClickListener(new TextFileInput(txt, storage));
+        button_multiply.setOnClickListener(new ArithmeticClass(txt, storage));
         final Button button_divide = findViewById(R.id.button_divide);
-        button_divide.setOnClickListener(new TextFileInput(txt, storage));
+        button_divide.setOnClickListener(new ArithmeticClass(txt, storage));
         final Button button_C = findViewById(R.id.button_C);
         button_C.setOnClickListener(new DeleteAllClass(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
         button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
         final Button button_minus = findViewById(R.id.button_minus);
-        button_minus.setOnClickListener(new TextFileInput(txt, storage));
+        button_minus.setOnClickListener(new ArithmeticClass(txt, storage));
         final Button button_delete = findViewById(R.id.button_delete);
         button_delete.setOnClickListener(new DeleteClass(txt, storage));
         final Button comma_button = findViewById(R.id.button_comma);
