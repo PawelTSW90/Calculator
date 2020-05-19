@@ -6,12 +6,12 @@ import android.widget.EditText;
 public class ZeroInput implements View.OnClickListener {
     private EditText txt;
     private StorageRefactorClass storage;
-    TextFileInput file;
+    MainInputClass input;
 
-    ZeroInput(EditText txt, StorageRefactorClass storage, TextFileInput file) {
+    ZeroInput(EditText txt, StorageRefactorClass storage, MainInputClass file) {
         this.txt = txt;
         this.storage = storage;
-        this.file = file;
+        this.input = file;
     }
     @Override
     public void onClick(View v) {
@@ -21,17 +21,13 @@ public class ZeroInput implements View.OnClickListener {
     }
 
     void isZeroAllowed(View v) {
-        int selection = txt.getSelectionEnd();
-        file.onClick(v);
+        input.addChar(v);
+        input.setCursor(v);
 
 
     }
 
-    public boolean isInteger(String input) {
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
 
-
-    }
 
 }
 

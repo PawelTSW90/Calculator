@@ -6,15 +6,16 @@ import java.util.Stack;
 
 public class StorageRefactorClass {
     String storage = "";
-
-
     void addCharToString(String input) {
+
         if (input.contains("⌫")) {
             return;
         }
         if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && isInteger(input)) {
             this.storage = input;
-        } else
+        }
+
+        else
             this.storage += input;
 
     }
@@ -23,8 +24,11 @@ public class StorageRefactorClass {
         return storage;
     }
 
-    void removeLastChar(){
-        storage=storage.substring(0, storage.length()-1);
+
+
+     String removeCharAtPosition(int position){
+        StringBuilder sb = new StringBuilder(storage);
+        return sb.deleteCharAt(position).toString();
 
     }
 

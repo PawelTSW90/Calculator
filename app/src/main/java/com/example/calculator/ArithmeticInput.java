@@ -22,21 +22,9 @@ public class ArithmeticInput implements View.OnClickListener {
         if (storage.storage.isEmpty())
             return;
 
-        //if selection positioned last, and previous char is arithmetic, wait
-        if (selection == storage.storage.length()) {
-            if (isInteger(String.valueOf(storage.storage.charAt(selection - 1)))) {
 
-                entryAllowed(v);
-            }
-         //if selection positioned first, and next char is arithmetic, wait
-        } else if (selection == 0) {
-            if (isInteger(String.valueOf(storage.storage.charAt(selection + 1)))) {
-                entryAllowed(v);
-
-
-            }
-
-
+         else{
+            entryAllowed(v);
         }
 
     }

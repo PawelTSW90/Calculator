@@ -94,7 +94,7 @@ class CalculatingClass {
         }
 
         if(cantCount){
-            storage.removeLastChar();
+            storage.removeCharAtPosition(storage.storage.charAt(storage.storage.length()-1));
             return storage.storage;
 
         } else {

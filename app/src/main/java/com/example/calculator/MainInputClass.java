@@ -1,24 +1,29 @@
 package com.example.calculator;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class TextFileInput implements View.OnClickListener {
+public class MainInputClass {
     private EditText txt;
     private StorageRefactorClass storage;
 
-    TextFileInput(EditText text, StorageRefactorClass storage) {
+    MainInputClass(EditText text, StorageRefactorClass storage) {
         this.txt = text;
         this.storage = storage;
 
     }
 
-    @Override
-    public void onClick(View v) {
+
+    void addChar(View v){
+        storage.addCharToString(((Button) v).getText().toString());
+    }
+
+    void setCursor(View v){
+        Log.i("tmp", "" + storage.storage.toString());
         //initialize selection position
         int selection = txt.getSelectionEnd();
-        storage.addCharToString(((Button) v).getText().toString());
         this.txt.setText(storage.returnString());
         int length = storage.storage.length() - 1;
         // if selection position is bigger than storage length, set it after last value
@@ -43,6 +48,7 @@ public class TextFileInput implements View.OnClickListener {
             txt.setSelection(selection + 1);
 
         }
+
     }
 
 
