@@ -4,15 +4,15 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-class Calculating {
-   StorageClass storage;
+class CalculatingClass {
+   StorageRefactorClass storage;
     boolean cantCount = false;
 
-
-    void WrongFormatChecker(StorageClass storage){                    //Before calculating, method check if format is correct. If not, program waiting
+    //Before calculating, method check if format is correct. If not, program waiting
+    void WrongFormatChecker(StorageRefactorClass storage){
         this.storage=storage;
-
-        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){    //Loop that no allows to two commas between two arithmetic operators
+    //Loop that no allows to two commas between two arithmetic operators
+        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
             if(cantCount){
                 break;
             }
@@ -36,14 +36,15 @@ class Calculating {
     }
 
 
-    String FinalResult(StorageClass storage) {
+    String FinalResult(StorageRefactorClass storage) {
         this.storage = storage;
 
 
 
-        ArrayList<String> chars = storage.returnWyjscie();
+        ArrayList<String> chars = storage.returnExit();
+        //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
-            chars.set(x, chars.get(x).replace(",", "."));       //replace "," for "." for calculating
+            chars.set(x, chars.get(x).replace(",", "."));
 
         }
 
@@ -51,13 +52,14 @@ class Calculating {
         for (int x = 0; x < chars.size(); x++) {
             Log.i("tmp", "storage: " + storage.storage);
             Log.i("tmp", "chars" + chars);
-            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {   //if character is nor number or dot, start calculating
+            //if character is nor number or dot, start calculating
+            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
 
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
                     cantCount = true;
 
-
-                } else if (chars.get(x).equals("+")) {           //adding
+                    //adding
+                } else if (chars.get(x).equals("+")) {
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
                     double tmp2 = Double.parseDouble(chars.get(x - 1));
                     Double sum = tmp1 + tmp2;
@@ -65,20 +67,21 @@ class Calculating {
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-                } else if (whatSign(chars.get(x)) == 1) {            //subtracting
+                    //subtracting
+                } else if (whatSign(chars.get(x)) == 1) {
                     Double minus = (Double.parseDouble(chars.get(x - 2)) - (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, minus.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-
-                } else if (whatSign(chars.get(x)) == 2) {          //multiply
+                    //multiplying
+                } else if (whatSign(chars.get(x)) == 2) {
                     Double multiply = (Double.parseDouble(chars.get(x - 2)) * (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, multiply.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-
+                    //dividing
                 } else if (whatSign(chars.get(x)) == 3) {
                     Double divide = (Double.parseDouble(chars.get(x - 2)) / (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, divide.toString());
@@ -90,7 +93,7 @@ class Calculating {
 
         }
 
-        if(cantCount){                               //
+        if(cantCount){
             storage.removeLastChar();
             return storage.storage;
 
@@ -130,7 +133,8 @@ class Calculating {
         } else if (input.equals("÷")) {
             return 3;
         } else {
-            return 4;                // no value
+            // no value
+            return 4;
         }
     }
 

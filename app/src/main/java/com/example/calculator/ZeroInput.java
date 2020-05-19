@@ -3,24 +3,27 @@ package com.example.calculator;
 import android.view.View;
 import android.widget.EditText;
 
-public class ZeroClass implements View.OnClickListener {
+public class ZeroInput implements View.OnClickListener {
     private EditText txt;
-    private StorageClass storage;
+    private StorageRefactorClass storage;
     TextFileInput file;
 
-    ZeroClass(EditText txt, StorageClass storage, TextFileInput file) {
+    ZeroInput(EditText txt, StorageRefactorClass storage, TextFileInput file) {
         this.txt = txt;
         this.storage = storage;
         this.file = file;
     }
     @Override
     public void onClick(View v) {
-        if (!storage.storage.isEmpty()) {
-            file.onClick(v);
-        }
+        isZeroAllowed(v);
+
+
     }
 
     void isZeroAllowed(View v) {
+        int selection = txt.getSelectionEnd();
+        file.onClick(v);
+
 
     }
 

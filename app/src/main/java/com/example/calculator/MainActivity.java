@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private StorageClass storage = new StorageClass();
-    private Calculating calculating = new Calculating();
+    private StorageRefactorClass storage = new StorageRefactorClass();
+    private CalculatingClass calculating = new CalculatingClass();
 
 
 
@@ -18,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final EditText txt = findViewById(R.id.text_Edit);
-        txt.setShowSoftInputOnFocus(false);                              //disable system keyobard
+        //disable system keyobard
+        txt.setShowSoftInputOnFocus(false);
         final Button button0 = findViewById(R.id.button_0);
-        button0.setOnClickListener(new ZeroClass(txt, storage, new TextFileInput(txt, storage) ));
+        button0.setOnClickListener(new ZeroInput(txt, storage, new TextFileInput(txt, storage)));
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new TextFileInput(txt, storage));
         final Button button2 = findViewById(R.id.button_2);
@@ -42,21 +43,21 @@ public class MainActivity extends AppCompatActivity {
         final Button brackets = findViewById(R.id.button_brackets);
         brackets.setOnClickListener(new TextFileInput(txt, storage));
         final Button button_add = findViewById(R.id.button_add);
-        button_add.setOnClickListener(new ArithmeticClass(txt, storage));
+        button_add.setOnClickListener(new ArithmeticInput(txt, storage));
         final Button button_multiply = findViewById(R.id.button_multiply);
-        button_multiply.setOnClickListener(new ArithmeticClass(txt, storage));
+        button_multiply.setOnClickListener(new ArithmeticInput(txt, storage));
         final Button button_divide = findViewById(R.id.button_divide);
-        button_divide.setOnClickListener(new ArithmeticClass(txt, storage));
+        button_divide.setOnClickListener(new ArithmeticInput(txt, storage));
         final Button button_C = findViewById(R.id.button_C);
-        button_C.setOnClickListener(new DeleteAllClass(txt, storage));
+        button_C.setOnClickListener(new DeleteAllInput(txt, storage));
         final Button button_result = findViewById(R.id.button_result);
-        button_result.setOnClickListener(new ResultClass(txt, storage, calculating));
+        button_result.setOnClickListener(new ResultInput(txt, storage, calculating));
         final Button button_minus = findViewById(R.id.button_minus);
-        button_minus.setOnClickListener(new ArithmeticClass(txt, storage));
+        button_minus.setOnClickListener(new ArithmeticInput(txt, storage));
         final Button button_delete = findViewById(R.id.button_delete);
-        button_delete.setOnClickListener(new DeleteClass(txt, storage));
+        button_delete.setOnClickListener(new DeleteInput(txt, storage));
         final Button comma_button = findViewById(R.id.button_comma);
-        comma_button.setOnClickListener(new CommaClass(txt, storage));
+        comma_button.setOnClickListener(new CommaInput(txt, storage));
 
 
 

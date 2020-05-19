@@ -3,12 +3,12 @@ package com.example.calculator;
 import android.view.View;
 import android.widget.EditText;
 
-public class ResultClass implements View.OnClickListener {
+public class ResultInput implements View.OnClickListener {
     private EditText txt;
-    private StorageClass storage;
-    private Calculating calculating;
+    private StorageRefactorClass storage;
+    private CalculatingClass calculating;
 
-    ResultClass(EditText text, StorageClass StorageClass, Calculating calculating) {
+    ResultInput(EditText text, StorageRefactorClass StorageClass, CalculatingClass calculating) {
         this.txt = text;
         this.storage = StorageClass;
         this.calculating = calculating;
@@ -20,18 +20,19 @@ public class ResultClass implements View.OnClickListener {
         calculating.WrongFormatChecker(storage);
 
 
-
-         if(calculating.cantCount){             //If format is not correct, dont do nothing
+            //If format is not correct, dont do nothing
+         if(calculating.cantCount){
             calculating.cantCount = false;
-        } else if (!isInteger(storage.storage)) {      //if there are arithmetic symbols, check if you can count result
+             //if there are arithmetic symbols, check if you can count result
+        } else if (!isInteger(storage.storage)) {
 
             storage.addCharToString("=");
             calculating.FinalResult(storage);
-
-            if(calculating.cantCount){                //if not, don't do nothing
+            //if not, don't do nothing
+            if(calculating.cantCount){
                 calculating.cantCount = false;
-
-            } else {                                 // else, display result
+            // else, display result
+            } else {
 
 
 

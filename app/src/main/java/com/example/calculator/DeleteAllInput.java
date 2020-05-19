@@ -3,11 +3,11 @@ package com.example.calculator;
 import android.view.View;
 import android.widget.EditText;
 
-public class DeleteAllClass implements View.OnClickListener {
+public class DeleteAllInput implements View.OnClickListener {
     private EditText txt;
-    private StorageClass storage;
+    private StorageRefactorClass storage;
 
-    DeleteAllClass(EditText txt, StorageClass storage){
+    DeleteAllInput(EditText txt, StorageRefactorClass storage){
         this.txt = txt;
         this.storage = storage;
     }

@@ -3,19 +3,20 @@ package com.example.calculator;
 import android.view.View;
 import android.widget.EditText;
 
-public class DeleteClass implements View.OnClickListener {
+public class DeleteInput implements View.OnClickListener {
 
     private EditText txt;
-    private StorageClass storage;
+    private StorageRefactorClass storage;
 
 
-    DeleteClass(EditText txt, StorageClass storage) {
+    DeleteInput(EditText txt, StorageRefactorClass storage) {
         this.txt = txt;
         this.storage = storage;
     }
 
     @Override
-    public void onClick(View v) {           //Method responsible for deleting one character and setting selection at right spot
+    //Method responsible for deleting one character and setting selection at right spot
+    public void onClick(View v) {
         int selection = txt.getSelectionEnd();
         if (selection == 0) {
             return;
