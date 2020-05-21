@@ -102,12 +102,24 @@ class CalculatingClass {
 
             StringBuilder result = new StringBuilder();
             double value = Double.parseDouble(chars.get(chars.size() - 1));
+            //set number of integers after comma to 10
             double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
-            result.append(roundedValue);
-            String tmp = result.toString();
-            tmp = tmp.replace(".", ",");
-            storage.storage = tmp;
-            return storage.storage;
+            //Displaying result as integer
+            if(roundedValue%1==0){
+                int intvalue = (int) roundedValue;
+                result.append(intvalue);
+                String tmp = result.toString();
+                tmp = tmp.replace(".", ",");
+                storage.storage = tmp;
+                return storage.storage;
+                //Displaying result as double
+            } else {
+                result.append(roundedValue);
+                String tmp = result.toString();
+                tmp = tmp.replace(".", ",");
+                storage.storage = tmp;
+                return storage.storage;
+            }
         }
     }
 
