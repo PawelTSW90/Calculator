@@ -21,8 +21,19 @@ public class ZeroInput implements View.OnClickListener {
     }
 
     void isZeroAllowed(View v) {
+        int selection = txt.getSelectionEnd();
+
+        if(!isInteger(String.valueOf(storage.storage.charAt(selection-2))) && String.valueOf(storage.storage.charAt(selection-1)).equals("0")){
+            return;
+        }
         input.addChar(v);
         input.setCursor(v);
+
+
+    }
+
+    private boolean isInteger(String input) {
+        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
 
 
     }

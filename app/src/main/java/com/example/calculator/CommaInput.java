@@ -1,7 +1,6 @@
 package com.example.calculator;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class CommaInput implements View.OnClickListener {
@@ -31,7 +30,7 @@ public class CommaInput implements View.OnClickListener {
             checkComma(v);
         }
         //if previous character is arithmetic symbol, add "0,"
-        else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1)))) {
+        else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1))) && selection == storage.storage.length()) {
             storage.addCharToString("0,");
             this.txt.setText(storage.returnString());
             this.txt.setSelection(selection + 2);
@@ -53,7 +52,7 @@ public class CommaInput implements View.OnClickListener {
         boolean isBackwardComma = false;
         boolean isForwardComma = false;
         //Backward loop looking for comma between selection and first no-integer character
-        for (int i = Math.max(selection - 1, selectionZero); i >= 0; i--) {
+        for (int i = Math.max(selection-1, selectionZero); i >= 0; i--) {
 
             if (!isInteger(String.valueOf(storage.storage.charAt(i)))) {
 
@@ -71,7 +70,7 @@ public class CommaInput implements View.OnClickListener {
             }
         }
         //Forward Loop looking for comma between selection and first no-integer character
-        for (int x = Math.max(selection - 1, selectionZero); x <= storage.storage.length() - 1; x++) {
+        for (int x = Math.max(selection-1, selectionZero); x <= storage.storage.length() - 1; x++) {
             if(String.valueOf(storage.storage.charAt(x)).equals(",")){
                 isForwardComma = true;
                 break;
@@ -91,7 +90,7 @@ public class CommaInput implements View.OnClickListener {
     void commaAllowed(View v) {
         //initialize selection position
         int kursor = txt.getSelectionEnd();
-        storage.addCharToString(((Button) v).getText().toString());
+        storage.addCharAtPosition(kursor, ",");
         this.txt.setText(storage.returnString());
         int length = storage.storage.length() - 1;
         // if selection position is bigger than storage length, set it after last value

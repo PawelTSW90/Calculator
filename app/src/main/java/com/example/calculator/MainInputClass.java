@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +20,6 @@ public class MainInputClass {
     }
 
     void setCursor(View v){
-        Log.i("tmp", "" + storage.storage.toString());
         //initialize selection position
         int selection = txt.getSelectionEnd();
         this.txt.setText(storage.returnString());

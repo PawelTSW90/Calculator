@@ -26,9 +26,17 @@ public class StorageRefactorClass {
 
 
 
-     String removeCharAtPosition(int position){
-        StringBuilder sb = new StringBuilder(storage);
-        return sb.deleteCharAt(position).toString();
+    void removeCharAtPosition(int position){
+        StringBuilder tmp = new StringBuilder(storage);
+        tmp = tmp.deleteCharAt(position);
+        storage = tmp.toString();
+
+    }
+
+    void addCharAtPosition(int position, String whatChar){
+        StringBuilder tmp2 = new StringBuilder(storage);
+        tmp2 = tmp2.insert(position, whatChar);
+        storage = tmp2.toString();
 
     }
 
