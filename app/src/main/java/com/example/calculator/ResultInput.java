@@ -20,11 +20,19 @@ public class ResultInput implements View.OnClickListener {
         calculating.WrongFormatChecker(storage);
 
 
-            //If format is not correct, dont do nothing
+            //Change cantCount value back to original (false) for future calculation
          if(calculating.cantCount){
             calculating.cantCount = false;
-             //if there are arithmetic symbols, check if you can count result
-        } else if (!isInteger(storage.storage)) {
+
+        } else if(!isInteger(String.valueOf(storage.storage.charAt(storage.storage.length()-1)))){
+             return;
+
+         }
+
+
+
+         //if there are arithmetic symbols, check if you can count result
+         else if (!isInteger(storage.storage)) {
 
             storage.addCharToString("=");
             calculating.FinalResult(storage);

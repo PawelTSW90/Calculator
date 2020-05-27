@@ -18,9 +18,22 @@ public class ArithmeticInput implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int selection = txt.getSelectionEnd();
-        //if storage is empty, wait
-        if (storage.storage.isEmpty())
+        if (storage.storage.isEmpty()) {
             return;
+        } else if(selection==0){
+            return;
+
+
+        } else if(selection == storage.storage.length()){
+            if(!isInteger(String.valueOf(storage.storage.charAt(selection-1)))){
+                return;
+            } else{
+                entryAllowed(v);
+            }
+        } else if(!isInteger(String.valueOf(storage.storage.charAt(selection-1))) || (!isInteger(String.valueOf(storage.storage.charAt(selection))))){
+            return;
+
+        }
 
 
          else{
