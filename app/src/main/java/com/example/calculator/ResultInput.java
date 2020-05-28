@@ -18,6 +18,7 @@ public class ResultInput implements View.OnClickListener {
         this.context = context;
     }
 
+
     public void onClick(View v) {
         calculating.WrongFormatChecker(storage);
             //Change cantCount value back to original (false) for future calculation
