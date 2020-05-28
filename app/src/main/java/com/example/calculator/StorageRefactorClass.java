@@ -7,10 +7,7 @@ import java.util.Stack;
 public class StorageRefactorClass {
     String storage = "";
     void addCharToString(String input) {
-
-        if (input.contains("⌫")) {
-            return;
-        }
+        //if digit is an input, and previous character is 0, replace it with new input
         if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && isInteger(input)) {
             this.storage = input;
         }

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         button_C.setOnClickListener(new DeleteAllInput(txt, storage));
 
         final Button button_result = findViewById(R.id.button_result);
-        button_result.setOnClickListener(new ResultInput(txt, storage, calculating));
+        button_result.setOnClickListener(new ResultInput(txt, storage, calculating, getApplicationContext()));
 
         final Button button_minus = findViewById(R.id.button_minus);
         button_minus.setOnClickListener(new ArithmeticInput(txt, storage));
