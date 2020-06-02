@@ -20,7 +20,7 @@ public class ResultInput implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        calculating.WrongFormatChecker(storage);
+        calculating.wrongFormatChecker(storage);
             //Change cantCount value back to original (false) for future calculation
          if(calculating.cantCount){
             calculating.cantCount = false;
@@ -32,7 +32,7 @@ public class ResultInput implements View.OnClickListener {
          else if (!isInteger(storage.storage)) {
 
             storage.addCharToString("=");
-            calculating.FinalResult(storage);
+            calculating.countResult(storage);
             //if not, don't do nothing
             if(calculating.cantCount){
                 calculating.cantCount = false;

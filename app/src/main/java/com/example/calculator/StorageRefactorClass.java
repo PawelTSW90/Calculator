@@ -37,7 +37,7 @@ public class StorageRefactorClass {
 
     }
 
-    ArrayList<String> returnExit() {
+    ArrayList<String> refactorStorage() {
         ArrayList<String> valueList = new ArrayList<>();
         Stack<String> stack = new Stack<>();
         ArrayList<String> exit = new ArrayList<>();

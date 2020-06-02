@@ -1,7 +1,5 @@
 package com.example.calculator;
-
 import android.util.Log;
-
 import java.util.ArrayList;
 
 class CalculatingClass {
@@ -9,15 +7,14 @@ class CalculatingClass {
     boolean cantCount = false;
 
     //Before calculating, method check if format is correct. If not, program waiting
-    void WrongFormatChecker(StorageRefactorClass storage){
+    void wrongFormatChecker(StorageRefactorClass storage){
         this.storage=storage;
-    //Loop that no allows to two commas between two arithmetic operators
+    //Loop that not allows to start counting when there are two commas between two arithmetic operators
         for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
             if(cantCount){
                 break;
             }
             if(String.valueOf(storage.storage.charAt(tmp)).equals(",")){
-
                 for(int tmp2 = tmp+1; tmp2<=storage.storage.length()-1; tmp2++){
                     Log.i("tmp", " " + storage.storage.charAt(tmp2));
                     if(!isDouble(String.valueOf(storage.storage.charAt(tmp2))) && String.valueOf(storage.storage.charAt(tmp2)).equals(",")){
@@ -25,39 +22,29 @@ class CalculatingClass {
                         break;
                     }  else if (!isDouble(String.valueOf(storage.storage.charAt(tmp2)))) {
                         break;
-
                     }
 
                 }
             }
         }
-
-
     }
-
-
-    String FinalResult(StorageRefactorClass storage) {
+        //Method is calling refactorStorage method to prepare storage for calculating,
+        //and start counting
+    String countResult(StorageRefactorClass storage) {
         this.storage = storage;
 
-
-
-        ArrayList<String> chars = storage.returnExit();
+        ArrayList<String> chars = storage.refactorStorage();
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
             chars.set(x, chars.get(x).replace(",", "."));
-
         }
-
-
         for (int x = 0; x < chars.size(); x++) {
             Log.i("tmp", "storage: " + storage.storage);
             Log.i("tmp", "chars" + chars);
             //if character is nor number or dot, start calculating
             if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
-
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
                     cantCount = true;
-
                     //adding
                 } else if (chars.get(x).equals("+")) {
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
@@ -90,7 +77,6 @@ class CalculatingClass {
                     x = 0;
                 }
             }
-
         }
 
         if(cantCount){
@@ -98,8 +84,6 @@ class CalculatingClass {
             return storage.storage;
 
         } else {
-
-
             StringBuilder result = new StringBuilder();
             double value = Double.parseDouble(chars.get(chars.size() - 1));
             //set number of integers after comma to 10
@@ -123,8 +107,6 @@ class CalculatingClass {
         }
     }
 
-
-
     public boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
@@ -133,7 +115,6 @@ class CalculatingClass {
             return false;
         }
     }
-
 
     public int whatSign(String input) {
         if (input.equals("+")) {
@@ -149,8 +130,6 @@ class CalculatingClass {
             return 4;
         }
     }
-
-
 }
 
 
