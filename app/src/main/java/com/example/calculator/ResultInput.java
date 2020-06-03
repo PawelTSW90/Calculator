@@ -7,11 +7,11 @@ import android.widget.Toast;
 
 public class ResultInput implements View.OnClickListener {
     private EditText txt;
-    private StorageRefactorClass storage;
-    private CalculatingClass calculating;
+    private StorageRefactor storage;
+    private Calculating calculating;
     private Context context;
 
-    ResultInput(EditText text, StorageRefactorClass StorageClass, CalculatingClass calculating, Context context) {
+    ResultInput(EditText text, StorageRefactor StorageClass, Calculating calculating, Context context) {
         this.txt = text;
         this.storage = StorageClass;
         this.calculating = calculating;
@@ -21,27 +21,18 @@ public class ResultInput implements View.OnClickListener {
 
     public void onClick(View v) {
         calculating.wrongFormatChecker(storage);
-            //Change cantCount value back to original (false) for future calculation
-         if(calculating.cantCount){
-            calculating.cantCount = false;
-            //if no value after operator, display wrong format toast
-        } else if(!isInteger(String.valueOf(storage.storage.charAt(storage.storage.length()-1)))){
+        if(!isInteger(String.valueOf(storage.getStorage().charAt(storage.getStorage().length()-1)))){
              Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
+
          }
-         //if there are arithmetic symbols, check if you can count result
-         else if (!isInteger(storage.storage)) {
+         //if there are arithmetic symbols, and format is correct
+         else if(!isInteger(storage.getStorage()) && !calculating.wrongFormatChecker(storage)) {
 
             storage.addCharToString("=");
             calculating.countResult(storage);
-            //if not, don't do nothing
-            if(calculating.cantCount){
-                calculating.cantCount = false;
-            // else, display result
-            } else {
-                this.txt.setText(storage.storage);
-                txt.setSelection(txt.length());
-            }
+
         }
+        //if format is wrong the function will preserve previous input
     }
     private boolean isInteger(String input) {
         return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");

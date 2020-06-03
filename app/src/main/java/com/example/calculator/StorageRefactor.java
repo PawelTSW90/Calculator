@@ -4,15 +4,14 @@ package com.example.calculator;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class StorageRefactorClass {
-    String storage = "";
+public class StorageRefactor {
+    private String storage = "";
+
     void addCharToString(String input) {
         //if digit is an input, and previous character is 0, replace it with new input
         if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && isInteger(input)) {
             this.storage = input;
-        }
-
-        else
+        } else
             this.storage += input;
 
     }
@@ -22,19 +21,35 @@ public class StorageRefactorClass {
     }
 
 
-
-    void removeCharAtPosition(int position){
+    void removeCharAtPosition(int position) {
         StringBuilder tmp = new StringBuilder(storage);
         tmp = tmp.deleteCharAt(position);
         storage = tmp.toString();
 
     }
 
-    void addCharAtPosition(int position, String whatChar){
+    String getStorage(){
+        return storage;
+    }
+
+    void setStorage(String string){
+        storage = string;
+    }
+
+    void addCharAtPosition(int position, String whatChar) {
         StringBuilder tmp2 = new StringBuilder(storage);
         tmp2 = tmp2.insert(position, whatChar);
         storage = tmp2.toString();
 
+    }
+
+    void addStringToTheEnd(String string){
+        this.storage+=string;
+
+    }
+
+    void clearStorage(){
+        this.storage = "";
     }
 
     ArrayList<String> refactorStorage() {
@@ -44,8 +59,8 @@ public class StorageRefactorClass {
         String tmp = "";
 
         for (int i = 0; i < storage.length(); i++) {
-                //If input is a digit, move it to tmp
-            if (isInteger(Character.toString(storage.charAt(i)))|| Character.toString(storage.charAt(i)).equals(",")) 
+            //If input is a digit, move it to tmp
+            if (isInteger(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
                 tmp += storage.charAt(i);
                 //if input isn't a digit
             else {
@@ -98,7 +113,7 @@ public class StorageRefactorClass {
             exit.add(stack.pop());
 
         }
-        valueList.remove(valueList.size()-1);
+        valueList.remove(valueList.size() - 1);
 
         return exit;
     }

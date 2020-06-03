@@ -1,36 +1,27 @@
 package com.example.calculator;
-import android.util.Log;
-import java.util.ArrayList;
 
-class CalculatingClass {
-   StorageRefactorClass storage;
-    boolean cantCount = false;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+class Calculating {
+    StorageRefactor storage;
+
 
     //Before calculating, method check if format is correct. If not, program waiting
-    void wrongFormatChecker(StorageRefactorClass storage){
-        this.storage=storage;
-    //Loop that not allows to start counting when there are two commas between two arithmetic operators
-        for(int tmp = 0; tmp<=storage.storage.length()-1; tmp++ ){
-            if(cantCount){
-                break;
-            }
-            if(String.valueOf(storage.storage.charAt(tmp)).equals(",")){
-                for(int tmp2 = tmp+1; tmp2<=storage.storage.length()-1; tmp2++){
-                    Log.i("tmp", " " + storage.storage.charAt(tmp2));
-                    if(!isDouble(String.valueOf(storage.storage.charAt(tmp2))) && String.valueOf(storage.storage.charAt(tmp2)).equals(",")){
-                        cantCount = true;
-                        break;
-                    }  else if (!isDouble(String.valueOf(storage.storage.charAt(tmp2)))) {
-                        break;
-                    }
+    boolean wrongFormatChecker(StorageRefactor storage) {
+        this.storage = storage;
+        boolean tmp = Pattern.matches("(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷])", storage.getStorage());
+        //(^|[+\-\\*])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\-\\*])
+        return tmp;
 
-                }
-            }
-        }
     }
-        //Method is calling refactorStorage method to prepare storage for calculating,
-        //and start counting
-    String countResult(StorageRefactorClass storage) {
+
+    //Method is calling refactorStorage method to prepare storage for calculating,
+    //and start counting
+    String countResult(StorageRefactor storage) {
+        boolean cantCount = false;
         this.storage = storage;
 
         ArrayList<String> chars = storage.refactorStorage();
@@ -39,7 +30,7 @@ class CalculatingClass {
             chars.set(x, chars.get(x).replace(",", "."));
         }
         for (int x = 0; x < chars.size(); x++) {
-            Log.i("tmp", "storage: " + storage.storage);
+            Log.i("tmp", "storage: " + storage.getStorage());
             Log.i("tmp", "chars" + chars);
             //if character is nor number or dot, start calculating
             if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
@@ -79,9 +70,9 @@ class CalculatingClass {
             }
         }
 
-        if(cantCount){
-            storage.removeCharAtPosition(storage.storage.charAt(storage.storage.length()-1));
-            return storage.storage;
+        if (wrongFormatChecker(storage) || cantCount) {
+            storage.removeCharAtPosition(storage.getStorage().charAt(storage.getStorage().length() - 1));
+            return storage.getStorage();
 
         } else {
             StringBuilder result = new StringBuilder();
@@ -89,20 +80,20 @@ class CalculatingClass {
             //set number of integers after comma to 10
             double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
             //Displaying result as integer
-            if(roundedValue%1==0){
+            if (roundedValue % 1 == 0) {
                 int intvalue = (int) roundedValue;
                 result.append(intvalue);
                 String tmp = result.toString();
                 tmp = tmp.replace(".", ",");
-                storage.storage = tmp;
-                return storage.storage;
+                storage.setStorage(tmp);
+                return storage.getStorage();
                 //Displaying result as double
             } else {
                 result.append(roundedValue);
                 String tmp = result.toString();
                 tmp = tmp.replace(".", ",");
-                storage.storage = tmp;
-                return storage.storage;
+                storage.setStorage(tmp);
+                return storage.getStorage();
             }
         }
     }
@@ -131,6 +122,7 @@ class CalculatingClass {
         }
     }
 }
+//(^|[+\-\\*])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\-\\*])
 
 
 

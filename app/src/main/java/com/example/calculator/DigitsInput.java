@@ -6,11 +6,11 @@ import android.widget.EditText;
 
 public class DigitsInput implements View.OnClickListener {
     EditText txt;
-    StorageRefactorClass storage;
+    StorageRefactor storage;
     MainInputClass input;
 
 
-    DigitsInput(EditText txt, StorageRefactorClass storage, MainInputClass input){
+    DigitsInput(EditText txt, StorageRefactor storage, MainInputClass input){
 
         this.txt = txt;
         this.storage = storage;
@@ -24,10 +24,10 @@ public class DigitsInput implements View.OnClickListener {
 
         int selection = txt.getSelectionEnd();
 
-        if(storage.storage.length() ==0){
+        if(storage.getStorage().length() ==0){
             input.addChar(v);
             input.setCursor(v);
-        } else if(!String.valueOf(storage.storage.charAt(selection-1)).equals("0")){
+        } else if(!String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             input.addChar(v);
             input.setCursor(v);
         } else if(selection<2){
@@ -35,11 +35,11 @@ public class DigitsInput implements View.OnClickListener {
             input.setCursor(v);
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
-        else if(!isInteger(String.valueOf(storage.storage.charAt(selection-2))) && String.valueOf(storage.storage.charAt(selection-1)).equals("0")){
+        else if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             storage.removeCharAtPosition(selection-1);
             storage.addCharToString(((Button)v).getText().toString());
             txt.setText(storage.returnString());
-            txt.setSelection(storage.storage.length());
+            txt.setSelection(storage.getStorage().length());
         } else{
             input.addChar(v);
             input.setCursor(v);

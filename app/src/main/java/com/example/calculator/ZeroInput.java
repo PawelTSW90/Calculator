@@ -5,10 +5,10 @@ import android.widget.EditText;
 
 public class ZeroInput implements View.OnClickListener {
     private EditText txt;
-    private StorageRefactorClass storage;
+    private StorageRefactor storage;
     MainInputClass input;
 
-    ZeroInput(EditText txt, StorageRefactorClass storage, MainInputClass file) {
+    ZeroInput(EditText txt, StorageRefactor storage, MainInputClass file) {
         this.txt = txt;
         this.storage = storage;
         this.input = file;
@@ -23,7 +23,7 @@ public class ZeroInput implements View.OnClickListener {
     void isZeroAllowed(View v) {
         int selection = txt.getSelectionEnd();
 
-        if(selection ==0 && storage.storage.length()>0){
+        if(selection ==0 && storage.getStorage().length()>0){
             return;
         }
 
@@ -32,7 +32,7 @@ public class ZeroInput implements View.OnClickListener {
             input.setCursor(v);
         }
 
-        else if(!isInteger(String.valueOf(storage.storage.charAt(selection-2))) && String.valueOf(storage.storage.charAt(selection-1)).equals("0")){
+        else if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             return;
         } else {
             input.addChar(v);

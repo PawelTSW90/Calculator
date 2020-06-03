@@ -6,10 +6,10 @@ import android.widget.EditText;
 public class DeleteInput implements View.OnClickListener {
 
     private EditText txt;
-    private StorageRefactorClass storage;
+    private StorageRefactor storage;
 
 
-    DeleteInput(EditText txt, StorageRefactorClass storage) {
+    DeleteInput(EditText txt, StorageRefactor storage) {
         this.txt = txt;
         this.storage = storage;
     }
@@ -25,12 +25,12 @@ public class DeleteInput implements View.OnClickListener {
         if (selection == 0) {
             return;
         } else {
-            String firstPart = storage.storage.substring(0, selection);
-            String secondPart = storage.storage.substring(selection);
-            storage.storage = "";
+            String firstPart = storage.getStorage().substring(0, selection);
+            String secondPart = storage.getStorage().substring(selection);
+            storage.clearStorage();
             firstPart = firstPart.substring(0, firstPart.length() - 1);
-            storage.storage += firstPart;
-            storage.storage += secondPart;
+            storage.addStringToTheEnd(firstPart);
+            storage.addStringToTheEnd(secondPart);
             this.txt.setText(storage.returnString());
             txt.setSelection(selection - 1);
         }

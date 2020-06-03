@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private StorageRefactorClass storage = new StorageRefactorClass();
-    private CalculatingClass calculating = new CalculatingClass();
+    private StorageRefactor storage = new StorageRefactor();
+    private Calculating calculating = new Calculating();
 
 
 

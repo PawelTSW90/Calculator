@@ -5,16 +5,16 @@ import android.widget.EditText;
 
 public class DeleteAllInput implements View.OnClickListener {
     private EditText txt;
-    private StorageRefactorClass storage;
+    private StorageRefactor storage;
 
-    DeleteAllInput(EditText txt, StorageRefactorClass storage){
+    DeleteAllInput(EditText txt, StorageRefactor storage){
         this.txt = txt;
         this.storage = storage;
     }
 
     @Override
     public void onClick(View v) {
-        storage.storage = "";
+        storage.clearStorage();
         this.txt.setText(storage.returnString());
 
     }

@@ -5,10 +5,10 @@ import android.widget.EditText;
 
 public class CommaInput implements View.OnClickListener {
     private EditText txt;
-    private StorageRefactorClass storage;
+    private StorageRefactor storage;
 
 
-    CommaInput(EditText txt, StorageRefactorClass storage) {
+    CommaInput(EditText txt, StorageRefactor storage) {
         this.txt = txt;
         this.storage = storage;
 
@@ -19,8 +19,8 @@ public class CommaInput implements View.OnClickListener {
         int selection = txt.getSelectionEnd();
 
         //if storage is empty, display "0," and set selection after comma
-        if (storage.storage.isEmpty()) {
-            storage.storage = "0,";
+        if (storage.getStorage().isEmpty()) {
+            storage.setStorage("0,");
             this.txt.setText(storage.returnString());
             txt.setSelection(2);
 
@@ -30,7 +30,7 @@ public class CommaInput implements View.OnClickListener {
             checkComma(v);
         }
         //if previous character is arithmetic symbol, add "0,"
-        else if (!isInteger(Character.toString(storage.storage.charAt(selection - 1))) && selection == storage.storage.length()) {
+        else if (!isInteger(Character.toString(storage.getStorage().charAt(selection - 1))) && selection == storage.getStorage().length()) {
             storage.addCharToString("0,");
             this.txt.setText(storage.returnString());
             this.txt.setSelection(selection + 2);
@@ -54,9 +54,9 @@ public class CommaInput implements View.OnClickListener {
         //Backward loop looking for comma between selection and first no-integer character
         for (int i = Math.max(selection-1, selectionZero); i >= 0; i--) {
 
-            if (!isInteger(String.valueOf(storage.storage.charAt(i)))) {
+            if (!isInteger(String.valueOf(storage.getStorage().charAt(i)))) {
 
-                if (String.valueOf(storage.storage.charAt(i)).equals(",")) {
+                if (String.valueOf(storage.getStorage().charAt(i)).equals(",")) {
                     isBackwardComma = true;
                     break;
 
@@ -64,14 +64,14 @@ public class CommaInput implements View.OnClickListener {
                     break;
                 }
 
-            } else if (String.valueOf(storage.storage.charAt(i)).equals(",")) {
+            } else if (String.valueOf(storage.getStorage().charAt(i)).equals(",")) {
                 isBackwardComma = true;
                 break;
             }
         }
         //Forward Loop looking for comma between selection and first no-integer character
-        for (int x = Math.max(selection-1, selectionZero); x <= storage.storage.length() - 1; x++) {
-            if(String.valueOf(storage.storage.charAt(x)).equals(",")){
+        for (int x = Math.max(selection-1, selectionZero); x <= storage.getStorage().length() - 1; x++) {
+            if(String.valueOf(storage.getStorage().charAt(x)).equals(",")){
                 isForwardComma = true;
                 break;
             }
@@ -92,7 +92,7 @@ public class CommaInput implements View.OnClickListener {
         int kursor = txt.getSelectionEnd();
         storage.addCharAtPosition(kursor, ",");
         this.txt.setText(storage.returnString());
-        int length = storage.storage.length() - 1;
+        int length = storage.getStorage().length() - 1;
         // if selection position is bigger than storage length, set it after last value
         if (kursor > length) {
             txt.setSelection(length + 1);

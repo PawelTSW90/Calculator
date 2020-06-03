@@ -6,9 +6,9 @@ import android.widget.EditText;
 
 public class MainInputClass {
     private EditText txt;
-    private StorageRefactorClass storage;
+    private StorageRefactor storage;
 
-    MainInputClass(EditText text, StorageRefactorClass storage) {
+    MainInputClass(EditText text, StorageRefactor storage) {
         this.txt = text;
         this.storage = storage;
 
@@ -23,7 +23,7 @@ public class MainInputClass {
         //initialize selection position
         int selection = txt.getSelectionEnd();
         this.txt.setText(storage.returnString());
-        int length = storage.storage.length() - 1;
+        int length = storage.getStorage().length() - 1;
         // if selection position is bigger than storage length, set it after last value
         if (selection > length) {
             txt.setSelection(length + 1);
@@ -32,16 +32,16 @@ public class MainInputClass {
             txt.setSelection(selection + 1);
         }
         //if selection is not positioned as last and storage has more than 1 values:
-        if (selection != storage.storage.length() - 1 && storage.storage.length() > 1) {
+        if (selection != storage.getStorage().length() - 1 && storage.getStorage().length() > 1) {
             //split storage into two halves. First one: all values before new value
-            String firstPart = storage.storage.substring(0, selection);
+            String firstPart = storage.getStorage().substring(0, selection);
             //second one: all values after new value
-            String secondPart = storage.storage.substring(selection, storage.storage.length() - 1);
-            storage.storage = "";
-            storage.storage += firstPart;
+            String secondPart = storage.getStorage().substring(selection, storage.getStorage().length() - 1);
+            storage.clearStorage();
+            storage.addStringToTheEnd(firstPart);
             //merge new storage from first half, NEW VALUE and second half
             storage.addCharToString(((Button) v).getText().toString());
-            storage.storage += secondPart;
+            storage.addStringToTheEnd(secondPart);
             this.txt.setText(storage.returnString());
             txt.setSelection(selection + 1);
 
