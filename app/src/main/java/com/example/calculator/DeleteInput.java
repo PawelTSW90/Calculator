@@ -25,14 +25,9 @@ public class DeleteInput implements View.OnClickListener {
         if (selection == 0) {
             return;
         } else {
-            String firstPart = storage.getStorage().substring(0, selection);
-            String secondPart = storage.getStorage().substring(selection);
-            storage.clearStorage();
-            firstPart = firstPart.substring(0, firstPart.length() - 1);
-            storage.addStringToTheEnd(firstPart);
-            storage.addStringToTheEnd(secondPart);
-            this.txt.setText(storage.returnString());
-            txt.setSelection(selection - 1);
+            storage.removeCharAt(selection-1);
+            txt.setText(storage.getStorage());
+            txt.setSelection(selection-1);
         }
 
     }

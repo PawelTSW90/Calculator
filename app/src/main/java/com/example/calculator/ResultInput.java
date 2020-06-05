@@ -22,19 +22,25 @@ public class ResultInput implements View.OnClickListener {
     public void onClick(View v) {
         calculating.wrongFormatChecker(storage);
         if(!isInteger(String.valueOf(storage.getStorage().charAt(storage.getStorage().length()-1)))){
-             Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
 
          }
          //if there are arithmetic symbols, and format is correct
          else if(!isInteger(storage.getStorage()) && !calculating.wrongFormatChecker(storage)) {
 
             storage.addCharToString("=");
-            calculating.countResult(storage);
-
+            txt.setText(calculating.countResult(storage));
+            txt.setSelection(storage.getStorage().length());
+        } else{
+            return;
         }
+
+
+
         //if format is wrong the function will preserve previous input
     }
     private boolean isInteger(String input) {
         return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
     }
+
 }

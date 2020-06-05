@@ -36,9 +36,9 @@ public class StorageRefactor {
         storage = string;
     }
 
-    void addCharAtPosition(int position, String whatChar) {
+    void addCharAtPosition(int position, String whichChar) {
         StringBuilder tmp2 = new StringBuilder(storage);
-        tmp2 = tmp2.insert(position, whatChar);
+        tmp2 = tmp2.insert(position, whichChar);
         storage = tmp2.toString();
 
     }
@@ -50,6 +50,12 @@ public class StorageRefactor {
 
     void clearStorage(){
         this.storage = "";
+    }
+
+    void removeCharAt(int position){
+        StringBuilder tmp = new StringBuilder(storage);
+        tmp = tmp.deleteCharAt(position);
+        storage = tmp.toString();
     }
 
     ArrayList<String> refactorStorage() {

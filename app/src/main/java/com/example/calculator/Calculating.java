@@ -1,18 +1,24 @@
 package com.example.calculator;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 class Calculating {
-    StorageRefactor storage;
+    private StorageRefactor storage;
+    private ResultInput result;
+    private Context context;
 
+    Calculating(Context context){
+        this.context=context;
 
+    }
     //Before calculating, method check if format is correct. If not, program waiting
     boolean wrongFormatChecker(StorageRefactor storage) {
         this.storage = storage;
-        boolean tmp = Pattern.matches("(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷])", storage.getStorage());
+        boolean tmp = Pattern.matches(".*(^|[+×÷-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷-]).*", storage.getStorage());
         //(^|[+\-\\*])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\-\\*])
         return tmp;
 

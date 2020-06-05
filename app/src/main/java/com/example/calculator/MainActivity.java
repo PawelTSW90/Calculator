@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private StorageRefactor storage = new StorageRefactor();
-    private Calculating calculating = new Calculating();
+
+    Context context;
 
 
 
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Calculating calculating = new Calculating(this.getApplicationContext());
+
 
         final EditText txt = findViewById(R.id.text_Edit);
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         button_C.setOnClickListener(new DeleteAllInput(txt, storage));
 
         final Button button_result = findViewById(R.id.button_result);
-        button_result.setOnClickListener(new ResultInput(txt, storage, calculating, getApplicationContext()));
+        button_result.setOnClickListener(new ResultInput(txt, storage, calculating, this.getApplicationContext()));
 
         final Button button_minus = findViewById(R.id.button_minus);
         button_minus.setOnClickListener(new ArithmeticInput(txt, storage));
@@ -84,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    Context getContext(){
+        return context;
     }
 
 
