@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Calculating calculating = new Calculating(this.getApplicationContext());
+        Calculating calculating = new Calculating();
 
 
         final EditText txt = findViewById(R.id.text_Edit);

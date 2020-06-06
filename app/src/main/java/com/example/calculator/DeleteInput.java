@@ -31,7 +31,5 @@ public class DeleteInput implements View.OnClickListener {
         }
 
     }
-
-
 }
 

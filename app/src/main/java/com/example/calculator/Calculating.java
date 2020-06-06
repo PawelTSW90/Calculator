@@ -1,25 +1,17 @@
 package com.example.calculator;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 class Calculating {
-    private StorageRefactor storage;
-    private ResultInput result;
-    private Context context;
 
-    Calculating(Context context){
-        this.context=context;
-
-    }
     //Before calculating, method check if format is correct. If not, program waiting
     boolean wrongFormatChecker(StorageRefactor storage) {
-        this.storage = storage;
-        boolean tmp = Pattern.matches(".*(^|[+×÷-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷-]).*", storage.getStorage());
-        //(^|[+\-\\*])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\-\\*])
+        boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", storage.getStorage());
+        tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", storage.getStorage());
+
         return tmp;
 
     }
@@ -28,7 +20,6 @@ class Calculating {
     //and start counting
     String countResult(StorageRefactor storage) {
         boolean cantCount = false;
-        this.storage = storage;
 
         ArrayList<String> chars = storage.refactorStorage();
         //replace "," for "." for calculating
@@ -42,7 +33,7 @@ class Calculating {
             if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
                     cantCount = true;
-                    //adding
+                    //adding two values
                 } else if (chars.get(x).equals("+")) {
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
                     double tmp2 = Double.parseDouble(chars.get(x - 1));
@@ -51,21 +42,21 @@ class Calculating {
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-                    //subtracting
+                    //subtracting two values
                 } else if (whatSign(chars.get(x)) == 1) {
                     Double minus = (Double.parseDouble(chars.get(x - 2)) - (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, minus.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-                    //multiplying
+                    //multiplying two values
                 } else if (whatSign(chars.get(x)) == 2) {
                     Double multiply = (Double.parseDouble(chars.get(x - 2)) * (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, multiply.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
-                    //dividing
+                    //dividing two values
                 } else if (whatSign(chars.get(x)) == 3) {
                     Double divide = (Double.parseDouble(chars.get(x - 2)) / (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, divide.toString());
@@ -128,7 +119,6 @@ class Calculating {
         }
     }
 }
-//(^|[+\-\\*])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\-\\*])
 
 
 
