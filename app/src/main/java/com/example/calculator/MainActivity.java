@@ -9,54 +9,50 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private StorageRefactor storage = new StorageRefactor();
+
 
     Context context;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Calculating calculating = new Calculating();
-
-
         final EditText txt = findViewById(R.id.text_Edit);
+        Calculating calculating = new Calculating();
+        StorageRefactor storage = new StorageRefactor(txt);
 
         //disable system keyobard
         txt.setShowSoftInputOnFocus(false);
 
-
         final Button button0 = findViewById(R.id.button_0);
-        button0.setOnClickListener(new ZeroInput(txt, storage, new MainInputClass(txt, storage)));
+        button0.setOnClickListener(new ZeroInput(txt, storage));
 
         final Button button1 = findViewById(R.id.button_1);
-        button1.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button1.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button2 = findViewById(R.id.button_2);
-        button2.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button2.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button3 = findViewById(R.id.button_3);
-        button3.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button3.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button4 = findViewById(R.id.button_4);
-        button4.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button4.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button5 = findViewById(R.id.button_5);
-        button5.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button5.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button6 = findViewById(R.id.button_6);
-        button6.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button6.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button7 = findViewById(R.id.button_7);
-        button7.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button7.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button8 = findViewById(R.id.button_8);
-        button8.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button8.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button button9 = findViewById(R.id.button_9);
-        button9.setOnClickListener(new DigitsInput(txt, storage, new MainInputClass(txt, storage)));
+        button9.setOnClickListener(new DigitsInput(txt, storage));
 
         final Button brackets = findViewById(R.id.button_brackets);
         brackets.setOnClickListener(new BracketsInput());
@@ -85,14 +81,9 @@ public class MainActivity extends AppCompatActivity {
         final Button comma_button = findViewById(R.id.button_comma);
         comma_button.setOnClickListener(new CommaInput(txt, storage));
 
-
-
-
     }
 
-    Context getContext(){
-        return context;
-    }
+
 
 
 }

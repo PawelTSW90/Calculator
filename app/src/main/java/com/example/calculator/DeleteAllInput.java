@@ -15,7 +15,7 @@ public class DeleteAllInput implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         storage.clearStorage();
-        this.txt.setText(storage.returnString());
+        this.txt.setText(storage.getStorage());
 
     }
 }

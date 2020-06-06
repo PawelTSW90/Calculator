@@ -1,5 +1,7 @@
 package com.example.calculator;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -9,17 +11,19 @@ class Calculating {
     boolean wrongFormatChecker(String expression) {
         boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
         tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", expression);
+        tmp = tmp || Pattern.matches(".*[+,\\-×÷]$.*", expression);
 
         return tmp;
 
     }
-
     //Method is calling refactorStorage method to prepare storage for calculating,
     //and start counting
     String countResult(StorageRefactor storage) {
+
         boolean cantCount = false;
 
         ArrayList<String> chars = storage.refactorStorage();
+        Log.i("proba", "storage: "  + chars.toString());
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
             chars.set(x, chars.get(x).replace(",", "."));
@@ -39,21 +43,21 @@ class Calculating {
                     chars.remove(x - 1);
                     x = 0;
                     //subtracting two values
-                } else if (whatSign(chars.get(x)) == 1) {
+                } else if (Utility.whatSign(chars.get(x)) == 1) {
                     Double minus = (Double.parseDouble(chars.get(x - 2)) - (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, minus.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
                     //multiplying two values
-                } else if (whatSign(chars.get(x)) == 2) {
+                } else if (Utility.whatSign(chars.get(x)) == 2) {
                     Double multiply = (Double.parseDouble(chars.get(x - 2)) * (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, multiply.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
                     //dividing two values
-                } else if (whatSign(chars.get(x)) == 3) {
+                } else if (Utility.whatSign(chars.get(x)) == 3) {
                     Double divide = (Double.parseDouble(chars.get(x - 2)) / (Double.parseDouble(chars.get(x - 1))));
                     chars.set(x - 2, divide.toString());
                     chars.remove(x - 1);
@@ -93,20 +97,7 @@ class Calculating {
 
 
 
-    public int whatSign(String input) {
-        if (input.equals("+")) {
-            return 0;
-        } else if (input.equals("-")) {
-            return 1;
-        } else if (input.equals("×")) {
-            return 2;
-        } else if (input.equals("÷")) {
-            return 3;
-        } else {
-            // no value
-            return 4;
-        }
-    }
+
 }
 
 

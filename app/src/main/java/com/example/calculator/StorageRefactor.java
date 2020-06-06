@@ -1,31 +1,41 @@
 package com.example.calculator;
 
 
+import android.widget.EditText;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class StorageRefactor {
     private String storage = "";
+    EditText txt;
 
-    void addCharToString(String input) {
-        //if digit is an input, and previous character is 0, replace it with new input
-        if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && Utility.isInteger(input)) {
-            this.storage = input;
+
+    StorageRefactor(EditText txt){
+        this.txt = txt;
+
+    }
+
+    void addCharAtPosition(int position, String whichChar) {
+        int selection = txt.getSelectionEnd();
+        StringBuilder tmp2 = new StringBuilder(storage);
+        tmp2 = tmp2.insert(position, whichChar);
+        storage = tmp2.toString();
+        txt.setText(getStorage());
+        if(selection == 0){
+            txt.setSelection(1);
         } else
-            this.storage += input;
+        txt.setSelection(selection+1);
 
     }
 
-    String returnString() {
-        return storage;
-    }
-
-
-    void removeCharAtPosition(int position) {
+    void removeCharAtPosition(int position){
+        int selection = txt.getSelectionEnd();
         StringBuilder tmp = new StringBuilder(storage);
         tmp = tmp.deleteCharAt(position);
         storage = tmp.toString();
-
+        txt.setText(getStorage());
+        txt.setSelection(selection-1);
     }
 
     String getStorage(){
@@ -36,26 +46,8 @@ public class StorageRefactor {
         storage = string;
     }
 
-    void addCharAtPosition(int position, String whichChar) {
-        StringBuilder tmp2 = new StringBuilder(storage);
-        tmp2 = tmp2.insert(position, whichChar);
-        storage = tmp2.toString();
-
-    }
-
-    void addStringToTheEnd(String string){
-        this.storage+=string;
-
-    }
-
     void clearStorage(){
         this.storage = "";
-    }
-
-    void removeCharAt(int position){
-        StringBuilder tmp = new StringBuilder(storage);
-        tmp = tmp.deleteCharAt(position);
-        storage = tmp.toString();
     }
 
     ArrayList<String> refactorStorage() {
@@ -66,7 +58,7 @@ public class StorageRefactor {
 
         for (int i = 0; i < storage.length(); i++) {
             //If input is a digit, move it to tmp
-            if (Utility.isInteger(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
+            if (Utility.isParseInt(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
                 tmp += storage.charAt(i);
                 //if input isn't a digit
             else {

@@ -24,10 +24,20 @@ public class DeleteInput implements View.OnClickListener {
         int selection = txt.getSelectionEnd();
         if (selection == 0) {
             return;
-        } else {
-            storage.removeCharAt(selection-1);
+        } else if(storage.getStorage().length()<=1){
+            storage.removeCharAtPosition(selection-1);
+        }
+
+
+        else if((selection == 1) && !Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection)))){
+            storage.removeCharAtPosition(0);
+            storage.removeCharAtPosition(0);
             txt.setText(storage.getStorage());
-            txt.setSelection(selection-1);
+            txt.setSelection(1);
+        }
+        else {
+            storage.removeCharAtPosition(selection-1);
+
         }
 
     }

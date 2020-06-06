@@ -21,14 +21,14 @@ public class ResultInput implements View.OnClickListener {
 
     public void onClick(View v) {
         calculating.wrongFormatChecker(storage.getStorage());
-        if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(storage.getStorage().length()-1)))){
-            Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
 
-         }
+        if(storage.getStorage().isEmpty()){
+            return;
+        }
          //if there are arithmetic symbols and format is correct start counting
-         else if(!Utility.isInteger(storage.getStorage()) && !calculating.wrongFormatChecker(storage.getStorage())) {
+          if(!Utility.containDigits(storage.getStorage()) && !calculating.wrongFormatChecker(storage.getStorage())) {
 
-            storage.addCharToString("=");
+            storage.addCharAtPosition(storage.getStorage().length(), "=");
             txt.setText(calculating.countResult(storage));
             txt.setSelection(storage.getStorage().length());
         } else{
