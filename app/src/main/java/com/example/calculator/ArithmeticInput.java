@@ -28,14 +28,14 @@ public class ArithmeticInput implements View.OnClickListener {
             //if selection is last,
         } else if(selection == storage.getStorage().length()){
             // and previous symbol is arithmetic, don't add symbol
-            if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-1)))){
+            if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(selection-1)))){
                 return;
                 //if not add it
             } else{
                 entryAllowed(v);
             }
             //if previous or current character arithmetic symbol, don't add symbol
-        } else if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-1))) || (!isInteger(String.valueOf(storage.getStorage().charAt(selection))))){
+        } else if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(selection-1))) || (!Utility.isInteger(String.valueOf(storage.getStorage().charAt(selection))))){
             return;
         } else {
             entryAllowed(v);
@@ -50,9 +50,5 @@ public class ArithmeticInput implements View.OnClickListener {
     }
 
 
-    private boolean isInteger(String input) {
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
-
-    }
 }
 

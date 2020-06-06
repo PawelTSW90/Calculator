@@ -32,7 +32,7 @@ public class ZeroInput implements View.OnClickListener {
             input.setCursor(v);
         }
 
-        else if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
+        else if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             return;
         } else {
             input.addChar(v);
@@ -41,11 +41,8 @@ public class ZeroInput implements View.OnClickListener {
 
     }
 
-    private boolean isInteger(String input) {
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
 
 
-    }
 
 
 

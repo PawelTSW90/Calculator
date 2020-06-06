@@ -30,7 +30,7 @@ public class CommaInput implements View.OnClickListener {
             checkComma(v);
         }
         //if previous character is arithmetic symbol, add "0,"
-        else if (!isInteger(Character.toString(storage.getStorage().charAt(selection - 1))) && selection == storage.getStorage().length()) {
+        else if (!Utility.isInteger(Character.toString(storage.getStorage().charAt(selection - 1))) && selection == storage.getStorage().length()) {
             storage.addCharToString("0,");
             this.txt.setText(storage.returnString());
             this.txt.setSelection(selection + 2);
@@ -54,7 +54,7 @@ public class CommaInput implements View.OnClickListener {
         //Backward loop looking for comma between selection and first no-integer character
         for (int i = Math.max(selection-1, selectionZero); i >= 0; i--) {
 
-            if (!isInteger(String.valueOf(storage.getStorage().charAt(i)))) {
+            if (!Utility.isInteger(String.valueOf(storage.getStorage().charAt(i)))) {
 
                 if (String.valueOf(storage.getStorage().charAt(i)).equals(",")) {
                     isBackwardComma = true;
@@ -102,17 +102,6 @@ public class CommaInput implements View.OnClickListener {
         }
     }
 
-
-
-
-    public boolean isInteger(String input) {
-        if (input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷")) {
-            return false;
-        }
-        return true;
-
-
-    }
 }
 
 

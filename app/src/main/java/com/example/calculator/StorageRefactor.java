@@ -9,7 +9,7 @@ public class StorageRefactor {
 
     void addCharToString(String input) {
         //if digit is an input, and previous character is 0, replace it with new input
-        if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && isInteger(input)) {
+        if (storage.length() == 1 && storage.startsWith("0") && !input.equals(",") && Utility.isInteger(input)) {
             this.storage = input;
         } else
             this.storage += input;
@@ -66,7 +66,7 @@ public class StorageRefactor {
 
         for (int i = 0; i < storage.length(); i++) {
             //If input is a digit, move it to tmp
-            if (isInteger(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
+            if (Utility.isInteger(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
                 tmp += storage.charAt(i);
                 //if input isn't a digit
             else {
@@ -124,14 +124,6 @@ public class StorageRefactor {
         return exit;
     }
 
-    public boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     public boolean isLowPriority(String input) {
         if (input.equals("+") || input.equals("-")) {

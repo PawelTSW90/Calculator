@@ -30,7 +30,7 @@ class Calculating {
             Log.i("tmp", "storage: " + storage.getStorage());
             Log.i("tmp", "chars" + chars);
             //if character is nor number or dot, start calculating
-            if (!isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
+            if (!Utility.isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
                     cantCount = true;
                     //adding two values
@@ -95,14 +95,7 @@ class Calculating {
         }
     }
 
-    public boolean isDouble(String input) {
-        try {
-            Double.parseDouble(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+
 
     public int whatSign(String input) {
         if (input.equals("+")) {

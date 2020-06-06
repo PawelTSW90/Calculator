@@ -35,7 +35,7 @@ public class DigitsInput implements View.OnClickListener {
             input.setCursor(v);
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
-        else if(!isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
+        else if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             storage.removeCharAtPosition(selection-1);
             storage.addCharToString(((Button)v).getText().toString());
             txt.setText(storage.returnString());
@@ -46,7 +46,5 @@ public class DigitsInput implements View.OnClickListener {
         }
     }
 
-    public boolean isInteger(String input) {
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
-    }
+
 }
