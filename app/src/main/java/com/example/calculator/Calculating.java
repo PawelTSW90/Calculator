@@ -1,16 +1,14 @@
 package com.example.calculator;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 class Calculating {
 
     //Before calculating, method check if format is correct. If not, program waiting
-    boolean wrongFormatChecker(StorageRefactor storage) {
-        boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", storage.getStorage());
-        tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", storage.getStorage());
+    boolean wrongFormatChecker(String expression) {
+        boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
+        tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", expression);
 
         return tmp;
 
@@ -27,8 +25,6 @@ class Calculating {
             chars.set(x, chars.get(x).replace(",", "."));
         }
         for (int x = 0; x < chars.size(); x++) {
-            Log.i("tmp", "storage: " + storage.getStorage());
-            Log.i("tmp", "chars" + chars);
             //if character is nor number or dot, start calculating
             if (!Utility.isDouble(chars.get(x)) && !chars.get(x).contains(".") && !chars.get(x).isEmpty()) {
                 if (chars.get(x - 2).isEmpty() || chars.get(x - 1).isEmpty()) {
@@ -67,7 +63,7 @@ class Calculating {
             }
         }
 
-        if (wrongFormatChecker(storage) || cantCount) {
+        if (wrongFormatChecker(storage.getStorage()) || cantCount) {
             storage.removeCharAtPosition(storage.getStorage().charAt(storage.getStorage().length() - 1));
             return storage.getStorage();
 

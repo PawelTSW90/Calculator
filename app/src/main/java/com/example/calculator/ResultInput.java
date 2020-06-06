@@ -20,13 +20,13 @@ public class ResultInput implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        calculating.wrongFormatChecker(storage);
+        calculating.wrongFormatChecker(storage.getStorage());
         if(!Utility.isInteger(String.valueOf(storage.getStorage().charAt(storage.getStorage().length()-1)))){
             Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
 
          }
          //if there are arithmetic symbols and format is correct start counting
-         else if(!Utility.isInteger(storage.getStorage()) && !calculating.wrongFormatChecker(storage)) {
+         else if(!Utility.isInteger(storage.getStorage()) && !calculating.wrongFormatChecker(storage.getStorage())) {
 
             storage.addCharToString("=");
             txt.setText(calculating.countResult(storage));
@@ -36,5 +36,5 @@ public class ResultInput implements View.OnClickListener {
         }
 
     }
-    
+
 }
