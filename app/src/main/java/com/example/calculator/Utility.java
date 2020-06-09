@@ -13,8 +13,8 @@ public class Utility {
 
     }
 
-    static boolean containDigits(String input){
-        return !input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
+    static boolean containArithmeticSymbol(String input){
+        return input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
 
     }
 

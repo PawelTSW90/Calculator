@@ -14,7 +14,6 @@ public class CommaInput implements View.OnClickListener {
 
     }
 
-
     public void onClick(View v) {
         int selection = txt.getSelectionEnd();
 
@@ -27,21 +26,17 @@ public class CommaInput implements View.OnClickListener {
         }
 
         else if (selection == 0) {
-            checkComma(v);
+            isCommaAllowed(v);
         }
-        //if previous character is arithmetic symbol, add 0, at selection
-        else if (!Utility.isParseInt(Character.toString(storage.getStorage().charAt(selection - 1)))) {
-            storage.addCharAtPosition(selection, "0,");
-            this.txt.setText(storage.getStorage());
-            this.txt.setSelection(selection + 2);
-        } else {
-            checkComma(v);
+
+         else {
+            isCommaAllowed(v);
         }
 
 
     }
     //Method is checking if comma is allowed
-    void checkComma(View v) {
+    boolean isCommaAllowed(View v) {
         //avoiding out of bound exception
         int selectionZero = 0;
         int selection = txt.getSelectionEnd();
@@ -50,7 +45,7 @@ public class CommaInput implements View.OnClickListener {
         }
         boolean isBackwardComma = false;
         boolean isForwardComma = false;
-        //Backward loop looking for comma between selection and first no-integer character
+        //Backward loop looking for comma between selection and first arithmetic symbol
         for (int i = Math.max(selection-1, selectionZero); i >= 0; i--) {
 
             if (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(i)))) {
@@ -68,7 +63,7 @@ public class CommaInput implements View.OnClickListener {
                 break;
             }
         }
-        //Forward Loop looking for comma between selection and first no-integer character
+        //Forward Loop looking for comma between selection and first arithmetic symbol
         for (int x = Math.max(selection-1, selectionZero); x <= storage.getStorage().length() - 1; x++) {
             if(String.valueOf(storage.getStorage().charAt(x)).equals(",")){
                 isForwardComma = true;
@@ -77,25 +72,33 @@ public class CommaInput implements View.OnClickListener {
         }
 
         if (isBackwardComma || isForwardComma) {
-            return;
+            return false;
         } else {
             commaAllowed(v);
+            return true;
         }
 
     }
 
     void commaAllowed(View v) {
         //initialize selection position
-        int kursor = txt.getSelectionEnd();
-        storage.addCharAtPosition(kursor, ",");
+        int selection = txt.getSelectionEnd();
+        //if previous character is arithmetic symbol, and comma is allowed, add 0, at selection
+        if(Utility.containArithmeticSymbol(Character.toString(storage.getStorage().charAt(selection - 1)))){
+            storage.addCharAtPosition(selection, "0,");
+            this.txt.setText(storage.getStorage());
+            this.txt.setSelection(selection + 2);
+
+        } else
+        storage.addCharAtPosition(selection, ",");
         this.txt.setText(storage.getStorage());
         int length = storage.getStorage().length() - 1;
         // if selection position is bigger than storage length, set it after last value
-        if (kursor > length) {
+        if (selection > length) {
             txt.setSelection(length + 1);
             //set selection position after last added value
         } else {
-            txt.setSelection(kursor + 1);
+            txt.setSelection(selection + 1);
         }
     }
 

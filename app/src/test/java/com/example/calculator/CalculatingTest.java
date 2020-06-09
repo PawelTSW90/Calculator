@@ -1,5 +1,7 @@
 package com.example.calculator;
 
+import android.widget.EditText;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.junit.Test;
  */
 public class CalculatingTest{
     private Calculating calculating;
+    EditText txt;
 
     @Before
     public void setup()
@@ -29,7 +32,7 @@ public class CalculatingTest{
     }
     @Test
     public void countResultTest(){
-        StorageRefactor storage = new StorageRefactor();
+        StorageRefactor storage = new StorageRefactor(txt);
         storage.setStorage("2,3+2,7=");
         Assert.assertTrue(calculating.countResult(storage).equals("5"));
 

@@ -9,8 +9,11 @@ class Calculating {
 
     //Before calculating, method check if format is correct. If not, program waiting
     boolean wrongFormatChecker(String expression) {
+        //regex checking if arithmetic symbols format is correct
         boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
+        //regex checking if commas format is correct
         tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", expression);
+        //regex checking if last character is arithmetic symbol
         tmp = tmp || Pattern.matches(".*[+,\\-×÷]$.*", expression);
 
         return tmp;
