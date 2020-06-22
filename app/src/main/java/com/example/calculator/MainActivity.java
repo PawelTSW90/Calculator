@@ -21,38 +21,38 @@ public class MainActivity extends AppCompatActivity {
         Calculating calculating = new Calculating();
         StorageRefactor storage = new StorageRefactor(txt);
 
-        //disable system keyobard
+        //disable system keyboard
         txt.setShowSoftInputOnFocus(false);
 
         final Button button0 = findViewById(R.id.button_0);
         button0.setOnClickListener(new ZeroInput(txt, storage));
 
         final Button button1 = findViewById(R.id.button_1);
-        button1.setOnClickListener(new DigitsInput(txt, storage));
+        button1.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext()));
 
         final Button button2 = findViewById(R.id.button_2);
-        button2.setOnClickListener(new DigitsInput(txt, storage));
+        button2.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button3 = findViewById(R.id.button_3);
-        button3.setOnClickListener(new DigitsInput(txt, storage));
+        button3.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button4 = findViewById(R.id.button_4);
-        button4.setOnClickListener(new DigitsInput(txt, storage));
+        button4.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button5 = findViewById(R.id.button_5);
-        button5.setOnClickListener(new DigitsInput(txt, storage));
+        button5.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button6 = findViewById(R.id.button_6);
-        button6.setOnClickListener(new DigitsInput(txt, storage));
+        button6.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button7 = findViewById(R.id.button_7);
-        button7.setOnClickListener(new DigitsInput(txt, storage));
+        button7.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button8 = findViewById(R.id.button_8);
-        button8.setOnClickListener(new DigitsInput(txt, storage));
+        button8.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button button9 = findViewById(R.id.button_9);
-        button9.setOnClickListener(new DigitsInput(txt, storage));
+        button9.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button brackets = findViewById(R.id.button_brackets);
         brackets.setOnClickListener(new BracketsInput());

@@ -84,7 +84,7 @@ public class StorageRefactor {
                         if (isLowPriority(last)) {
                             //add arithmetic operator to stack
                             stack.add(Character.toString(storage.charAt(i)));
-                            //if stack last arithmetic operator has high priority aswell,
+                            //if stack last arithmetic operator has high priority as well,
                         } else {
                             // adding last arithmetic operator to exit, as long as last arithmetic operator on stack has high priority
                             while (!isLowPriority(last)) {
@@ -118,9 +118,7 @@ public class StorageRefactor {
 
 
     public boolean isLowPriority(String input) {
-        if (input.equals("+") || input.equals("-")) {
-            return true;
-        } else
-            return false;
+        return input.equals("+") || input.equals("-");
+
     }
 }

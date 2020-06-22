@@ -34,7 +34,7 @@ public class ZeroInput implements View.OnClickListener {
             storage.addCharAtPosition(selection,value);
 
         }
-        //if previous character is 0, and there is arithmetic symbol two characters back, dont do nothing
+        //if previous character is 0, and there is arithmetic symbol two characters back, don't do nothing
         else if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
             return;
         }

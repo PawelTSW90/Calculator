@@ -14,7 +14,7 @@ public class Utility {
     }
 
     static boolean containArithmeticSymbol(String input){
-        return input.contains("+") && !input.contains("-") && !input.contains("×") && !input.contains("÷");
+        return input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷");
 
     }
 

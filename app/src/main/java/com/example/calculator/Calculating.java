@@ -12,9 +12,9 @@ class Calculating {
         //regex checking if arithmetic symbols format is correct
         boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
         //regex checking if commas format is correct
-        tmp = tmp || Pattern.matches(".*(^|[+\\-×÷])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+\\-×÷]).*", expression);
+        tmp = tmp || Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-]).*", expression);
         //regex checking if last character is arithmetic symbol
-        tmp = tmp || Pattern.matches(".*[+,\\-×÷]$.*", expression);
+        tmp = tmp || Pattern.matches(".*[+,×÷\\-]$.*", expression);
 
         return tmp;
 
@@ -40,15 +40,15 @@ class Calculating {
                 } else if (chars.get(x).equals("+")) {
                     double tmp1 = Double.parseDouble(chars.get(x - 2));
                     double tmp2 = Double.parseDouble(chars.get(x - 1));
-                    Double sum = tmp1 + tmp2;
-                    chars.set(x - 2, sum.toString());
+                    double sum = tmp1 + tmp2;
+                    chars.set(x - 2, Double.toString(sum));
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
                     //subtracting two values
                 } else if (Utility.whatSign(chars.get(x)) == 1) {
-                    Double minus = (Double.parseDouble(chars.get(x - 2)) - (Double.parseDouble(chars.get(x - 1))));
-                    chars.set(x - 2, minus.toString());
+                    double minus = (Double.parseDouble(chars.get(x - 2)) - (Double.parseDouble(chars.get(x - 1))));
+                    chars.set(x - 2, Double.toString(minus));
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
