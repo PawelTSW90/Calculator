@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         txt.setShowSoftInputOnFocus(false);
 
         final Button button0 = findViewById(R.id.button_0);
-        button0.setOnClickListener(new ZeroInput(txt, storage));
+        button0.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext()));
 
         final Button button1 = findViewById(R.id.button_1);
         button1.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext()));
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         button_divide.setOnClickListener(new ArithmeticInput(txt, storage));
 
         final Button button_C = findViewById(R.id.button_C);
-        button_C.setOnClickListener(new DeleteAllInput(txt, storage));
+        button_C.setOnClickListener(new DeleteInput(txt, storage));
 
         final Button button_result = findViewById(R.id.button_result);
         button_result.setOnClickListener(new ResultInput(txt, storage, calculating, this.getApplicationContext()));

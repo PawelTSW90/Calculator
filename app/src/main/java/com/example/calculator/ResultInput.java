@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ public class ResultInput implements View.OnClickListener {
     private Calculating calculating;
     private Context context;
 
+
     ResultInput(EditText text, StorageRefactor StorageClass, Calculating calculating, Context context) {
         this.txt = text;
         this.storage = StorageClass;
@@ -20,20 +22,28 @@ public class ResultInput implements View.OnClickListener {
 
 
     public void onClick(View v) {
+        Log.i("liczba",storage.getStorage());
         calculating.wrongFormatChecker(storage.getStorage());
 
         if(storage.getStorage().isEmpty()){
             return;
         }
          //if there are arithmetic symbols and format is correct start counting
-          if(Utility.containArithmeticSymbol(storage.getStorage()) && !calculating.wrongFormatChecker(storage.getStorage())) {
-
-            storage.addCharAtPosition(storage.getStorage().length(), "=");
+          if(Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
+              storage.addCharAtPosition(storage.getStorage().length(), "=");
             txt.setText(calculating.countResult(storage));
             txt.setSelection(storage.getStorage().length());
-        } else{
+            //if format is wrong, display toast
+        } else if(calculating.wrongFormatChecker(storage.getStorage()) == 1){
             Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
-        }
+            //if 15 digits limit is reached, display toast
+        } else if(calculating.wrongFormatChecker(storage.getStorage()) == 2){
+              Toast.makeText(this.context, "15 digits limit reached", Toast.LENGTH_SHORT).show();
+              //if 10 digits after comma limit is reached, display toast
+          } else if(calculating.wrongFormatChecker(storage.getStorage()) == 3){
+              Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
+
+          }
 
     }
 

@@ -1,22 +1,35 @@
 package com.example.calculator;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 class Calculating {
+    final int RESPONSE_OK = 0;
+    final int WRONG_FORMAT = 1;
+    final int RESPONSE_15_DIGITS_LIMIT_REACHED = 2;
+    final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 3;
 
-    //Before calculating, method check if format is correct. If not, program waiting
-    boolean wrongFormatChecker(String expression) {
-        //regex checking if arithmetic symbols format is correct
-        boolean tmp = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
-        //regex checking if commas format is correct
-        tmp = tmp || Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-]).*", expression);
-        //regex checking if last character is arithmetic symbol
-        tmp = tmp || Pattern.matches(".*[+,×÷\\-]$.*", expression);
+    //Before calculating, method check if format is correct
+    int wrongFormatChecker(String expression) {
 
-        return tmp;
+        //regex check if arithmetic symbols format is correct
+        boolean formatCheck1 = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
+        //regex check if commas format is correct
+        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-]).*", expression);
+        //regex check if last character is arithmetic symbol
+        boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
+        //regex check if 15 digit limit is reached
+        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{14,}.*", expression);
+        //regex check if 10 digit limit is reached
+        boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{9,}.*", expression);
+
+        if(formatCheck1||formatCheck2||formatCheck3){
+            return WRONG_FORMAT;
+        } else if(fifteenDigitsLimit){
+            return RESPONSE_15_DIGITS_LIMIT_REACHED;
+        } else if(tenDigitsAfterCommaLimit){
+            return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
+        } else return RESPONSE_OK;
 
     }
     //Method is calling refactorStorage method to prepare storage for calculating,
@@ -26,7 +39,6 @@ class Calculating {
         boolean cantCount = false;
 
         ArrayList<String> chars = storage.refactorStorage();
-        Log.i("proba", "storage: "  + chars.toString());
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
             chars.set(x, chars.get(x).replace(",", "."));
@@ -70,7 +82,7 @@ class Calculating {
             }
         }
 
-        if (wrongFormatChecker(storage.getStorage()) || cantCount) {
+        if (cantCount) {
             storage.removeCharAtPosition(storage.getStorage().charAt(storage.getStorage().length() - 1));
             return storage.getStorage();
 
@@ -78,11 +90,11 @@ class Calculating {
             StringBuilder result = new StringBuilder();
             double value = Double.parseDouble(chars.get(chars.size() - 1));
             //set number of integers after comma to 10
-            double roundedValue = Math.round(value * 10000000000.0) / 10000000000.0;
+            double roundedValue = Math.round(value * 10000000.0) / 10000000.0;
             //Displaying result as integer
             if (roundedValue % 1 == 0) {
-                int intvalue = (int) roundedValue;
-                result.append(intvalue);
+                int intValue = (int) roundedValue;
+                result.append(intValue);
                 String tmp = result.toString();
                 tmp = tmp.replace(".", ",");
                 storage.setStorage(tmp);
@@ -97,10 +109,6 @@ class Calculating {
             }
         }
     }
-
-
-
-
 }
 
 

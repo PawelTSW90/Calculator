@@ -48,6 +48,8 @@ public class StorageRefactor {
 
     void clearStorage(){
         this.storage = "";
+        txt.setText(getStorage());
+        txt.setSelection(0);
     }
 
     ArrayList<String> refactorStorage() {
