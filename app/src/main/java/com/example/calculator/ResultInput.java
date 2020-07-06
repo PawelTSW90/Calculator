@@ -1,7 +1,6 @@
 package com.example.calculator;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ public class ResultInput implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        Log.i("liczba",storage.getStorage());
         calculating.wrongFormatChecker(storage.getStorage());
 
         if(storage.getStorage().isEmpty()){

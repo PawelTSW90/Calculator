@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -19,19 +20,20 @@ class Calculating {
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
         //regex check if 15 digit limit is reached
-        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{14,}.*", expression);
+        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{16,}.*", expression);
         //regex check if 10 digit limit is reached
-        boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{9,}.*", expression);
+        boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{11,}.*", expression);
 
-        if(formatCheck1||formatCheck2||formatCheck3){
+        if (formatCheck1 || formatCheck2 || formatCheck3) {
             return WRONG_FORMAT;
-        } else if(fifteenDigitsLimit){
+        } else if (fifteenDigitsLimit) {
             return RESPONSE_15_DIGITS_LIMIT_REACHED;
-        } else if(tenDigitsAfterCommaLimit){
+        } else if (tenDigitsAfterCommaLimit) {
             return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
         } else return RESPONSE_OK;
 
     }
+
     //Method is calling refactorStorage method to prepare storage for calculating,
     //and start counting
     String countResult(StorageRefactor storage) {
@@ -87,30 +89,23 @@ class Calculating {
             return storage.getStorage();
 
         } else {
-            StringBuilder result = new StringBuilder();
+            BigDecimal bigDecimalValue, bg2;
             double value = Double.parseDouble(chars.get(chars.size() - 1));
-            //set number of integers after comma to 10
-            double roundedValue = Math.round(value * 10000000.0) / 10000000.0;
-            //Displaying result as integer
-            if (roundedValue % 1 == 0) {
-                int intValue = (int) roundedValue;
-                result.append(intValue);
-                String tmp = result.toString();
-                tmp = tmp.replace(".", ",");
-                storage.setStorage(tmp);
-                return storage.getStorage();
-                //Displaying result as double
-            } else {
-                result.append(roundedValue);
-                String tmp = result.toString();
-                tmp = tmp.replace(".", ",");
-                storage.setStorage(tmp);
-                return storage.getStorage();
+            bigDecimalValue = BigDecimal.valueOf(value);
+            bg2 = bigDecimalValue.remainder(new BigDecimal(1));
+            double bg2toDouble = bg2.doubleValue();
+            String bigDecimalToString = bigDecimalValue.toString();
+
+            if(bg2toDouble == 0.0){
+                storage.setStorage(bigDecimalToString);
+            } else{
+                bigDecimalToString = bigDecimalToString.replace(".", ",");
+                storage.setStorage(bigDecimalToString);
+
             }
+
+
         }
+        return storage.getStorage();
     }
 }
-
-
-
-

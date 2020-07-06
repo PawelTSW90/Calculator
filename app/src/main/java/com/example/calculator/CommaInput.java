@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -80,9 +79,7 @@ public class CommaInput implements View.OnClickListener {
 
         //if previous character is arithmetic symbol, add 0, at selection
         else if(Utility.containArithmeticSymbol(Character.toString(storage.getStorage().charAt(selection - 1)))){
-            storage.addCharAtPosition(selection, "0,");
-           Log.i("kupa", "selection:" + selection);
-           Log.i("kupa", "storage:" + storage.getStorage());
+            storage.addCharAtPosition(selection, "0,");;
             this.txt.setText(storage.getStorage());
             this.txt.setSelection(selection + 2);
 

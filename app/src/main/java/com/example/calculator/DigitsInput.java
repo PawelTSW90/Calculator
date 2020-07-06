@@ -139,8 +139,16 @@ public class DigitsInput implements View.OnClickListener {
             storage.addCharAtPosition(selection, value);
         }
 
+        else if((storage.getStorage().length()==1)&&String.valueOf(storage.getStorage().charAt(0)).equals("0")){
+            storage.removeCharAtPosition(0);
+            storage.addCharAtPosition(0, value);
+            txt.setText(storage.getStorage());
+            txt.setSelection(1);
+
+        }
+
         //if previous value is "0" and next value is comma, replace zero with new digit if it's different than 0
-        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")&& String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
+        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")&& selection<storage.getStorage().length() &&String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
             storage.removeCharAtPosition(selection - 1);
             storage.addCharAtPosition(selection - 1, value);
             txt.setText(storage.getStorage());
@@ -157,7 +165,7 @@ public class DigitsInput implements View.OnClickListener {
 
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
-        else if (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
+        else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             storage.removeCharAtPosition(selection - 1);
             storage.addCharAtPosition(selection - 1, value);
             txt.setText(storage.getStorage());
