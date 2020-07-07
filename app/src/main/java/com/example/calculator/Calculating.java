@@ -1,5 +1,7 @@
 package com.example.calculator;
 
+import android.util.Log;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -52,10 +54,11 @@ class Calculating {
                     cantCount = true;
                     //adding two values
                 } else if (chars.get(x).equals("+")) {
-                    double tmp1 = Double.parseDouble(chars.get(x - 2));
-                    double tmp2 = Double.parseDouble(chars.get(x - 1));
-                    double sum = tmp1 + tmp2;
-                    chars.set(x - 2, Double.toString(sum));
+                    BigDecimal tmp11 = new BigDecimal(chars.get(x-2));
+                    BigDecimal tmp22 = new BigDecimal(chars.get(x-1));
+                    BigDecimal sum;
+                    sum = tmp11.add(tmp22);
+                    chars.set(x - 2, sum.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
@@ -90,17 +93,21 @@ class Calculating {
 
         } else {
             BigDecimal bigDecimalValue, bg2;
-            double value = Double.parseDouble(chars.get(chars.size() - 1));
-            bigDecimalValue = BigDecimal.valueOf(value);
+            bigDecimalValue = new BigDecimal(chars.get(chars.size()-1));
             bg2 = bigDecimalValue.remainder(new BigDecimal(1));
             double bg2toDouble = bg2.doubleValue();
             String bigDecimalToString = bigDecimalValue.toString();
 
             if(bg2toDouble == 0.0){
-                storage.setStorage(bigDecimalToString);
+                StringBuilder tmp = new StringBuilder(bigDecimalToString);
+                Log.i("proba",""+tmp);
+                tmp = tmp.deleteCharAt(tmp.length()-1);
+                tmp = tmp.deleteCharAt(tmp.length()-1);
+                storage.setStorage(tmp.toString());
             } else{
                 bigDecimalToString = bigDecimalToString.replace(".", ",");
                 storage.setStorage(bigDecimalToString);
+                //15,63+8 naprawić
 
             }
 
