@@ -64,11 +64,11 @@ class Calculating {
                     x = 0;
                     //subtracting two values
                 } else if (Utility.whatSign(chars.get(x)) == 1) {
-                    BigDecimal value1, value2, substracting;
+                    BigDecimal value1, value2, subtracting;
                     value1 = new BigDecimal(chars.get(x-2));
                     value2 = new BigDecimal(chars.get(x-1));
-                    substracting = value1.subtract(value2);
-                    chars.set(x - 2, substracting.toString());
+                    subtracting = value1.subtract(value2);
+                    chars.set(x - 2, subtracting.toString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
