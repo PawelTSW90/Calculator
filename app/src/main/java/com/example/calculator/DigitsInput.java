@@ -16,6 +16,7 @@ public class DigitsInput implements View.OnClickListener {
 
     private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 1;
     private final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 2;
+    private final int RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED = 3;
 
 
     DigitsInput(EditText txt, StorageRefactor storage, Context context) {
@@ -33,6 +34,8 @@ public class DigitsInput implements View.OnClickListener {
         } else if (characterLimitAfterComma(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
             Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
 
+        } else if(characterLimitAfterComma(v) == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED){
+            Toast.makeText(this.context, "100 characters limit reached", Toast.LENGTH_SHORT).show();
         }
 
         //0 input
@@ -82,12 +85,15 @@ public class DigitsInput implements View.OnClickListener {
 
         boolean tmpCharacterLimit = Pattern.matches(".*\\d{14,}.*", substring);
         boolean tmpCharacterLimitAfterComma = Pattern.matches(".*,\\d{9,}.*", substring);
+        boolean tmp100CharactersLimit = Pattern.matches(".{100,}", storage.getStorage());
 
         if (tmpCharacterLimit) {
             return RESPONSE_15_DIGITS_LIMIT_REACHED;
         } else if (tmpCharacterLimitAfterComma) {
             return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
-        }
+        } else if(tmp100CharactersLimit){
+            return  RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED;
+        } else
         return ENTRY_ALLOWED;
 
     }

@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 
+import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -80,17 +81,18 @@ public class StorageRefactor {
                     if (Character.toString(storage.charAt(i)).equals("=") || Character.toString(storage.charAt(i)).equals(",")) {
                         continue;
                     }
-                    //if our arithmetic operator has high priority, and last arithmetic operator on stack has lower priority
+                    //if our arithmetic operator has high priority,
                     if (!isLowPriority(Character.toString(storage.charAt(i)))) {
-
+                    // and last operator has lower priority,
                         if (isLowPriority(last)) {
-                            //add arithmetic operator to stack
+                            //add our operator on stack
                             stack.add(Character.toString(storage.charAt(i)));
                             //if stack last arithmetic operator has high priority as well,
                         } else {
                             // adding last arithmetic operator to exit, as long as last arithmetic operator on stack has high priority
-                            while (!isLowPriority(last)) {
+                            while (isLowPriority(stack.peek())) {
                                 exit.add(last);
+                                stack.pop();
 
                             }
                             //when last arithmetic operator on stack has low priority, we adding our arithmetic operator to stack

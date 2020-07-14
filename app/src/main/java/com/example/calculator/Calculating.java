@@ -8,10 +8,12 @@ import java.util.regex.Pattern;
 class Calculating {
     private final int RESPONSE_OK = 0;
     private final int WRONG_FORMAT = 1;
-    private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 2;
-    private final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 3;
+    private final int DIGITS_SCALE_REACHED = 2;
+    private final int COMMA_SCALE_REACHED = 3;
+    private final int MAXIMUM_SCALE_REACHED = 4;
     private final int COMMA_SCALE = 10;
-    private final int TOTAL_SCALE = 15;
+    private final int DIGITS_SCALE = 15;
+    private final int MAXIMUM_SCALE = 101;
     //Before calculating, method check if format is correct
     int wrongFormatChecker(String expression) {
 
@@ -22,17 +24,23 @@ class Calculating {
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
         //regex check if 15 digit limit is reached
-        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{"+(TOTAL_SCALE+1)+",}.*", expression);
+        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{"+(DIGITS_SCALE+1)+",}.*", expression);
         //regex check if 10 digit limit is reached
         boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{"+(COMMA_SCALE+1)+",}.*", expression);
+        //regex check if total scale 100 or more characters is reached
+        boolean maximumScaleReached = Pattern.matches(".{"+(MAXIMUM_SCALE)+",}", expression);
 
         if (formatCheck1 || formatCheck2 || formatCheck3) {
             return WRONG_FORMAT;
         } else if (fifteenDigitsLimit) {
-            return RESPONSE_15_DIGITS_LIMIT_REACHED;
+            return DIGITS_SCALE_REACHED;
         } else if (tenDigitsAfterCommaLimit) {
-            return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
-        } else return RESPONSE_OK;
+            return COMMA_SCALE_REACHED;
+        } else if(maximumScaleReached){
+            return MAXIMUM_SCALE_REACHED;
+        }
+
+        else return RESPONSE_OK;
 
     }
 
@@ -78,7 +86,7 @@ class Calculating {
                     value1 = new BigDecimal(chars.get(x-2));
                     value2 = new BigDecimal(chars.get(x-1));
                     multiplying = value1.multiply(value2);
-                    chars.set(x - 2, multiplying.toString());
+                    chars.set(x - 2, multiplying.stripTrailingZeros().toPlainString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
                     x = 0;
@@ -107,6 +115,7 @@ class Calculating {
             double bg2toDouble = bg2.doubleValue();
             String bigDecimalToString = bigDecimalValue.toString();
             storage.setStorage(bigDecimalToString);
+
 
             if(bg2toDouble != 0.0){
                 bigDecimalToString = bigDecimalToString.replace(".", ",");

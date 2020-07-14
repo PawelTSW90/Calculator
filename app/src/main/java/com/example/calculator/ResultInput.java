@@ -41,6 +41,8 @@ public class ResultInput implements View.OnClickListener {
           } else if(calculating.wrongFormatChecker(storage.getStorage()) == 3){
               Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
 
+          } else if(calculating.wrongFormatChecker(storage.getStorage()) == 4){
+              Toast.makeText(this.context, "100 characters limit reached", Toast.LENGTH_SHORT).show();
           }
 
     }
