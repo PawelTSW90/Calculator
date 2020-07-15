@@ -51,8 +51,7 @@ public class ArithmeticInput implements View.OnClickListener {
         String tmp = ((Button)v).getText().toString();
         int selection = txt.getSelectionEnd();
         storage.addCharAtPosition(selection,tmp);
-        this.txt.setText(storage.getStorage());
-        txt.setSelection(selection+1);
+
     }
 
 

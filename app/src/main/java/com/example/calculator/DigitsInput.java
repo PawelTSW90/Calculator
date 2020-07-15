@@ -49,7 +49,7 @@ public class DigitsInput implements View.OnClickListener {
     }
 
 
-    //Method blocking entering more than 15 digits or 10 digits after comma
+    //Method blocking entering more than 15 digits between arithmetic operators or 10 digits after comma
     public int characterLimitAfterComma(View v) {
         int ENTRY_ALLOWED = 0;
         int selection = txt.getSelectionEnd();
@@ -66,7 +66,7 @@ public class DigitsInput implements View.OnClickListener {
             add("÷");
         }};
 
-        int nearestRightOperator = getNearestRightSubstringStart(storage.getStorage(), selection, listOfOperators);
+        int nearestRightOperator = getNearestRightSubstringEnd(storage.getStorage(), selection, listOfOperators);
         int nearestLeftOperator = getNearestLeftSubstringStart(storage.getStorage(), selection, listOfOperators);
 
 
@@ -97,11 +97,11 @@ public class DigitsInput implements View.OnClickListener {
         return ENTRY_ALLOWED;
 
     }
-            //method return first no-digit entry after cursor
-    int getNearestRightSubstringStart(String str, int cursor, ArrayList<String> substringList) {
+            //method return first no-digit entry after cursor, or -1 if operator is not found
+    int getNearestRightSubstringEnd(String str, int cursor, ArrayList<String> substringList) {
         int nearestRightOperator = str.length();
         boolean operatorFound = false;
-
+            //
         for (String element : substringList) {
             int tmp2 = str.indexOf(element, cursor);
             if ((tmp2 < nearestRightOperator) && (tmp2 != -1)) {
@@ -114,7 +114,7 @@ public class DigitsInput implements View.OnClickListener {
 
         return nearestRightOperator;
     }
-            // method returns first no-digit entry before cursor
+            // method returns first no-digit entry before cursor, or -1 if operator is not found
     int getNearestLeftSubstringStart(String str, int cursor, ArrayList<String> substringList) {
         int nearestLeftOperator = -1;
         for (String element : substringList) {
@@ -144,11 +144,10 @@ public class DigitsInput implements View.OnClickListener {
         else if ((selection == 0) && storage.getStorage().length() >= 1) {
             storage.addCharAtPosition(selection, value);
         }
-
+        //if there is just zero in storage, and cursor is placed after it, replace 0 with new digit
         else if((storage.getStorage().length()==1)&&String.valueOf(storage.getStorage().charAt(0)).equals("0")){
             storage.removeCharAtPosition(0);
             storage.addCharAtPosition(0, value);
-            txt.setText(storage.getStorage());
             txt.setSelection(1);
 
         }
@@ -157,7 +156,7 @@ public class DigitsInput implements View.OnClickListener {
         else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")&& selection<storage.getStorage().length() &&String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
             storage.removeCharAtPosition(selection - 1);
             storage.addCharAtPosition(selection - 1, value);
-            txt.setText(storage.getStorage());
+
             txt.setSelection(selection);
 
         }
@@ -174,7 +173,7 @@ public class DigitsInput implements View.OnClickListener {
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             storage.removeCharAtPosition(selection - 1);
             storage.addCharAtPosition(selection - 1, value);
-            txt.setText(storage.getStorage());
+
             txt.setSelection(storage.getStorage().length());
         }
 

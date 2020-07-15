@@ -29,7 +29,6 @@ public class ResultInput implements View.OnClickListener {
          //if there are arithmetic symbols and format is correct start counting
           if(Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
               storage.addCharAtPosition(storage.getStorage().length(), "=");
-            txt.setText(calculating.countResult(storage));
             txt.setSelection(storage.getStorage().length());
             //if format is wrong, display toast
         } else if(calculating.wrongFormatChecker(storage.getStorage()) == 1){

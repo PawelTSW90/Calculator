@@ -80,12 +80,10 @@ public class CommaInput implements View.OnClickListener {
         //if previous character is arithmetic symbol, add 0, at selection
         else if(Utility.containArithmeticSymbol(Character.toString(storage.getStorage().charAt(selection - 1)))){
             storage.addCharAtPosition(selection, "0,");;
-            this.txt.setText(storage.getStorage());
             this.txt.setSelection(selection + 2);
 
         } else {
            storage.addCharAtPosition(selection, ",");
-           this.txt.setText(storage.getStorage());
            int length = storage.getStorage().length() - 1;
            // if selection position is bigger than storage length, set it after last value
            if (selection > length) {

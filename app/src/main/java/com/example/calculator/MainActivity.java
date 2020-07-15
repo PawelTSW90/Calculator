@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         button9.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext()));
 
         final Button brackets = findViewById(R.id.button_brackets);
-        brackets.setOnClickListener(new BracketsInput());
+        brackets.setOnClickListener(new BracketsInput(txt, storage));
 
         final Button button_add = findViewById(R.id.button_add);
         button_add.setOnClickListener(new ArithmeticInput(txt, storage));

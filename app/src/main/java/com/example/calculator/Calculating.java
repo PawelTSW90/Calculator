@@ -14,7 +14,7 @@ class Calculating {
     private final int COMMA_SCALE = 10;
     private final int DIGITS_SCALE = 15;
     private final int MAXIMUM_SCALE = 101;
-    //Before calculating, method check if format is correct
+    //Before calculating, method check if format is correct. If not, toast are displayed
     int wrongFormatChecker(String expression) {
 
         //regex check if arithmetic symbols format is correct
