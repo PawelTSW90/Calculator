@@ -121,6 +121,10 @@ class Calculating {
                 bigDecimalToString = bigDecimalToString.replace(".", ",");
                 storage.setStorage(bigDecimalToString);
 
+            } else{
+                int intValue = bigDecimalValue.intValue();
+                String stringValue = String.valueOf(intValue);
+                storage.setStorage(stringValue);
             }
 
 

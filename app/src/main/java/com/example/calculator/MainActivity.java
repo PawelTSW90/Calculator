@@ -79,10 +79,6 @@ public class MainActivity extends AppCompatActivity {
         comma_button.setOnClickListener(new CommaInput(txt, storage));
 
     }
-
-
-
-
 }
 
 

@@ -1,7 +1,6 @@
 package com.example.calculator;
 
 
-import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.Stack;
 
 public class StorageRefactor {
     private String storage = "";
-    EditText txt;
+    private EditText txt;
 
 
     StorageRefactor(EditText txt){
