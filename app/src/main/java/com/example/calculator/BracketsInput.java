@@ -31,29 +31,24 @@ public class BracketsInput implements View.OnClickListener {
     }
 
     String bracketType() {
-        int bracketOpened = 0;
-        int bracketClosed = 0;
+        boolean closeBracket = false;
         int substringStart = 0;
         int substringEnd = txt.getSelectionEnd();
         String substring = storage.getStorage().substring(substringStart, substringEnd);
-        for(int x = substring.length()-1; x>=0; x--){
-            if(String.valueOf(substring.charAt(x)).equals("(")){
-                bracketOpened = 1;
+        for (int x = substring.length() - 1; x >= 0; x--) {
+            if (String.valueOf(substring.charAt(x)).equals("(")) {
+                closeBracket = true;
                 break;
-            } else if(String.valueOf(substring.charAt(x)).equals(")")){
-                bracketClosed = 1;
+            } else if (String.valueOf(substring.charAt(x)).equals(")")) {
                 break;
             }
         }
 
-        if(bracketOpened ==1){
+        if (closeBracket) {
             return "closeBracket";
-        } else if(bracketClosed ==1){
+        } else {
             return "openBracket";
-        } return null;
-
-
-
+        }
 
 
     }

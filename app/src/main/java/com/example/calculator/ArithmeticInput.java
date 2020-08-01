@@ -38,11 +38,12 @@ public class ArithmeticInput implements View.OnClickListener {
             } else{
                 entryAllowed(v);
             }
-            //if previous or current character arithmetic symbol, don't add symbol
-        } else if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1))) || (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection))))){
+            //if previous or current character arithmetic symbol(except brackets), don't add symbol
+        } else if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1))) || (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection)))) && (!Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection-1)))) && (!Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection))))){
             return;
         } else {
             entryAllowed(v);
+
         }
 
     }

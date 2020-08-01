@@ -49,7 +49,6 @@ class Calculating {
     String countResult(StorageRefactor storage) {
 
         boolean cantCount = false;
-
         ArrayList<String> chars = storage.refactorStorage();
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {

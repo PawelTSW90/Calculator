@@ -1,9 +1,9 @@
 package com.example.calculator;
 
-public class Utility {
+class Utility {
 
 
-    static boolean isParseInt(String input){
+    static boolean isParseInt(String input) {
         try {
             Integer.parseInt(input);
             return true;
@@ -13,12 +13,12 @@ public class Utility {
 
     }
 
-    static boolean containArithmeticSymbol(String input){
+    static boolean containArithmeticSymbol(String input) {
         return input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷");
 
     }
 
-    static  boolean isDouble(String input) {
+     static boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
             return true;
@@ -40,5 +40,9 @@ public class Utility {
             // no value
             return 4;
         }
+    }
+
+     static boolean isBracket(String input){
+        return input.contains("(") || input.contains(")");
     }
 }
