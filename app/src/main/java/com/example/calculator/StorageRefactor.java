@@ -69,16 +69,14 @@ public class StorageRefactor {
                 exit.add(tmp);
                 tmp = "";
 
-                while (!stack.isEmpty() || !stack.peek().equals("(") ) {
-                    if(stack.peek().equals("(")){
-                        stack.pop();
-                        break;
-                    }
+                while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());
+
                 }
+                stack.pop();
 
             } else {
-                if(!tmp.equals("")){
+                if (!tmp.equals("")) {
                     exit.add(tmp);
                 }
 
@@ -112,13 +110,13 @@ public class StorageRefactor {
                         }
 
                     } else {
-                        while (!stack.isEmpty()) {
-                            if(stack.peek().equals("(")){
-                                stack.pop();
-                            }
+                        if(stack.isEmpty() || !isLowPriority(stack.peek())){
+                            stack.push(String.valueOf(storage.charAt(i)));
+
+                        } else{
                             exit.add(stack.pop());
                         }
-                        stack.add(Character.toString(storage.charAt(i)));
+
                     }
                 }
                 tmp = "";
@@ -132,6 +130,8 @@ public class StorageRefactor {
 
         return exit;
     }
+
+    //5*(8-7+9)/5 Check wrong result!!!!!!!
 
 
     public boolean isLowPriority(String input) {

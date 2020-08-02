@@ -31,8 +31,8 @@ public class ArithmeticInput implements View.OnClickListener {
 
             //if selection is last,
         } else if(selection == storage.getStorage().length()){
-            // and previous symbol is arithmetic, don't add symbol
-            if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1)))){
+            // and previous symbol is arithmetic(except brackets), don't add symbol
+            if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1))) && !Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection-1)))){
                 return;
                 //if not add it
             } else{

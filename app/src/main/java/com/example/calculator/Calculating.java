@@ -1,5 +1,7 @@
 package com.example.calculator;
 
+import android.util.Log;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ class Calculating {
 
         boolean cantCount = false;
         ArrayList<String> chars = storage.refactorStorage();
+        Log.i("proba", chars.toString());
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
             chars.set(x, chars.get(x).replace(",", "."));
