@@ -59,27 +59,30 @@ public class StorageRefactor {
 
         for (int i = 0; i < storage.length(); i++) {
             //If input is a digit, move it to tmp
-            if (Utility.isParseInt(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(","))
-                tmp += storage.charAt(i);
-                //if input isn't a digit
+            if
+            (Utility.isParseInt(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(",")) {
+                tmp = String.valueOf(storage.charAt(i));
+            }
+            //if input is open bracket, move it on stack
             else if (Character.toString(storage.charAt(i)).equals("(")) {
                 stack.add(Character.toString(storage.charAt(i)));
-
+            //if input is closed bracket, move digit from tmp to exit...
             } else if (Character.toString(storage.charAt(i)).equals(")")) {
                 exit.add(tmp);
                 tmp = "";
-
+            // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());
-
                 }
+                // remove open bracket from stack
                 stack.pop();
-
+            // if input is arithmetic symbol
             } else {
+                // move digit from tmp to exit
                 if (!tmp.equals("")) {
                     exit.add(tmp);
                 }
-
+                //if stack is empty, move current symbol to stack
                 if (stack.isEmpty()) {
                     stack.add(Character.toString(storage.charAt(i)));
                     //if stack isn't empty
@@ -97,44 +100,49 @@ public class StorageRefactor {
                             stack.add(Character.toString(storage.charAt(i)));
                             //if last stack  operator has high priority as well,
                         } else {
-                            // adding last arithmetic operator to exit, as long as last arithmetic operator on stack has high priority
+                            // add last arithmetic operator from stac to exit, as long as last arithmetic operator on stack has high priority
                             while (isLowPriority(stack.peek())) {
                                 exit.add(last);
                                 stack.pop();
 
                             }
-                            //when last arithmetic operator on stack has low priority, we adding our arithmetic operator to stack
+                            //when last arithmetic operator on stack has low priority, add our arithmetic operator to stack
                             stack.push(Character.toString(storage.charAt(i)));
 
 
                         }
-
+                        // if our arithmetic operator has low priority.
                     } else {
-                        if(stack.isEmpty() || !isLowPriority(stack.peek())){
-                            stack.push(String.valueOf(storage.charAt(i)));
-
-                        } else{
+                        // move operators from stack to exit until : stack is empty/you find high priority symbol on stack/you find opened bracket on stack
+                        while (!stack.isEmpty() && isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
                             exit.add(stack.pop());
                         }
+                        //then add current symbol to stack
+                        stack.push(String.valueOf(storage.charAt(i)));
+
 
                     }
                 }
+                //reset tmp after digit has already been moved to exit
                 tmp = "";
             }
         }
+        // if current symbol is "=", move everything from stack to exit until stack is empty
         while (!stack.isEmpty()) {
             exit.add(stack.pop());
 
         }
 
+        // CHECK 2+(1,5+2*3) result is 13 instead of 9,5 !!!!!
+
 
         return exit;
     }
 
-    //5*(8-7+9)/5 Check wrong result!!!!!!!
 
 
-    public boolean isLowPriority(String input) {
+
+    private boolean isLowPriority(String input) {
         return input.equals("+") || input.equals("-");
 
     }
