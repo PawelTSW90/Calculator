@@ -133,7 +133,7 @@ public class StorageRefactor {
 
         }
 
-        // CHECK 2+(1,5+2*3) result is 13 instead of 9,5 !!!!!
+        // CHECK 2+(1,5+2*3) result is 13 instead of 9,5 !!!!
 
 
         return exit;
