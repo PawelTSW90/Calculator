@@ -1,5 +1,6 @@
 package com.example.calculator;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,9 +17,13 @@ public class BracketsInput implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         int selection = txt.getSelectionEnd();
-
+        Log.i("proba", ""+storage.getStorage().charAt(selection));
+        //is storage is empty, open bracket
         if (storage.getStorage().isEmpty()) {
             storage.addCharAtPosition(0, "(");
+        //if there is arithmetic symbol at cursor position, and there are no brackets to close, don't do nothing
+        } else if (bracketType().equals("openBracket") && Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection)))){
+            return;
         } else {
 
             if (bracketType().equals("closeBracket")) {

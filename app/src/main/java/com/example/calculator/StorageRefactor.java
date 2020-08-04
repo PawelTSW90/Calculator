@@ -55,21 +55,21 @@ public class StorageRefactor {
     ArrayList<String> refactorStorage() {
         Stack<String> stack = new Stack<>();
         ArrayList<String> exit = new ArrayList<>();
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
 
         for (int i = 0; i < storage.length(); i++) {
             //If input is a digit, move it to tmp
             if
             (Utility.isParseInt(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(",")) {
-                tmp = String.valueOf(storage.charAt(i));
+                tmp.append(String.valueOf(storage.charAt(i)));
             }
             //if input is open bracket, move it on stack
             else if (Character.toString(storage.charAt(i)).equals("(")) {
                 stack.add(Character.toString(storage.charAt(i)));
             //if input is closed bracket, move digit from tmp to exit...
             } else if (Character.toString(storage.charAt(i)).equals(")")) {
-                exit.add(tmp);
-                tmp = "";
+                exit.add(tmp.toString());
+                tmp = new StringBuilder();
             // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());
@@ -79,8 +79,8 @@ public class StorageRefactor {
             // if input is arithmetic symbol
             } else {
                 // move digit from tmp to exit
-                if (!tmp.equals("")) {
-                    exit.add(tmp);
+                if (!tmp.toString().equals("")) {
+                    exit.add(tmp.toString());
                 }
                 //if stack is empty, move current symbol to stack
                 if (stack.isEmpty()) {
@@ -124,7 +124,7 @@ public class StorageRefactor {
                     }
                 }
                 //reset tmp after digit has already been moved to exit
-                tmp = "";
+                tmp = new StringBuilder();
             }
         }
         // if current symbol is "=", move everything from stack to exit until stack is empty
@@ -133,7 +133,7 @@ public class StorageRefactor {
 
         }
 
-        // CHECK 2+(1,5+2*3) result is 13 instead of 9,5 !!!!
+        //
 
 
         return exit;

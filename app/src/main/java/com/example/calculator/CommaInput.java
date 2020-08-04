@@ -78,7 +78,7 @@ public class CommaInput implements View.OnClickListener {
        }
 
         //if previous character is arithmetic symbol, add 0, at selection
-        else if(Utility.containArithmeticSymbol(Character.toString(storage.getStorage().charAt(selection - 1)))){
+        else if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))){
             storage.addCharAtPosition(selection, "0,");;
             this.txt.setSelection(selection + 2);
 
