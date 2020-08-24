@@ -100,8 +100,8 @@ public class StorageRefactor {
                             stack.add(Character.toString(storage.charAt(i)));
                             //if last stack  operator has high priority as well,
                         } else {
-                            // add last arithmetic operator from stac to exit, as long as last arithmetic operator on stack has high priority
-                            while (isLowPriority(stack.peek())) {
+                            // add last arithmetic operator from stack to exit, as long as last arithmetic operator on stack has high priority or the stack is empty
+                            while (!stack.isEmpty() && !isLowPriority(stack.peek())) {
                                 exit.add(last);
                                 stack.pop();
 
@@ -113,8 +113,8 @@ public class StorageRefactor {
                         }
                         // if our arithmetic operator has low priority.
                     } else {
-                        // move operators from stack to exit until : stack is empty/you find high priority symbol on stack/you find opened bracket on stack
-                        while (!stack.isEmpty() && isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
+                        // move operators from stack to exit until : stack is empty/you find low priority symbol on stack/you find opened bracket on stack
+                        while (!stack.isEmpty() && !isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
                             exit.add(stack.pop());
                         }
                         //then add current symbol to stack
