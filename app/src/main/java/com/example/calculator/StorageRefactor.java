@@ -127,8 +127,8 @@ public class StorageRefactor {
                 tmp = new StringBuilder();
             }
         }
-        // if current symbol is "=", move everything from stack to exit until stack is empty
-        while (!stack.isEmpty()) {
+        // at the end, move everything from stack to exit until stack is empty, except "=" sign
+        while (!stack.isEmpty() && !stack.peek().equals("=")) {
             exit.add(stack.pop());
 
         }

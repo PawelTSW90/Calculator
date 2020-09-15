@@ -120,12 +120,14 @@ class Calculating {
 
 
             if(bg2toDouble != 0.0){
-                bigDecimalToString = bigDecimalToString.replace(".", ",");
-                storage.setStorage(bigDecimalToString);
+                BigDecimal tmp = new BigDecimal(bigDecimalToString);
+                String stringValue = tmp.toPlainString();
+                stringValue = stringValue.replace(".", ",");
+                storage.setStorage(stringValue);
 
             } else{
-                int intValue = bigDecimalValue.intValue();
-                String stringValue = String.valueOf(intValue);
+                BigDecimal tmp = new BigDecimal(bigDecimalToString);
+                String stringValue = tmp.toPlainString();
                 storage.setStorage(stringValue);
             }
 

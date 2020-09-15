@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class DigitsInput implements View.OnClickListener {
+
     private EditText txt;
     private StorageRefactor storage;
     private Context context;
@@ -17,6 +18,7 @@ public class DigitsInput implements View.OnClickListener {
     private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 1;
     private final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 2;
     private final int RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED = 3;
+
 
 
     DigitsInput(EditText txt, StorageRefactor storage, Context context) {
@@ -28,9 +30,11 @@ public class DigitsInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Toast toast = Toast.makeText(this.context, "15 digits limit reached", Toast.LENGTH_SHORT);
         //checking if format is correct. If not display toast
         if (characterLimitAfterComma(v) == RESPONSE_15_DIGITS_LIMIT_REACHED) {
-            Toast.makeText(this.context, "15 digits limit reached", Toast.LENGTH_SHORT).show();
+            toast.cancel();
+            toast.show();
         } else if (characterLimitAfterComma(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
             Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
 
