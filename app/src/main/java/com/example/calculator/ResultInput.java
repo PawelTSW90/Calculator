@@ -10,6 +10,7 @@ public class ResultInput implements View.OnClickListener {
     private StorageRefactor storage;
     private Calculating calculating;
     private Context context;
+    Toast toast = null;
 
 
     ResultInput(EditText text, StorageRefactor StorageClass, Calculating calculating, Context context) {
@@ -23,27 +24,44 @@ public class ResultInput implements View.OnClickListener {
     public void onClick(View v) {
         calculating.wrongFormatChecker(storage.getStorage());
 
-        if(storage.getStorage().isEmpty()){
+        if (storage.getStorage().isEmpty()) {
             return;
         }
-         //if there are arithmetic symbols and format is correct start counting
-          if(Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
-              storage.addCharAtPosition(storage.getStorage().length(), "=");
-              txt.setText(calculating.countResult(storage));
-              txt.setSelection(storage.getStorage().length());
+        //if there are arithmetic symbols and format is correct start counting
+        if (Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
+            storage.addCharAtPosition(storage.getStorage().length(), "=");
+            txt.setText(calculating.countResult(storage));
+            txt.setSelection(storage.getStorage().length());
             //if format is wrong, display toast
-        } else if(calculating.wrongFormatChecker(storage.getStorage()) == 1){
-            Toast.makeText(this.context, "Wrong format used", Toast.LENGTH_SHORT).show();
+        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 1) {
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "Wrong format used", Toast.LENGTH_SHORT);
+            toast.show();
             //if 15 digits limit is reached, display toast
-        } else if(calculating.wrongFormatChecker(storage.getStorage()) == 2){
-              Toast.makeText(this.context, "15 digits limit reached", Toast.LENGTH_SHORT).show();
-              //if 10 digits after comma limit is reached, display toast
-          } else if(calculating.wrongFormatChecker(storage.getStorage()) == 3){
-              Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
+        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 2) {
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "15 digits limit reached", Toast.LENGTH_SHORT);
+            toast.show();
+            //if 10 digits after comma limit is reached, display toast
+        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 3) {
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "10 digits after comma limit reached", Toast.LENGTH_SHORT);
+            toast.show();
 
-          } else if(calculating.wrongFormatChecker(storage.getStorage()) == 4){
-              Toast.makeText(this.context, "100 characters limit reached", Toast.LENGTH_SHORT).show();
-          }
+        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 4) {
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
 
     }
 

@@ -14,6 +14,7 @@ public class DigitsInput implements View.OnClickListener {
     private EditText txt;
     private StorageRefactor storage;
     private Context context;
+    Toast toast = null;
 
     private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 1;
     private final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 2;
@@ -26,20 +27,36 @@ public class DigitsInput implements View.OnClickListener {
         this.storage = storage;
         this.context = context;
 
+
     }
 
     @Override
     public void onClick(View v) {
-        Toast toast = Toast.makeText(this.context, "15 digits limit reached", Toast.LENGTH_SHORT);
+
+
+
         //checking if format is correct. If not display toast
         if (characterLimitAfterComma(v) == RESPONSE_15_DIGITS_LIMIT_REACHED) {
-            toast.cancel();
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "15 digits limit reached", Toast.LENGTH_SHORT);
             toast.show();
+
+
         } else if (characterLimitAfterComma(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
-            Toast.makeText(this.context, "10 digits after comma limit reached", Toast.LENGTH_SHORT).show();
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "10 digits after comma limit reached", Toast.LENGTH_SHORT);
+            toast.show();
 
         } else if(characterLimitAfterComma(v) == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED){
-            Toast.makeText(this.context, "100 characters limit reached", Toast.LENGTH_SHORT).show();
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         //0 input
