@@ -127,6 +127,7 @@ class Calculating {
 
             } else{
                 BigDecimal tmp = new BigDecimal(bigDecimalToString);
+                tmp = tmp.stripTrailingZeros();
                 String stringValue = tmp.toPlainString();
                 storage.setStorage(stringValue);
             }

@@ -22,11 +22,18 @@ public class ArithmeticInput implements View.OnClickListener {
     void checkIfEntryAllowed(View v){
         int selection = txt.getSelectionEnd();
 
-        //if storage is empty, don't add symbol
+        //if storage is empty, don't add symbol(except minus)
         if (storage.getStorage().isEmpty()) {
+            if(((Button)v).getText().equals("-")){
+                entryAllowed(v);
+
+            } else
             return;
-            //if storage is not empty, but selection is 0, don't add symbol
-        } else if(selection==0){
+            //if storage is not empty, but selection is 0, don't add symbol(except minus)
+        } else if(selection==0) {
+            if(((Button)v).getText().equals("-")){
+                entryAllowed(v);
+            } else
             return;
 
             //if selection is last,
