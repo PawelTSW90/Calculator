@@ -16,6 +16,7 @@ class Calculating {
     private final int COMMA_SCALE = 10;
     private final int DIGITS_SCALE = 15;
     private final int MAXIMUM_SCALE = 101;
+
     //Before calculating, method check if format is correct. If not, toast are displayed
     int wrongFormatChecker(String expression) {
 
@@ -26,11 +27,11 @@ class Calculating {
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
         //regex check if 15 digit limit is reached
-        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{"+(DIGITS_SCALE+1)+",}.*", expression);
+        boolean fifteenDigitsLimit = Pattern.matches(".*\\d{" + (DIGITS_SCALE + 1) + ",}.*", expression);
         //regex check if 10 digit limit is reached
-        boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{"+(COMMA_SCALE+1)+",}.*", expression);
+        boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{" + (COMMA_SCALE + 1) + ",}.*", expression);
         //regex check if total scale 100 or more characters is reached
-        boolean maximumScaleReached = Pattern.matches(".{"+(MAXIMUM_SCALE)+",}", expression);
+        boolean maximumScaleReached = Pattern.matches(".{" + (MAXIMUM_SCALE) + ",}", expression);
 
         if (formatCheck1 || formatCheck2 || formatCheck3) {
             return WRONG_FORMAT;
@@ -38,11 +39,9 @@ class Calculating {
             return DIGITS_SCALE_REACHED;
         } else if (tenDigitsAfterCommaLimit) {
             return COMMA_SCALE_REACHED;
-        } else if(maximumScaleReached){
+        } else if (maximumScaleReached) {
             return MAXIMUM_SCALE_REACHED;
-        }
-
-        else return RESPONSE_OK;
+        } else return RESPONSE_OK;
 
     }
 
@@ -65,8 +64,8 @@ class Calculating {
                     //adding two values
                 } else if (chars.get(x).equals("+")) {
                     BigDecimal value1, value2, sum;
-                    value1 = new BigDecimal(chars.get(x-2));
-                    value2 = new BigDecimal(chars.get(x-1));
+                    value1 = new BigDecimal(chars.get(x - 2));
+                    value2 = new BigDecimal(chars.get(x - 1));
                     sum = value1.add(value2);
                     chars.set(x - 2, sum.toString());
                     chars.remove(x - 1);
@@ -75,8 +74,8 @@ class Calculating {
                     //subtracting two values
                 } else if (Utility.whatSign(chars.get(x)) == 1) {
                     BigDecimal value1, value2, subtracting;
-                    value1 = new BigDecimal(chars.get(x-2));
-                    value2 = new BigDecimal(chars.get(x-1));
+                    value1 = new BigDecimal(chars.get(x - 2));
+                    value2 = new BigDecimal(chars.get(x - 1));
                     subtracting = value1.subtract(value2);
                     chars.set(x - 2, subtracting.toString());
                     chars.remove(x - 1);
@@ -85,8 +84,8 @@ class Calculating {
                     //multiplying two values
                 } else if (Utility.whatSign(chars.get(x)) == 2) {
                     BigDecimal value1, value2, multiplying;
-                    value1 = new BigDecimal(chars.get(x-2));
-                    value2 = new BigDecimal(chars.get(x-1));
+                    value1 = new BigDecimal(chars.get(x - 2));
+                    value2 = new BigDecimal(chars.get(x - 1));
                     multiplying = value1.multiply(value2);
                     chars.set(x - 2, multiplying.stripTrailingZeros().toPlainString());
                     chars.remove(x - 1);
@@ -95,9 +94,9 @@ class Calculating {
                     //dividing two values
                 } else if (Utility.whatSign(chars.get(x)) == 3) {
                     BigDecimal value1, value2, dividing;
-                    value1 = new BigDecimal(chars.get(x-2));
-                    value2 = new BigDecimal(chars.get(x-1));
-                    dividing = value1.divide(value2,COMMA_SCALE, RoundingMode.HALF_UP);
+                    value1 = new BigDecimal(chars.get(x - 2));
+                    value2 = new BigDecimal(chars.get(x - 1));
+                    dividing = value1.divide(value2, COMMA_SCALE, RoundingMode.HALF_UP);
                     chars.set(x - 2, dividing.stripTrailingZeros().toPlainString());
                     chars.remove(x - 1);
                     chars.remove(x - 1);
@@ -111,26 +110,23 @@ class Calculating {
             return storage.getStorage();
 
         } else {
-            BigDecimal bigDecimalValue, bg2;
-            bigDecimalValue = new BigDecimal(chars.get(chars.size()-1));
-            bg2 = bigDecimalValue.remainder(new BigDecimal(1));
-            double bg2toDouble = bg2.doubleValue();
+            BigDecimal bigDecimalValue;
+            bigDecimalValue = new BigDecimal(chars.get(chars.size() - 1));
             String bigDecimalToString = bigDecimalValue.toString();
-            storage.setStorage(bigDecimalToString);
-
-
-            if(bg2toDouble != 0.0){
-                BigDecimal tmp = new BigDecimal(bigDecimalToString);
-                String stringValue = tmp.toPlainString();
-                stringValue = stringValue.replace(".", ",");
-                storage.setStorage(stringValue);
-
-            } else{
-                BigDecimal tmp = new BigDecimal(bigDecimalToString);
-                tmp = tmp.stripTrailingZeros();
-                String stringValue = tmp.toPlainString();
-                storage.setStorage(stringValue);
+            BigDecimal tmp = new BigDecimal(bigDecimalToString);
+            //workaround for trailingZeros bug with 0 compared value
+            BigDecimal zero = BigDecimal.ZERO;
+            if (tmp.compareTo(zero) == 0) {
+                tmp = zero;
             }
+
+
+
+            tmp = tmp.stripTrailingZeros();
+            String stringValue = tmp.toPlainString();
+            stringValue = stringValue.replace(".", ",");
+
+            storage.setStorage(stringValue);
 
 
         }
