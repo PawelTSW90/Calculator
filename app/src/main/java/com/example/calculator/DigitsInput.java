@@ -208,8 +208,22 @@ public class DigitsInput implements View.OnClickListener {
     public void checkZero(View v){
         String value = ((Button)v).getText().toString();
         int selection = txt.getSelectionEnd();
-        //cursor position 0, storage is not empty, wait
+
+        //cursor position 0, next character is comma, allow 0 input
+        if(selection==0 && String.valueOf(storage.getStorage().charAt(0)).equals(",")){
+            storage.addCharAtPosition(selection,value);
+
+        }
+        //cursor position 0, storage is not empty, no input
         if(selection ==0 && storage.getStorage().length()>0){
+            return;
+        }
+        //current character is 0, previous character is comma, no input
+        else if(String.valueOf(storage.getStorage().charAt(selection)).equals("0") && String.valueOf(storage.getStorage().charAt(selection+1)).equals(",")){
+            return;
+        }
+        //current character is comma, previous character is 0, no input
+        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0") && String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
             return;
         }
         //if there is only 0, wait

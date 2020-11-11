@@ -23,7 +23,7 @@ class Calculating {
         //regex check if arithmetic symbols format is correct
         boolean formatCheck1 = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
         //regex check if commas format is correct
-        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-]).*", expression);
+        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-])|\\D[,]|^[,].*", expression);
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
         //regex check if 15 digit limit is reached
