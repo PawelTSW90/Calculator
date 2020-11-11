@@ -27,7 +27,7 @@ public class ResultInput implements View.OnClickListener {
         if (storage.getStorage().isEmpty()) {
             return;
         }
-        //if there are arithmetic symbols and format is correct start counting
+        //if format is correct start counting
         if (Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
             storage.addCharAtPosition(storage.getStorage().length(), "=");
             txt.setText(calculating.countResult(storage));

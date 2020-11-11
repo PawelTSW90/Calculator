@@ -32,6 +32,7 @@ class Calculating {
         boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{" + (COMMA_SCALE + 1) + ",}.*", expression);
         //regex check if total scale 100 or more characters is reached
         boolean maximumScaleReached = Pattern.matches(".{" + (MAXIMUM_SCALE) + ",}", expression);
+        //regex check
 
         if (formatCheck1 || formatCheck2 || formatCheck3) {
             return WRONG_FORMAT;
@@ -114,21 +115,17 @@ class Calculating {
             bigDecimalValue = new BigDecimal(chars.get(chars.size() - 1));
             String bigDecimalToString = bigDecimalValue.toString();
             BigDecimal tmp = new BigDecimal(bigDecimalToString);
+
             //workaround for trailingZeros bug with 0 compared value
             BigDecimal zero = BigDecimal.ZERO;
             if (tmp.compareTo(zero) == 0) {
                 tmp = zero;
             }
-
-
-
             tmp = tmp.stripTrailingZeros();
             String stringValue = tmp.toPlainString();
             stringValue = stringValue.replace(".", ",");
 
             storage.setStorage(stringValue);
-
-
         }
         return storage.getStorage();
     }
