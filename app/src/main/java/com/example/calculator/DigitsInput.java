@@ -252,12 +252,16 @@ public class DigitsInput implements View.OnClickListener {
 
         } else {
 
-            //if current character is comma and previous character is 0, no input
+            //if current character is comma and previous character is 0, input not allowed
             if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
                 return;
+
+            // if current and previous characters are commas, input not allowed
             } else if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals(",")) {
                 return;
             } else {
+
+            // input allowed
                 storage.addCharAtPosition(selection, value);
 
             }
