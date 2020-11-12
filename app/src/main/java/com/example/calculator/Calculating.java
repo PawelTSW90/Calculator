@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 class Calculating {
+    StorageRefactor storage;
+
+    Calculating(StorageRefactor storage){
+        this.storage = storage;
+    }
     private final int RESPONSE_OK = 0;
     private final int WRONG_FORMAT = 1;
     private final int DIGITS_SCALE_REACHED = 2;
@@ -33,8 +38,7 @@ class Calculating {
         //regex check if total scale 100 or more characters is reached
         boolean maximumScaleReached = Pattern.matches(".{" + (MAXIMUM_SCALE) + ",}", expression);
         //regex check
-
-        if (formatCheck1 || formatCheck2 || formatCheck3) {
+        if (formatCheck1 || formatCheck2 || formatCheck3||!checkBrackets()) {
             return WRONG_FORMAT;
         } else if (fifteenDigitsLimit) {
             return DIGITS_SCALE_REACHED;
@@ -45,12 +49,29 @@ class Calculating {
         } else return RESPONSE_OK;
 
     }
+    //method checking if number of brackets is correct
+    boolean checkBrackets(){
+        int openedBrackets = 0;
+        int closedBrackets = 0;
+
+        for(int x=0; x<=storage.getStorage().length()-1; x++){
+            if(String.valueOf(storage.getStorage().charAt(x)).equals("(")){
+                openedBrackets++;
+            }
+            if(String.valueOf(storage.getStorage().charAt(x)).equals(")")){
+                closedBrackets++;
+            }
+        }
+        return openedBrackets == closedBrackets;
+
+    }
 
     //Method is calling refactorStorage method to prepare storage for calculating,
     //and start counting
     String countResult(StorageRefactor storage) {
 
         boolean cantCount = false;
+        storage.changeStorage();
         ArrayList<String> chars = storage.refactorStorage();
         Log.i("proba", chars.toString());
         //replace "," for "." for calculating

@@ -1,10 +1,13 @@
 package com.example.calculator;
 
 
+import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StorageRefactor {
     private String storage = "";
@@ -52,7 +55,24 @@ public class StorageRefactor {
         txt.setSelection(0);
     }
 
+
+    void changeStorage(){
+
+        String storage = getStorage();
+        Pattern myPattern = Pattern.compile("-\\d+$");
+        Matcher match = myPattern.matcher(storage);
+
+        while (match.find()){
+            Log.d("check",""+ match.start()+"-"+ match.end());
+        }
+
+
+    }
+
     ArrayList<String> refactorStorage() {
+
+
+
         Stack<String> stack = new Stack<>();
         ArrayList<String> exit = new ArrayList<>();
         StringBuilder tmp = new StringBuilder();

@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final EditText txt = findViewById(R.id.text_Edit);
-        Calculating calculating = new Calculating();
         StorageRefactor storage = new StorageRefactor(txt);
+        Calculating calculating = new Calculating(storage);
 
         //disable system keyboard
         txt.setShowSoftInputOnFocus(false);

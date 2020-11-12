@@ -19,7 +19,7 @@ public class DigitsInput implements View.OnClickListener {
     private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 1;
     private final int RESPONSE_LIMIT_AFTER_COMMA_REACHED = 2;
     private final int RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED = 3;
-
+    private final int RESPONSE_WRONG_FORMAT_USED = 4;
 
 
     DigitsInput(EditText txt, StorageRefactor storage, Context context) {
@@ -34,9 +34,8 @@ public class DigitsInput implements View.OnClickListener {
     public void onClick(View v) {
 
 
-
         //checking if format is correct. If not display toast
-        if (characterLimitAfterComma(v) == RESPONSE_15_DIGITS_LIMIT_REACHED) {
+        if (wrongFormatChecker(v) == RESPONSE_15_DIGITS_LIMIT_REACHED) {
             if (toast != null) {
                 toast.cancel();
             }
@@ -44,23 +43,25 @@ public class DigitsInput implements View.OnClickListener {
             toast.show();
 
 
-        } else if (characterLimitAfterComma(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
+        } else if (wrongFormatChecker(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
             if (toast != null) {
                 toast.cancel();
             }
             toast = Toast.makeText(context, "10 digits after comma limit reached", Toast.LENGTH_SHORT);
             toast.show();
 
-        } else if(characterLimitAfterComma(v) == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED){
+        } else if (wrongFormatChecker(v) == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED) {
             if (toast != null) {
                 toast.cancel();
             }
             toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
             toast.show();
+        } else if (wrongFormatChecker(v) == RESPONSE_WRONG_FORMAT_USED) {
+            return;
         }
 
         //0 input
-        else if(((Button)v).getText().toString().equals("0")){
+        else if (((Button) v).getText().toString().equals("0")) {
             checkZero(v);
         }
         // other digits input
@@ -71,7 +72,7 @@ public class DigitsInput implements View.OnClickListener {
 
 
     //Method blocking entering more than 15 digits between arithmetic operators or 10 digits after comma
-    public int characterLimitAfterComma(View v) {
+    public int wrongFormatChecker(View v) {
         int ENTRY_ALLOWED = 0;
         int selection = txt.getSelectionEnd();
         int substringStart = 0;
@@ -107,22 +108,27 @@ public class DigitsInput implements View.OnClickListener {
         boolean tmpCharacterLimit = Pattern.matches(".*\\d{14,}.*", substring);
         boolean tmpCharacterLimitAfterComma = Pattern.matches(".*,\\d{9,}.*", substring);
         boolean tmp100CharactersLimit = Pattern.matches(".{100,}", storage.getStorage());
+        boolean tmpTwoCommas = Pattern.matches(".*,,.*", storage.getStorage());
 
         if (tmpCharacterLimit) {
             return RESPONSE_15_DIGITS_LIMIT_REACHED;
         } else if (tmpCharacterLimitAfterComma) {
             return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
-        } else if(tmp100CharactersLimit){
-            return  RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED;
+        } else if (tmp100CharactersLimit) {
+            return RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED;
+        } else if (tmpTwoCommas) {
+            return RESPONSE_WRONG_FORMAT_USED;
         } else
-        return ENTRY_ALLOWED;
+
+            return ENTRY_ALLOWED;
 
     }
-            //method return first no-digit entry after cursor, or -1 if operator is not found
+
+    //method return first no-digit entry after cursor, or -1 if operator is not found
     int getNearestRightSubstringEnd(String str, int cursor, ArrayList<String> substringList) {
         int nearestRightOperator = str.length();
         boolean operatorFound = false;
-            //
+        //
         for (String element : substringList) {
             int tmp2 = str.indexOf(element, cursor);
             if ((tmp2 < nearestRightOperator) && (tmp2 != -1)) {
@@ -135,7 +141,8 @@ public class DigitsInput implements View.OnClickListener {
 
         return nearestRightOperator;
     }
-            // method returns first no-digit entry before cursor, or -1 if operator is not found
+
+    // method returns first no-digit entry before cursor, or -1 if operator is not found
     int getNearestLeftSubstringStart(String str, int cursor, ArrayList<String> substringList) {
         int nearestLeftOperator = -1;
         for (String element : substringList) {
@@ -150,8 +157,8 @@ public class DigitsInput implements View.OnClickListener {
         return nearestLeftOperator;
     }
 
-            //digit input except 0
-    private  void digitEntry(View v) {
+    //digit input except 0
+    private void digitEntry(View v) {
 
         int selection = txt.getSelectionEnd();
         String value = ((Button) v).getText().toString();
@@ -166,7 +173,7 @@ public class DigitsInput implements View.OnClickListener {
             storage.addCharAtPosition(selection, value);
         }
         //if there is just zero in storage, and cursor is placed after it, replace 0 with new digit
-        else if((storage.getStorage().length()==1)&&String.valueOf(storage.getStorage().charAt(0)).equals("0")){
+        else if ((storage.getStorage().length() == 1) && String.valueOf(storage.getStorage().charAt(0)).equals("0")) {
             storage.removeCharAtPosition(0);
             storage.addCharAtPosition(0, value);
             txt.setSelection(1);
@@ -174,7 +181,7 @@ public class DigitsInput implements View.OnClickListener {
         }
 
         //if previous value is "0" and next value is comma, replace zero with new digit if it's different than 0
-        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")&& selection<storage.getStorage().length() &&String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
+        else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0") && selection < storage.getStorage().length() && String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
             storage.removeCharAtPosition(selection - 1);
             storage.addCharAtPosition(selection - 1, value);
 
@@ -196,55 +203,71 @@ public class DigitsInput implements View.OnClickListener {
             storage.addCharAtPosition(selection - 1, value);
 
             txt.setSelection(storage.getStorage().length());
-        }
-
-
-        else {
+        } else {
             storage.addCharAtPosition(selection, value);
 
         }
     }
+
     // 0 digit input
-    public void checkZero(View v){
-        String value = ((Button)v).getText().toString();
+    public void checkZero(View v) {
+        String value = ((Button) v).getText().toString();
         int selection = txt.getSelectionEnd();
+        //cursor at position 0:
+        if (selection == 0) {
+            //if storage is empty - input allowed
+            if (storage.getStorage().isEmpty()) {
+                storage.addCharAtPosition(selection, value);
 
-        //cursor position 0, next character is comma, allow 0 input
-        if(selection==0 && String.valueOf(storage.getStorage().charAt(0)).equals(",")){
-            storage.addCharAtPosition(selection,value);
+            }
+            //if next character is comma, input allowed
+            else if (String.valueOf(storage.getStorage().charAt(0)).equals(",")) {
+                storage.addCharAtPosition(selection, value);
 
-        }
-        //cursor position 0, storage is not empty, no input
-        if(selection ==0 && storage.getStorage().length()>0){
-            return;
-        }
-        //current character is 0, previous character is comma, no input
-        else if(String.valueOf(storage.getStorage().charAt(selection)).equals("0") && String.valueOf(storage.getStorage().charAt(selection+1)).equals(",")){
-            return;
-        }
-        //current character is comma, previous character is 0, no input
-        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("0") && String.valueOf(storage.getStorage().charAt(selection)).equals(",")){
-            return;
-        }
-        //if there is only 0, wait
-        else if((storage.getStorage().length()==1 && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0"))){
-            return;
-        }
+            }
 
-        else if(selection<3){
-            storage.addCharAtPosition(selection,value);
-
-        }
-        //if previous character is 0, and there is arithmetic symbol two characters back, don't do nothing
-        else if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection-2))) && String.valueOf(storage.getStorage().charAt(selection-1)).equals("0")){
-            return;
-        }
+            //otherwise, input not allowed
 
 
-        else {
-            storage.addCharAtPosition(selection,value);
+        }
+        //cursor position as last, storage smaller than 2:
+        else if (storage.getStorage().length() < 2 && selection == storage.getStorage().length()) {
+
+            //input allowed
+
+            storage.addCharAtPosition(selection, value);
 
         }
+
+        //cursor positioned as last:
+        else if (selection == storage.getStorage().length()) {
+
+            //if previous character is 0, and there is arithmetic symbol two characters back, input not allowed
+            if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
+                return;
+            } else {
+                //input allowed
+                storage.addCharAtPosition(selection, value);
+            }
+
+        } else {
+
+            //if current character is comma and previous character is 0, no input
+            if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
+                return;
+            } else if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals(",")) {
+                return;
+            } else {
+                storage.addCharAtPosition(selection, value);
+
+            }
+
+        }
+
+
     }
 
+
 }
+
+
