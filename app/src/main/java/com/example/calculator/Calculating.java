@@ -71,8 +71,8 @@ class Calculating {
     String countResult(StorageRefactor storage) {
 
         boolean cantCount = false;
-        storage.changeStorage();
         ArrayList<String> chars = storage.refactorStorage();
+        chars.clear();
         Log.i("proba", chars.toString());
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {

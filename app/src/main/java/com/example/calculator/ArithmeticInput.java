@@ -19,36 +19,59 @@ public class ArithmeticInput implements View.OnClickListener {
         checkIfEntryAllowed(v);
     }
 
-    void checkIfEntryAllowed(View v){
+    void checkIfEntryAllowed(View v) {
         int selection = txt.getSelectionEnd();
 
-        //if storage is empty, don't add symbol(except minus)
+        //if storage is empty, arithmetic not allowed (except minus)
         if (storage.getStorage().isEmpty()) {
-            if(((Button)v).getText().equals("-")){
-                entryAllowed(v);
-
-            } else
-            return;
-            //if storage is not empty, but selection is 0, don't add symbol(except minus)
-        } else if(selection==0) {
-            if(((Button)v).getText().equals("-")){
-                entryAllowed(v);
-            } else
-            return;
-
-            //if selection is last,
-        } else if(selection == storage.getStorage().length()){
-            // and previous symbol is arithmetic(except brackets), don't add symbol
-            if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1))) && !Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection-1)))){
+            if (!((Button) v).getText().equals("-")) {
                 return;
-                //if not add it
-            } else{
+            } else {
                 entryAllowed(v);
             }
-            //if previous or current character arithmetic symbol(except brackets), don't add symbol
-        } else if(!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection-1))) || (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(selection)))) && (!Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection-1)))) && (!Utility.isBracket(String.valueOf(storage.getStorage().charAt(selection))))){
+        }
+
+        //if selection = 0, arithmetic not allowed (except minus when next symbol is digit)
+        if (selection == 0) {
+            if (!(Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection))))) {
+                return;
+
+            } else {
+                if (((Button) v).getText().equals("-")) {
+                    entryAllowed(v);
+                } else {
+                    return;
+                }
+            }
+
+
+
+            //if selection is last,
+        } else if (selection == storage.getStorage().length()) {
+            // and previous symbol is arithmetic, don't add symbol
+            if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
+                return;
+                //if previous symbol is opened bracket, only minus is allowed
+            } else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("(")) {
+                if (((Button) v).getText().toString().equals("-")) {
+                    entryAllowed(v);
+                } else {
+                    return;
+                }
+                //otherwise arithmetic symbols are allowed
+            } else {
+                entryAllowed(v);
+            }
+            //if previous or current symbols are arithmetic, input not allowed
+        } else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1))) || (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection))))) {
             return;
-        } else {
+
+        } else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("(")) {
+            if (((Button) v).getText().toString().equals("-")) {
+                entryAllowed(v);
+            }
+        }
+        else {
             entryAllowed(v);
 
         }
@@ -56,9 +79,9 @@ public class ArithmeticInput implements View.OnClickListener {
     }
 
     void entryAllowed(View v) {
-        String tmp = ((Button)v).getText().toString();
+        String tmp = ((Button) v).getText().toString();
         int selection = txt.getSelectionEnd();
-        storage.addCharAtPosition(selection,tmp);
+        storage.addCharAtPosition(selection, tmp);
 
     }
 

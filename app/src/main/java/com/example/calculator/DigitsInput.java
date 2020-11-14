@@ -168,6 +168,11 @@ public class DigitsInput implements View.OnClickListener {
             storage.addCharAtPosition(0, value);
         }
 
+        else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals(")")){
+            storage.addCharAtPosition(selection, "×");
+            storage.addCharAtPosition(selection, value);?????? odwrotnie
+        }
+
         //if cursor is at the beginning, and storage contains some characters, insert digit as a first one
         else if ((selection == 0) && storage.getStorage().length() >= 1) {
             storage.addCharAtPosition(selection, value);

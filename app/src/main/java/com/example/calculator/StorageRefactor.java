@@ -1,13 +1,10 @@
 package com.example.calculator;
 
 
-import android.util.Log;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StorageRefactor {
     private String storage = "";
@@ -56,19 +53,38 @@ public class StorageRefactor {
     }
 
 
-    void changeStorage(){
-
+    /*void changeStorage(){
+StringBuilder tmpStorage = new StringBuilder().append(storage);
         String storage = getStorage();
-        Pattern myPattern = Pattern.compile("-\\d+$");
+        Pattern myPattern = Pattern.compile("-\\d+");
         Matcher match = myPattern.matcher(storage);
+        List<ArrayList<Integer>> storageList = new ArrayList<>();
 
         while (match.find()){
             Log.d("check",""+ match.start()+"-"+ match.end());
+            ArrayList<Integer> tmpList = new ArrayList<>();
+            tmpList.add(match.start());
+            tmpList.add(match.end());
+            storageList.add(tmpList);
+            Log.d("check", "" + storageList);
         }
+        StringBuilder storageTmp = new StringBuilder(getStorage());
+        storageTmp.insert(5, ")");
+        storageTmp.insert(3, "(0");
+        storageTmp.insert(3, ")");
+        storageTmp.insert(1, "(0");
+        Log.d("check", "" + storageTmp);
+        setStorage(storageTmp.toString());
+
+
 
 
     }
 
+
+
+
+     */
     ArrayList<String> refactorStorage() {
 
 
@@ -154,7 +170,6 @@ public class StorageRefactor {
         }
 
         //
-
 
         return exit;
     }
