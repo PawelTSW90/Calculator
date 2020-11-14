@@ -4,6 +4,7 @@ package com.example.calculator;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class StorageRefactor {
@@ -88,79 +89,99 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
     ArrayList<String> refactorStorage() {
 
 
-
         Stack<String> stack = new Stack<>();
         ArrayList<String> exit = new ArrayList<>();
         StringBuilder tmp = new StringBuilder();
 
         for (int i = 0; i < storage.length(); i++) {
+            String currentChar = Character.toString(storage.charAt(i));
             //If input is a digit, move it to tmp
             if
-            (Utility.isParseInt(Character.toString(storage.charAt(i))) || Character.toString(storage.charAt(i)).equals(",")) {
+            (Utility.isParseInt(currentChar) || currentChar.equals(",")) {
                 tmp.append(storage.charAt(i));
             }
             //if input is open bracket, move it on stack
-            else if (Character.toString(storage.charAt(i)).equals("(")) {
-                stack.add(Character.toString(storage.charAt(i)));
-            //if input is closed bracket, move digit from tmp to exit...
-            } else if (Character.toString(storage.charAt(i)).equals(")")) {
+            else if (currentChar.equals("(")) {
+                stack.add(currentChar);
+                //if input is closed bracket, move digit from tmp to exit...
+            } else if (currentChar.equals(")")) {
                 exit.add(tmp.toString());
                 tmp = new StringBuilder();
-            // move everything from stack to exit, until you get open bracket...
+                // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());
                 }
                 // remove open bracket from stack
                 stack.pop();
-            // if input is arithmetic symbol
+                // if input is arithmetic symbol
             } else {
-                // move digit from tmp to exit
-                if (!tmp.toString().equals("")) {
-                    exit.add(tmp.toString());
-                }
-                //if stack is empty, move current symbol to stack
-                if (stack.isEmpty()) {
-                    stack.add(Character.toString(storage.charAt(i)));
-                    //if stack isn't empty
+
+                //if input is "-" and it's first character in storage, add "NEG" to stack so its used for next number negation
+                if (currentChar.equals("-") && tmp.length() == 0) {
+                    stack.add("NEG");
                 } else {
-                    //declare last arithmetic operator on stack as last
-                    String last = stack.peek();
-                    if (Character.toString(storage.charAt(i)).equals("=")) {
-                        continue;
+
+
+                    //add negative number from stack to exit, if NEG is on peek's top
+
+                    try {
+                        if (stack.peek().equals("NEG")) {
+                            exit.add("-" + tmp.toString());
+                            stack.pop();
+                            tmp = new StringBuilder();
+
+                        }
+                    } catch (EmptyStackException e) {
+                        //ELSE
                     }
-                    //if our arithmetic operator has high priority,
-                    if (!isLowPriority(Character.toString(storage.charAt(i)))) {
-                        // and last operator has lower priority,
-                        if (isLowPriority(last)) {
-                            //add our operator on stack
-                            stack.add(Character.toString(storage.charAt(i)));
-                            //if last stack  operator has high priority as well,
-                        } else {
-                            // add last arithmetic operator from stack to exit until: stack is empty/you will find high priority symbol on stack/open bracket
-                            while (!stack.isEmpty() && !isLowPriority(stack.peek())&& !stack.peek().equals("(")) {
-                                exit.add(last);
-                                stack.pop();
+                    // move digit from tmp to exit
+                    if (!tmp.toString().equals("")) {
+                        exit.add(tmp.toString());
+                    }
+                    //if stack is empty, move current symbol to stack
+                    if (stack.isEmpty()) {
+                        stack.add(currentChar);
+                        //if stack isn't empty
+                    } else {
+                        //declare last arithmetic operator on stack as last
+                        String last = stack.peek();
+                        if (currentChar.equals("=")) {
+                            continue;
+                        }
+                        //if our arithmetic operator has high priority,
+                        if (!isLowPriority(currentChar)) {
+                            // and last operator has lower priority,
+                            if (isLowPriority(last)) {
+                                //add our operator on stack
+                                stack.add(currentChar);
+                                //if last stack  operator has high priority as well,
+                            } else {
+                                // add last arithmetic operator from stack to exit until: stack is empty/you will find high priority symbol on stack/open bracket
+                                while (!stack.isEmpty() && !isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
+                                    exit.add(last);
+                                    stack.pop();
+
+                                }
+                                //when last arithmetic operator on stack has low priority, add our arithmetic operator to stack
+                                stack.push(currentChar);
+
 
                             }
-                            //when last arithmetic operator on stack has low priority, add our arithmetic operator to stack
-                            stack.push(Character.toString(storage.charAt(i)));
+                            // if our arithmetic operator has low priority.
+                        } else {
+                            // move operators from stack to exit until : stack is empty/you find low priority symbol on stack/open bracket
+                            while (!stack.isEmpty() && !isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
+                                exit.add(stack.pop());
+                            }
+                            //then add current symbol to stack
+                            stack.push(currentChar);
 
 
                         }
-                        // if our arithmetic operator has low priority.
-                    } else {
-                        // move operators from stack to exit until : stack is empty/you find low priority symbol on stack/open bracket
-                        while (!stack.isEmpty() && !isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
-                            exit.add(stack.pop());
-                        }
-                        //then add current symbol to stack
-                        stack.push(String.valueOf(storage.charAt(i)));
-
-
                     }
+                    //reset tmp after digit has already been moved to exit
+                    tmp = new StringBuilder();
                 }
-                //reset tmp after digit has already been moved to exit
-                tmp = new StringBuilder();
             }
         }
         // at the end, move everything from stack to exit until stack is empty, except "=" sign
@@ -173,8 +194,6 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
 
         return exit;
     }
-
-
 
 
     private boolean isLowPriority(String input) {

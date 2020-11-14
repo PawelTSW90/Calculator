@@ -167,10 +167,11 @@ public class DigitsInput implements View.OnClickListener {
         if (storage.getStorage().length() == 0) {
             storage.addCharAtPosition(0, value);
         }
-
+        //if previous character is closed bracket, add "x" before new digit
         else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals(")")){
+            storage.addCharAtPosition(selection, value);
             storage.addCharAtPosition(selection, "×");
-            storage.addCharAtPosition(selection, value);?????? odwrotnie
+
         }
 
         //if cursor is at the beginning, and storage contains some characters, insert digit as a first one

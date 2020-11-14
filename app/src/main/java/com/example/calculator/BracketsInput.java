@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -23,13 +22,15 @@ public class BracketsInput implements View.OnClickListener {
 
         }
          else {
-            Log.i("check", "" + storage.getStorage().charAt(selection-1));
+            //close bracket input
             if (bracketType().equals("closeBracket")) {
                 storage.addCharAtPosition(selection, ")");
             } else {
+                //open bracket input
                 if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection-1)))){
                     storage.addCharAtPosition(selection, "(");
                 } else {
+                    //open bracket with multiply symbol input
                     storage.addCharAtPosition(selection, "×(");
                     txt.setSelection(selection + 2);
                 }
@@ -37,7 +38,7 @@ public class BracketsInput implements View.OnClickListener {
 
         }
     }
-
+        //method checking what type of bracket has to be input
     String bracketType() {
         boolean closeBracket = false;
         int substringStart = 0;

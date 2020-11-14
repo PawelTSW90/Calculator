@@ -33,9 +33,8 @@ public class DeleteInput implements View.OnClickListener {
 
             if (selection == 0) {
                 return;
-                
-
-            }  else {
+            }
+            else {
                 storage.removeCharAtPosition(selection - 1);
 
             }
