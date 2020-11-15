@@ -72,7 +72,7 @@ class Calculating {
 
         boolean cantCount = false;
         ArrayList<String> chars = storage.refactorStorage();
-
+        
         Log.i("proba", chars.toString());
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {

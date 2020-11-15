@@ -103,10 +103,20 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
             //if input is open bracket, move it on stack
             else if (currentChar.equals("(")) {
                 stack.add(currentChar);
-                //if input is closed bracket, move digit from tmp to exit...
+                //if input is closed bracket,
             } else if (currentChar.equals(")")) {
-                exit.add(tmp.toString());
-                tmp = new StringBuilder();
+
+                //if stack peek is "NEG", negate previous number and move it to exit
+                if (stack.peek().equals("NEG")) {
+                    exit.add("-" + tmp.toString());
+                    stack.pop();
+                    tmp = new StringBuilder();
+
+                } else {
+                    // move number from tmp to exit...
+                    exit.add(tmp.toString());
+                    tmp = new StringBuilder();
+                }
                 // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());
@@ -116,13 +126,13 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
                 // if input is arithmetic symbol
             } else {
 
-                //if input is "-" and it's first character in storage, add "NEG" to stack so its used for next number negation
+                //if input is "-" and it's first character in storage, add "NEG" to stack
                 if (currentChar.equals("-") && tmp.length() == 0) {
                     stack.add("NEG");
                 } else {
 
 
-                    //add negative number from stack to exit, if NEG is on peek's top
+                    //if current character is arithmetic, and "NEG" is on top of the stack, negate previous number
 
                     try {
                         if (stack.peek().equals("NEG")) {
@@ -132,9 +142,8 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
 
                         }
                     } catch (EmptyStackException e) {
-                        //ELSE
+
                     }
-                    // move digit from tmp to exit
                     if (!tmp.toString().equals("")) {
                         exit.add(tmp.toString());
                     }
@@ -170,7 +179,7 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
                             // if our arithmetic operator has low priority.
                         } else {
                             // move operators from stack to exit until : stack is empty/you find low priority symbol on stack/open bracket
-                            while (!stack.isEmpty() && !isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
+                            while (!stack.isEmpty() && isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
                                 exit.add(stack.pop());
                             }
                             //then add current symbol to stack

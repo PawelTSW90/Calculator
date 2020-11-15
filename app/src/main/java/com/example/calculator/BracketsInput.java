@@ -20,25 +20,26 @@ public class BracketsInput implements View.OnClickListener {
         if (storage.getStorage().isEmpty()) {
             storage.addCharAtPosition(0, "(");
 
-        }
-         else {
+        } else {
             //close bracket input
             if (bracketType().equals("closeBracket")) {
                 storage.addCharAtPosition(selection, ")");
-            } else {
                 //open bracket input
-                if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection-1)))){
-                    storage.addCharAtPosition(selection, "(");
-                } else {
-                    //open bracket with multiply symbol input
-                    storage.addCharAtPosition(selection, "×(");
-                    txt.setSelection(selection + 2);
-                }
-            }
+            } else if (bracketType().equals("openBracket")) {
+                storage.addCharAtPosition(selection, "(");
 
+
+            } else {
+                //open bracket with multiply symbol input
+                storage.addCharAtPosition(selection, "×(");
+                txt.setSelection(selection + 2);
+            }
         }
+
     }
-        //method checking what type of bracket has to be input
+
+
+    //method checking what type of bracket has to be input
     String bracketType() {
         boolean closeBracket = false;
         int substringStart = 0;
