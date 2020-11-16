@@ -73,25 +73,20 @@ public class CommaInput implements View.OnClickListener {
         //initialize selection position
         int selection = txt.getSelectionEnd();
 
+        //if selection is 0, add ",0"
        if(selection == 0){
            storage.addCharAtPosition(0, "0,");
        }
 
-        //if previous character is arithmetic symbol, add 0, at selection
+        //if previous character is arithmetic symbol, add 0,
         else if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))){
             storage.addCharAtPosition(selection, "0,");;
             this.txt.setSelection(selection + 2);
 
         } else {
            storage.addCharAtPosition(selection, ",");
-           int length = storage.getStorage().length() - 1;
-           // if selection position is bigger than storage length, set it after last value
-           if (selection > length) {
-               txt.setSelection(length + 1);
-               //set selection position after last added value
-           } else {
-               txt.setSelection(selection + 1);
-           }
+           txt.setSelection(selection + 1);
+
        }
     }
 

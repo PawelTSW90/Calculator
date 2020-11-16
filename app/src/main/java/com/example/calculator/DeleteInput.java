@@ -18,37 +18,35 @@ public class DeleteInput implements View.OnClickListener {
     @Override
 
     public void onClick(View v) {
+        int selection = txt.getSelectionEnd();
         String input = ((Button) v).getText().toString();
         if (input.equals("⌫")) {
-            deleteMethod();
+            deleteChar(selection);
         } else {
-            deleteAllMethod();
+            deleteAll();
         }
     }
 
     //Method  deleting one character
-    void deleteMethod() {
+    void deleteChar(int position) {
         try {
-            int selection = txt.getSelectionEnd();
+            StringBuilder tempStorage = new StringBuilder(storage.getStorage());
+            tempStorage = tempStorage.deleteCharAt(position-1);
+            storage.setStorage(tempStorage.toString());
+            txt.setText(storage.getStorage());
+            txt.setSelection(position-1);
 
-            if (selection == 0) {
-                return;
-            }
-            else {
-                storage.removeCharAtPosition(selection - 1);
+        } catch (IndexOutOfBoundsException e) {
 
-            }
-
-        } catch (IndexOutOfBoundsException e){
-            int selection = txt.getSelectionEnd();
-            storage.removeCharAtPosition(selection - 1);
         }
+
     }
 
     //Method clearing all storage
-    void deleteAllMethod() {
-        storage.clearStorage();
-
+    void deleteAll() {
+        storage.setStorage("");
+        txt.setSelection(0);
+        txt.setText(storage.getStorage());
 
     }
 }

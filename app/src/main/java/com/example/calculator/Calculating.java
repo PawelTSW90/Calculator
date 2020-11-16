@@ -130,7 +130,7 @@ class Calculating {
         }
 
         if (cantCount) {
-            storage.removeCharAtPosition(storage.getStorage().charAt(storage.getStorage().length() - 1));
+            storage.setStorage("");
             return storage.getStorage();
 
         } else {
@@ -144,6 +144,7 @@ class Calculating {
             if (tmp.compareTo(zero) == 0) {
                 tmp = zero;
             }
+            //removing trailing zeros from result, changing back "." into "," and return final result
             tmp = tmp.stripTrailingZeros();
             String stringValue = tmp.toPlainString();
             stringValue = stringValue.replace(".", ",");

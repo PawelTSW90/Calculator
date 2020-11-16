@@ -14,6 +14,7 @@ public class DigitsInput implements View.OnClickListener {
     private EditText txt;
     private StorageRefactor storage;
     private Context context;
+    private DeleteInput delete;
     Toast toast = null;
 
     private final int RESPONSE_15_DIGITS_LIMIT_REACHED = 1;
@@ -22,10 +23,11 @@ public class DigitsInput implements View.OnClickListener {
     private final int RESPONSE_WRONG_FORMAT_USED = 4;
 
 
-    DigitsInput(EditText txt, StorageRefactor storage, Context context) {
+    DigitsInput(EditText txt, StorageRefactor storage, Context context, DeleteInput delete) {
         this.txt = txt;
         this.storage = storage;
         this.context = context;
+        this.delete = delete;
 
 
     }
@@ -35,6 +37,8 @@ public class DigitsInput implements View.OnClickListener {
 
 
         //checking if format is correct. If not display toast
+
+        //15 digits limit reached toast
         if (wrongFormatChecker(v) == RESPONSE_15_DIGITS_LIMIT_REACHED) {
             if (toast != null) {
                 toast.cancel();
@@ -42,7 +46,7 @@ public class DigitsInput implements View.OnClickListener {
             toast = Toast.makeText(context, "15 digits limit reached", Toast.LENGTH_SHORT);
             toast.show();
 
-
+        //10 digits after comma limit reached toast
         } else if (wrongFormatChecker(v) == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
             if (toast != null) {
                 toast.cancel();
@@ -50,6 +54,7 @@ public class DigitsInput implements View.OnClickListener {
             toast = Toast.makeText(context, "10 digits after comma limit reached", Toast.LENGTH_SHORT);
             toast.show();
 
+            //100 characters limit reached toast
         } else if (wrongFormatChecker(v) == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED) {
             if (toast != null) {
                 toast.cancel();
@@ -60,11 +65,13 @@ public class DigitsInput implements View.OnClickListener {
             return;
         }
 
-        //0 input
+        //if format is correct:
+
+        //check if 0 entry is allowed
         else if (((Button) v).getText().toString().equals("0")) {
             checkZero(v);
         }
-        // other digits input
+        // check if other digits entry is allowed
         else {
             digitEntry(v);
         }
@@ -124,11 +131,11 @@ public class DigitsInput implements View.OnClickListener {
 
     }
 
-    //method return first no-digit entry after cursor, or -1 if operator is not found
+    //method returns first no-digit entry after cursor, or -1 if operator is not found
     int getNearestRightSubstringEnd(String str, int cursor, ArrayList<String> substringList) {
         int nearestRightOperator = str.length();
         boolean operatorFound = false;
-        //
+
         for (String element : substringList) {
             int tmp2 = str.indexOf(element, cursor);
             if ((tmp2 < nearestRightOperator) && (tmp2 != -1)) {
@@ -157,7 +164,7 @@ public class DigitsInput implements View.OnClickListener {
         return nearestLeftOperator;
     }
 
-    //digit input except 0
+        // method is checking if no-0 digit input is allowed
     private void digitEntry(View v) {
 
         int selection = txt.getSelectionEnd();
@@ -174,10 +181,9 @@ public class DigitsInput implements View.OnClickListener {
 
         }
 
-
         //if there is just zero in storage, and cursor is placed after it, replace 0 with new digit
         else if ((storage.getStorage().length() == 1) && String.valueOf(storage.getStorage().charAt(0)).equals("0")) {
-            storage.removeCharAtPosition(0);
+            delete.deleteChar(selection);
             storage.addCharAtPosition(0, currentValue);
             txt.setSelection(1);
 
@@ -185,11 +191,9 @@ public class DigitsInput implements View.OnClickListener {
 
         //if previous currentValue is "0" and next currentValue is comma, replace zero with new digit if it's different than 0
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0") && selection < storage.getStorage().length() && String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
-            storage.removeCharAtPosition(selection - 1);
+            delete.deleteChar(selection-1);
             storage.addCharAtPosition(selection - 1, currentValue);
-
             txt.setSelection(selection);
-
         }
 
         //if previous character is not zero, insert new digit
@@ -202,10 +206,8 @@ public class DigitsInput implements View.OnClickListener {
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
-            storage.removeCharAtPosition(selection - 1);
+            delete.deleteChar(selection);
             storage.addCharAtPosition(selection - 1, currentValue);
-
-            txt.setSelection(storage.getStorage().length());
         } else {
             storage.addCharAtPosition(selection, currentValue);
 
@@ -216,7 +218,8 @@ public class DigitsInput implements View.OnClickListener {
     public void checkZero(View v) {
         String value = ((Button) v).getText().toString();
         int selection = txt.getSelectionEnd();
-        //cursor at position 0:
+        //if cursor is at position 0:
+
         if (selection == 0) {
             //if storage is empty - input allowed
             if (storage.getStorage().isEmpty()) {
@@ -234,6 +237,7 @@ public class DigitsInput implements View.OnClickListener {
 
         }
         //cursor position as last, storage smaller than 2:
+
         else if (storage.getStorage().length() < 2 && selection == storage.getStorage().length()) {
 
             //input allowed
@@ -243,6 +247,7 @@ public class DigitsInput implements View.OnClickListener {
         }
 
         //cursor positioned as last:
+
         else if (selection == storage.getStorage().length()) {
 
             //if previous character is 0, and there is arithmetic symbol two characters back, input not allowed
@@ -254,6 +259,7 @@ public class DigitsInput implements View.OnClickListener {
             }
 
         } else {
+            //cursor positioned in the middle:
 
             //if current character is comma and previous character is 0, input not allowed
             if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
