@@ -161,35 +161,32 @@ public class DigitsInput implements View.OnClickListener {
     private void digitEntry(View v) {
 
         int selection = txt.getSelectionEnd();
-        String value = ((Button) v).getText().toString();
+        String currentValue = ((Button) v).getText().toString();
 
-        //if storage is empty, insert new digit
-        if (storage.getStorage().length() == 0) {
-            storage.addCharAtPosition(0, value);
+        //if cursor is at the beginning, add number
+        if ((selection == 0)) {
+            storage.addCharAtPosition(0, currentValue);
         }
-        //if previous character is closed bracket, add "x" before new digit
+        //if previous character is closed bracket, add "x" before new number
         else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals(")")){
-            storage.addCharAtPosition(selection, value);
+            storage.addCharAtPosition(selection, currentValue);
             storage.addCharAtPosition(selection, "×");
 
         }
 
-        //if cursor is at the beginning, and storage contains some characters, insert digit as a first one
-        else if ((selection == 0) && storage.getStorage().length() >= 1) {
-            storage.addCharAtPosition(selection, value);
-        }
+
         //if there is just zero in storage, and cursor is placed after it, replace 0 with new digit
         else if ((storage.getStorage().length() == 1) && String.valueOf(storage.getStorage().charAt(0)).equals("0")) {
             storage.removeCharAtPosition(0);
-            storage.addCharAtPosition(0, value);
+            storage.addCharAtPosition(0, currentValue);
             txt.setSelection(1);
 
         }
 
-        //if previous value is "0" and next value is comma, replace zero with new digit if it's different than 0
+        //if previous currentValue is "0" and next currentValue is comma, replace zero with new digit if it's different than 0
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0") && selection < storage.getStorage().length() && String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
             storage.removeCharAtPosition(selection - 1);
-            storage.addCharAtPosition(selection - 1, value);
+            storage.addCharAtPosition(selection - 1, currentValue);
 
             txt.setSelection(selection);
 
@@ -197,20 +194,20 @@ public class DigitsInput implements View.OnClickListener {
 
         //if previous character is not zero, insert new digit
         else if (!String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
-            storage.addCharAtPosition(selection, value);
+            storage.addCharAtPosition(selection, currentValue);
 
         } else if (selection < 2) {
-            storage.addCharAtPosition(selection, value);
+            storage.addCharAtPosition(selection, currentValue);
 
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             storage.removeCharAtPosition(selection - 1);
-            storage.addCharAtPosition(selection - 1, value);
+            storage.addCharAtPosition(selection - 1, currentValue);
 
             txt.setSelection(storage.getStorage().length());
         } else {
-            storage.addCharAtPosition(selection, value);
+            storage.addCharAtPosition(selection, currentValue);
 
         }
     }

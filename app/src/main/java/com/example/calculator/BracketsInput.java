@@ -21,19 +21,27 @@ public class BracketsInput implements View.OnClickListener {
             storage.addCharAtPosition(0, "(");
 
         } else {
-            //close bracket input
-            if (bracketType().equals("closeBracket")) {
-                storage.addCharAtPosition(selection, ")");
-                //open bracket input
-            } else if (bracketType().equals("openBracket")) {
+            try {
+
+
+                //close bracket input
+                if (bracketType().equals("closeBracket")) {
+                    storage.addCharAtPosition(selection, ")");
+                    //open bracket input
+                }
+                //open bracket with "x", if there is a number before it
+                else if
+                    (bracketType().equals("openBracket") && Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection - 1)))){
+                    storage.addCharAtPosition(selection, "×(");
+                    txt.setSelection(selection + 2);
+                } else{
+                    storage.addCharAtPosition(selection, "(");
+                }
+                // open bracket
+            } catch (IndexOutOfBoundsException e) {
                 storage.addCharAtPosition(selection, "(");
-
-
-            } else {
-                //open bracket with multiply symbol input
-                storage.addCharAtPosition(selection, "×(");
-                txt.setSelection(selection + 2);
             }
+
         }
 
     }
@@ -41,20 +49,20 @@ public class BracketsInput implements View.OnClickListener {
 
     //method checking what type of bracket has to be input
     String bracketType() {
-        boolean closeBracket = false;
+        int closedBracket = 0;
+        int openedBracket = 0;
         int substringStart = 0;
-        int substringEnd = txt.getSelectionEnd();
+        int substringEnd = storage.getStorage().length();
         String substring = storage.getStorage().substring(substringStart, substringEnd);
         for (int x = substring.length() - 1; x >= 0; x--) {
             if (String.valueOf(substring.charAt(x)).equals("(")) {
-                closeBracket = true;
-                break;
+                openedBracket++;
             } else if (String.valueOf(substring.charAt(x)).equals(")")) {
-                break;
+                closedBracket++;
             }
         }
 
-        if (closeBracket) {
+        if (closedBracket<openedBracket) {
             return "closeBracket";
         } else {
             return "openBracket";

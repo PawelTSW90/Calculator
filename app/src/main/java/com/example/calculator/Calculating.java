@@ -28,9 +28,11 @@ class Calculating {
         //regex check if arithmetic symbols format is correct
         boolean formatCheck1 = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
         //regex check if commas format is correct
-        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+×÷\\-])|\\D[,]|^[,].*", expression);
+        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+()×÷\\-])|\\D[,]|^[,].*", expression);
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
+        //regex check if every comma with brackets format is correct
+        boolean formatCheck4 = Pattern.matches(".*(\\D,\\D|\\d,\\D|\\D,\\d|,$|^,).*", expression);
         //regex check if 15 digit limit is reached
         boolean fifteenDigitsLimit = Pattern.matches(".*\\d{" + (DIGITS_SCALE + 1) + ",}.*", expression);
         //regex check if 10 digit limit is reached
@@ -38,7 +40,7 @@ class Calculating {
         //regex check if total scale 100 or more characters is reached
         boolean maximumScaleReached = Pattern.matches(".{" + (MAXIMUM_SCALE) + ",}", expression);
         //regex check
-        if (formatCheck1 || formatCheck2 || formatCheck3||!checkBrackets()) {
+        if (formatCheck1 || formatCheck2 || formatCheck3||formatCheck4||!checkBrackets()) {
             return WRONG_FORMAT;
         } else if (fifteenDigitsLimit) {
             return DIGITS_SCALE_REACHED;

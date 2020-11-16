@@ -144,7 +144,7 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
                     } catch (EmptyStackException e) {
 
                     }
-                    if (!tmp.toString().equals("")) {
+                    if (!tmp.toString().isEmpty()) {
                         exit.add(tmp.toString());
                     }
                     //if stack is empty, move current symbol to stack
@@ -178,8 +178,10 @@ StringBuilder tmpStorage = new StringBuilder().append(storage);
                             }
                             // if our arithmetic operator has low priority.
                         } else {
-                            // move operators from stack to exit until : stack is empty/you find low priority symbol on stack/open bracket
-                            while (!stack.isEmpty() && isLowPriority(stack.peek()) && !stack.peek().equals("(")) {
+
+
+                            // move operators from stack to exit until : stack is empty/you find open bracket
+                            while (!stack.isEmpty()  && !stack.peek().equals("(")) {
                                 exit.add(stack.pop());
                             }
                             //then add current symbol to stack
