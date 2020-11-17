@@ -1,5 +1,7 @@
 package com.example.calculator;
 
+import android.widget.EditText;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,28 +14,25 @@ import org.junit.Test;
 public class CalculatingTest{
     private Calculating calculating;
     private StorageRefactor storage;
+    private EditText txt;
     @Before
     public void setup()
     {
         this.calculating = new Calculating(storage);
-        this.storage = storage;
+        this.storage = new StorageRefactor(txt);
     }
 
-    @Test
-    public void wrongFormatCheckerTest() {
-        /*
-        String testExpression2 = "2+4,,4+1";
-        Assert.assertTrue(this.calculating.wrongFormatChecker(testExpression2));
-        String testExpression = "2+4,6,8,9+1";
-        Assert.assertTrue(this.calculating.wrongFormatChecker(testExpression));
 
-*/
-    }
     @Test
     public void countResultTest(){
-        StorageRefactor storage = new StorageRefactor(null);
         storage.setStorage("2,3+2,7=");
-        Assert.assertTrue(calculating.countResult(storage).equals("5"));
+        Assert.assertEquals("5", calculating.countResult(storage));
+
+    }
+    @Test
+    public void countResultTest2(){
+        storage.setStorage("-1-2-3=");
+        Assert.assertEquals("-6", calculating.countResult(storage));
 
     }
 }

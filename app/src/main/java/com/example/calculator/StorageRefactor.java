@@ -70,7 +70,10 @@ public class StorageRefactor {
 
                 } else {
                     // move number from awaitingNumbers to exit...
-                    exit.add(awaitingNumbers.toString());
+                    while (awaitingNumbers.length()!=0){
+                        exit.add(awaitingNumbers.toString());
+                        awaitingNumbers.deleteCharAt(awaitingNumbers.length()-1);
+                    }
                     awaitingNumbers = new StringBuilder();
                 }
                 // move everything from stack to exit, until you get open bracket...
