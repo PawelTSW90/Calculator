@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class StorageRefactor {
     private String storage = "";
-    private EditText txt;
+    private final EditText txt;
 
     StorageRefactor(EditText txt) {
         this.txt = txt;

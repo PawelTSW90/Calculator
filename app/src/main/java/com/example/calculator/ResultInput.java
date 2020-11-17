@@ -6,10 +6,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class ResultInput implements View.OnClickListener {
-    private EditText txt;
-    private StorageRefactor storage;
-    private Calculating calculating;
-    private Context context;
+    private final EditText txt;
+    private final StorageRefactor storage;
+    private final Calculating calculating;
+    private final Context context;
     Toast toast = null;
 
 

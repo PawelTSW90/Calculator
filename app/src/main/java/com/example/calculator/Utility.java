@@ -26,19 +26,20 @@ class Utility {
             return false;
         }
     }
-        //method is checking what arithmetic symbol is beeing used
+        //method is checking which arithmetic symbol is used
     static int whatSign(String input) {
-        if (input.equals("+")) {
-            return 0;
-        } else if (input.equals("-")) {
-            return 1;
-        } else if (input.equals("×")) {
-            return 2;
-        } else if (input.equals("÷")) {
-            return 3;
-        } else {
-            // no value
-            return 4;
+        switch (input) {
+            case "+":
+                return 0;
+            case "-":
+                return 1;
+            case "×":
+                return 2;
+            case "÷":
+                return 3;
+            default:
+                // no value
+                return 4;
         }
     }
 

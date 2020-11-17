@@ -5,8 +5,8 @@ import android.widget.EditText;
 
 public class BracketsInput implements View.OnClickListener {
 
-    private StorageRefactor storage;
-    private EditText txt;
+    private final StorageRefactor storage;
+    private final EditText txt;
 
     BracketsInput(EditText txt, StorageRefactor storage) {
         this.storage = storage;

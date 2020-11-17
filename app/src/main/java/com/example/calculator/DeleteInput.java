@@ -6,8 +6,8 @@ import android.widget.EditText;
 
 public class DeleteInput implements View.OnClickListener {
 
-    private EditText txt;
-    private StorageRefactor storage;
+    private final EditText txt;
+    private final StorageRefactor storage;
 
 
     DeleteInput(EditText txt, StorageRefactor storage) {
@@ -31,12 +31,12 @@ public class DeleteInput implements View.OnClickListener {
     void deleteChar(int position) {
         try {
             StringBuilder tempStorage = new StringBuilder(storage.getStorage());
-            tempStorage = tempStorage.deleteCharAt(position-1);
+            tempStorage = tempStorage.deleteCharAt(position - 1);
             storage.setStorage(tempStorage.toString());
             txt.setText(storage.getStorage());
-            txt.setSelection(position-1);
+            txt.setSelection(position - 1);
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException ignored) {
 
         }
 
@@ -44,6 +44,7 @@ public class DeleteInput implements View.OnClickListener {
 
     //Method clearing all storage
     void deleteAll() {
+
         storage.setStorage("");
         txt.setSelection(0);
         txt.setText(storage.getStorage());

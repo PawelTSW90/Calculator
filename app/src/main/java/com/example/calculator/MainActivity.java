@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -12,12 +13,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final EditText txt = findViewById(R.id.text_Edit);
+        EditText txt = findViewById(R.id.text_Edit);
         StorageRefactor storage = new StorageRefactor(txt);
         Calculating calculating = new Calculating(storage);
         DeleteInput delete = new DeleteInput(txt, storage);
+
+        //restore storage data after activity restart
+        if (savedInstanceState != null) {
+            storage.setStorage(savedInstanceState.getString("storage"));
+        }
 
 
         //disable system keyboard
@@ -30,28 +37,28 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button2 = findViewById(R.id.button_2);
-        button2.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button2.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button3 = findViewById(R.id.button_3);
-        button3.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button3.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button4 = findViewById(R.id.button_4);
-        button4.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button4.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button5 = findViewById(R.id.button_5);
-        button5.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button5.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button6 = findViewById(R.id.button_6);
-        button6.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button6.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button7 = findViewById(R.id.button_7);
-        button7.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button7.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button8 = findViewById(R.id.button_8);
-        button8.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button8.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button button9 = findViewById(R.id.button_9);
-        button9.setOnClickListener(new DigitsInput(txt, storage,getApplicationContext(), delete));
+        button9.setOnClickListener(new DigitsInput(txt, storage, getApplicationContext(), delete));
 
         final Button brackets = findViewById(R.id.button_brackets);
         brackets.setOnClickListener(new BracketsInput(txt, storage));
@@ -80,7 +87,18 @@ public class MainActivity extends AppCompatActivity {
         final Button comma_button = findViewById(R.id.button_comma);
         comma_button.setOnClickListener(new CommaInput(txt, storage));
 
+
     }
+
+    //save storage data before activity restart caused by screen rotation
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        EditText txt = findViewById(R.id.text_Edit);
+
+        outState.putString("storage", txt.getText().toString());
+    }
+
 }
 
 

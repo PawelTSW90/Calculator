@@ -1,7 +1,5 @@
 package com.example.calculator;
 
-import android.util.Log;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -68,14 +66,13 @@ class Calculating {
 
     }
 
-    //Method is calling refactorStorage method to prepare storage for calculating,
-    //and start counting
+    //Method is calculating polish reverse notation format and returns result
     String countResult(StorageRefactor storage) {
 
         boolean cantCount = false;
         ArrayList<String> chars = storage.refactorStorage();
         
-        Log.i("proba", chars.toString());
+
         //replace "," for "." for calculating
         for (int x = 0; x < chars.size(); x++) {
             chars.set(x, chars.get(x).replace(",", "."));

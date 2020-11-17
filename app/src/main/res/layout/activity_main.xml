@@ -27,7 +27,8 @@
             android:layout_marginTop="0dp"
             android:background="@null"
             android:text=""
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:autofillHints="" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -41,7 +42,7 @@
 
                 <Button
                     android:id="@+id/button_C"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -51,7 +52,7 @@
 
                 <Button
                     android:id="@+id/button_brackets"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -61,7 +62,7 @@
 
                 <Button
                     android:id="@+id/button_delete"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -71,7 +72,7 @@
 
                 <Button
                     android:id="@+id/button_divide"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -87,34 +88,34 @@
 
                 <Button
                     android:id="@+id/button_7"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_7"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_8"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_8"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_9"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_9"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_multiply"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -131,7 +132,7 @@
 
                 <Button
                     android:id="@+id/button_4"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -140,25 +141,25 @@
 
                 <Button
                     android:id="@+id/button_5"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_5"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_6"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_6"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_minus"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -175,35 +176,35 @@
 
                 <Button
                     android:id="@+id/button_1"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_1"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_2"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_2"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_3"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:text="@string/button_3"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_add"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -219,29 +220,31 @@
 
                 <Button
                     android:id="@+id/button_0"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_0"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_comma"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/button_comma"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
 
                 <Button
                     android:id="@+id/button_result"
-                    style="@android:style/Widget.Button"
+                    style="@android:style/Widget.Material.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
                     android:text="@string/button_result"
+                    android:textColor="@android:color/white"
                     android:textSize="25sp" />
 
 

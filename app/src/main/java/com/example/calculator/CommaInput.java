@@ -4,8 +4,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class CommaInput implements View.OnClickListener {
-    private EditText txt;
-    private StorageRefactor storage;
+    private final EditText txt;
+    private final StorageRefactor storage;
 
 
     CommaInput(EditText txt, StorageRefactor storage) {
@@ -24,21 +24,22 @@ public class CommaInput implements View.OnClickListener {
             txt.setSelection(2);
 
         } else if (selection == 0) {
-            if(isCommaAllowed(v))
-                commaAllowed(v);
+            if (isCommaAllowed())
+                commaAllowed();
         } else {
-            if(isCommaAllowed(v))
-                commaAllowed(v);
+            if (isCommaAllowed())
+                commaAllowed();
         }
 
     }
+
     //Method is checking if comma is allowed
-    boolean isCommaAllowed(View v) {
+    boolean isCommaAllowed() {
         int selection = txt.getSelectionEnd();
         boolean isBackwardComma = false;
         boolean isForwardComma = false;
         //Backward loop looking for comma between selection and first arithmetic symbol
-        for (int i = Math.max(selection-1, 0); i >= 0; i--) {
+        for (int i = Math.max(selection - 1, 0); i >= 0; i--) {
 
             if (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(i)))) {
 
@@ -56,38 +57,34 @@ public class CommaInput implements View.OnClickListener {
             }
         }
         //Forward Loop looking for comma between selection and first arithmetic symbol
-        for (int x = Math.max(selection-1, 0); x <= storage.getStorage().length() - 1; x++) {
-            if(String.valueOf(storage.getStorage().charAt(x)).equals(",")){
+        for (int x = Math.max(selection - 1, 0); x <= storage.getStorage().length() - 1; x++) {
+            if (String.valueOf(storage.getStorage().charAt(x)).equals(",")) {
                 isForwardComma = true;
                 break;
             }
         }
-        if (isBackwardComma || isForwardComma) {
-            return false;
-        } else {
-            return true;
-        }
+        return !isBackwardComma && !isForwardComma;
     }
 
-    void commaAllowed(View v) {
+    void commaAllowed() {
         //initialize selection position
         int selection = txt.getSelectionEnd();
 
         //if selection is 0, add ",0"
-       if(selection == 0){
-           storage.addCharAtPosition(0, "0,");
-       }
+        if (selection == 0) {
+            storage.addCharAtPosition(0, "0,");
+        }
 
         //if previous character is arithmetic symbol, add 0,
-        else if(Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))){
-            storage.addCharAtPosition(selection, "0,");;
+        else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
+            storage.addCharAtPosition(selection, "0,");
             this.txt.setSelection(selection + 2);
 
         } else {
-           storage.addCharAtPosition(selection, ",");
-           txt.setSelection(selection + 1);
+            storage.addCharAtPosition(selection, ",");
+            txt.setSelection(selection + 1);
 
-       }
+        }
     }
 
 }
