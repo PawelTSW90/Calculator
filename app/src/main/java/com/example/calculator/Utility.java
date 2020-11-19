@@ -2,16 +2,6 @@ package com.example.calculator;
 
 class Utility {
 
-            //method is checking if value is integer
-    static boolean isParseInt(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
             //method is checking if value is arithmetic symbol
     static boolean containArithmeticSymbol(String input) {
         return input.contains("+") || input.contains("-") || input.contains("×") || input.contains("÷");

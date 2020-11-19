@@ -18,16 +18,17 @@ public class StorageRefactor {
     }
 
     //method is adding value, to designated position
-    void addCharAtPosition(int position, String whichChar) {
-        int selection = txt.getSelectionEnd();
-        StringBuilder tempStorage = new StringBuilder(storage);
-        tempStorage = tempStorage.insert(position, whichChar);
-        storage = tempStorage.toString();
-        txt.setText(getStorage());
-        if (selection == 0) {
-            txt.setSelection(1);
-        } else
-            txt.setSelection(selection + 1);
+    void addAtPosition(int position, String whichChar) {
+            int selection = txt.getSelectionEnd();
+            StringBuilder tempStorage = new StringBuilder(storage);
+            tempStorage = tempStorage.insert(position, whichChar);
+            storage = tempStorage.toString();
+            txt.setText(getStorage());
+            if (selection == 0) {
+                txt.setSelection(1);
+            } else
+                txt.setSelection(selection + 1);
+
 
     }
 
@@ -53,7 +54,7 @@ public class StorageRefactor {
             String currentChar = Character.toString(storage.charAt(i));
             //If input is a digit, move it to awaitingNumbers
             if
-            (Utility.isParseInt(currentChar) || currentChar.equals(",")) {
+            (Utility.isDouble(currentChar) || currentChar.equals(",")) {
                 awaitingNumbers.append(storage.charAt(i));
             }
             //if input is open bracket, move it on stack
@@ -66,7 +67,6 @@ public class StorageRefactor {
                 if (stack.peek().equals("NEG")) {
                     exit.add("-" + awaitingNumbers.toString());
                     stack.pop();
-                    awaitingNumbers = new StringBuilder();
 
                 } else {
                     // move number from awaitingNumbers to exit...
@@ -74,8 +74,8 @@ public class StorageRefactor {
                         exit.add(awaitingNumbers.toString());
                         awaitingNumbers.deleteCharAt(awaitingNumbers.length()-1);
                     }
-                    awaitingNumbers = new StringBuilder();
                 }
+                awaitingNumbers = new StringBuilder();
                 // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());

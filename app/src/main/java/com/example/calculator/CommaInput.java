@@ -41,15 +41,13 @@ public class CommaInput implements View.OnClickListener {
         //Backward loop looking for comma between selection and first arithmetic symbol
         for (int i = Math.max(selection - 1, 0); i >= 0; i--) {
 
-            if (!Utility.isParseInt(String.valueOf(storage.getStorage().charAt(i)))) {
+            if (!Utility.isDouble(String.valueOf(storage.getStorage().charAt(i)))) {
 
                 if (String.valueOf(storage.getStorage().charAt(i)).equals(",")) {
                     isBackwardComma = true;
-                    break;
 
-                } else {
-                    break;
                 }
+                break;
 
             } else if (String.valueOf(storage.getStorage().charAt(i)).equals(",")) {
                 isBackwardComma = true;
@@ -72,16 +70,16 @@ public class CommaInput implements View.OnClickListener {
 
         //if selection is 0, add ",0"
         if (selection == 0) {
-            storage.addCharAtPosition(0, "0,");
+            storage.addAtPosition(0, "0,");
         }
 
         //if previous character is arithmetic symbol, add 0,
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
-            storage.addCharAtPosition(selection, "0,");
+            storage.addAtPosition(selection, "0,");
             this.txt.setSelection(selection + 2);
 
         } else {
-            storage.addCharAtPosition(selection, ",");
+            storage.addAtPosition(selection, ",");
             txt.setSelection(selection + 1);
 
         }

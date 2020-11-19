@@ -31,7 +31,7 @@ public class ResultInput implements View.OnClickListener {
         }
         //if format is correct start counting
         if (Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
-            storage.addCharAtPosition(storage.getStorage().length(), "=");
+            storage.addAtPosition(storage.getStorage().length(), "=");
             txt.setText(calculating.countResult(storage));
             txt.setSelection(storage.getStorage().length());
             //if format is wrong, display toast

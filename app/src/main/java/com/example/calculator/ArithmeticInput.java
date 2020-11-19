@@ -72,7 +72,7 @@ public class ArithmeticInput implements View.OnClickListener {
     void entryAllowed(View v) {
         String tmp = ((Button) v).getText().toString();
         int selection = txt.getSelectionEnd();
-        storage.addCharAtPosition(selection, tmp);
+        storage.addAtPosition(selection, tmp);
 
     }
 

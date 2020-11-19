@@ -18,7 +18,7 @@ public class BracketsInput implements View.OnClickListener {
         int selection = txt.getSelectionEnd();
         //is storage is empty, open bracket
         if (storage.getStorage().isEmpty()) {
-            storage.addCharAtPosition(0, "(");
+            storage.addAtPosition(0, "(");
 
         } else {
             try {
@@ -26,20 +26,20 @@ public class BracketsInput implements View.OnClickListener {
 
                 //close bracket input
                 if (bracketType().equals("closeBracket")) {
-                    storage.addCharAtPosition(selection, ")");
+                    storage.addAtPosition(selection, ")");
                     //open bracket input
                 }
                 //open bracket with "x", if there is a number before it
                 else if
                     (bracketType().equals("openBracket") && Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection - 1)))){
-                    storage.addCharAtPosition(selection, "×(");
+                    storage.addAtPosition(selection, "×(");
                     txt.setSelection(selection + 2);
                 } else{
-                    storage.addCharAtPosition(selection, "(");
+                    storage.addAtPosition(selection, "(");
                 }
                 // open bracket
             } catch (IndexOutOfBoundsException e) {
-                storage.addCharAtPosition(selection, "(");
+                storage.addAtPosition(selection, "(");
             }
 
         }

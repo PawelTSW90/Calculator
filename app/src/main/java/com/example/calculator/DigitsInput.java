@@ -171,19 +171,19 @@ public class DigitsInput implements View.OnClickListener {
 
         //if cursor is at the beginning, add number
         if ((selection == 0)) {
-            storage.addCharAtPosition(0, currentValue);
+            storage.addAtPosition(0, currentValue);
         }
         //if previous character is closed bracket, add "x" before new number
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals(")")) {
-            storage.addCharAtPosition(selection, currentValue);
-            storage.addCharAtPosition(selection, "×");
+            storage.addAtPosition(selection, currentValue);
+            storage.addAtPosition(selection, "×");
 
         }
 
         //if there is just zero in storage, and cursor is placed after it, replace 0 with new digit
         else if ((storage.getStorage().length() == 1) && String.valueOf(storage.getStorage().charAt(0)).equals("0")) {
             delete.deleteChar(selection);
-            storage.addCharAtPosition(0, currentValue);
+            storage.addAtPosition(0, currentValue);
             txt.setSelection(1);
 
         }
@@ -191,24 +191,24 @@ public class DigitsInput implements View.OnClickListener {
         //if previous currentValue is "0" and next currentValue is comma, replace zero with new digit if it's different than 0
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0") && selection < storage.getStorage().length() && String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
             delete.deleteChar(selection - 1);
-            storage.addCharAtPosition(selection - 1, currentValue);
+            storage.addAtPosition(selection - 1, currentValue);
             txt.setSelection(selection);
         }
 
         //if previous character is not zero, insert new digit
         else if (!String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
-            storage.addCharAtPosition(selection, currentValue);
+            storage.addAtPosition(selection, currentValue);
 
         } else if (selection < 2) {
-            storage.addCharAtPosition(selection, currentValue);
+            storage.addAtPosition(selection, currentValue);
 
         }
         //If there is arithmetic symbol two characters back, and 0 digit one character back, replace 0 with new digit
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             delete.deleteChar(selection);
-            storage.addCharAtPosition(selection - 1, currentValue);
+            storage.addAtPosition(selection - 1, currentValue);
         } else {
-            storage.addCharAtPosition(selection, currentValue);
+            storage.addAtPosition(selection, currentValue);
 
         }
     }
@@ -222,12 +222,12 @@ public class DigitsInput implements View.OnClickListener {
         if (selection == 0) {
             //if storage is empty - input allowed
             if (storage.getStorage().isEmpty()) {
-                storage.addCharAtPosition(selection, value);
+                storage.addAtPosition(selection, value);
 
             }
             //if next character is comma, input allowed
             else if (String.valueOf(storage.getStorage().charAt(0)).equals(",")) {
-                storage.addCharAtPosition(selection, value);
+                storage.addAtPosition(selection, value);
 
             }
 
@@ -241,7 +241,7 @@ public class DigitsInput implements View.OnClickListener {
 
             //input allowed
 
-            storage.addCharAtPosition(selection, value);
+            storage.addAtPosition(selection, value);
 
         }
 
@@ -253,7 +253,7 @@ public class DigitsInput implements View.OnClickListener {
             if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             } else {
                 //input allowed
-                storage.addCharAtPosition(selection, value);
+                storage.addAtPosition(selection, value);
             }
 
         } else {
@@ -267,7 +267,7 @@ public class DigitsInput implements View.OnClickListener {
             } else {
 
                 // input allowed
-                storage.addCharAtPosition(selection, value);
+                storage.addAtPosition(selection, value);
 
             }
 
