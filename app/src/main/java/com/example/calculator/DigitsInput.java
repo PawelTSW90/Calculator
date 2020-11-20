@@ -34,12 +34,29 @@ public class DigitsInput implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        //if current format is correct:
+        if (wrongFormatToasts()) {
+            //check if 0 entry is allowed
+            if (((Button) v).getText().toString().equals("0")) {
+                checkZero(v);
+            }
+            // check if new digit entry is allowed
+            else {
+                digitEntry(v);
+            }
 
+        }
 
-        //checking if format is correct. If not display toast
+    }
+
+    //Method displays toasts if format is not correct
+    public boolean wrongFormatToasts() {
+        boolean formatCorrect = true;
+        //if format is not correct:
 
         //15 digits limit reached toast
         if (wrongFormatChecker() == RESPONSE_15_DIGITS_LIMIT_REACHED) {
+            formatCorrect = false;
             if (toast != null) {
                 toast.cancel();
             }
@@ -48,6 +65,7 @@ public class DigitsInput implements View.OnClickListener {
 
             //10 digits after comma limit reached toast
         } else if (wrongFormatChecker() == RESPONSE_LIMIT_AFTER_COMMA_REACHED) {
+            formatCorrect = false;
             if (toast != null) {
                 toast.cancel();
             }
@@ -56,24 +74,19 @@ public class DigitsInput implements View.OnClickListener {
 
             //100 characters limit reached toast
         } else if (wrongFormatChecker() == RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED) {
+            formatCorrect = false;
             if (toast != null) {
                 toast.cancel();
             }
             toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
             toast.show();
         } else if (wrongFormatChecker() == RESPONSE_WRONG_FORMAT_USED) {
+            formatCorrect = false;
         }
 
-        //if format is correct:
+        return formatCorrect;
 
-        //check if 0 entry is allowed
-        else if (((Button) v).getText().toString().equals("0")) {
-            checkZero(v);
-        }
-        // check if other digits entry is allowed
-        else {
-            digitEntry(v);
-        }
+
     }
 
 
@@ -163,7 +176,7 @@ public class DigitsInput implements View.OnClickListener {
         return nearestLeftOperator;
     }
 
-    // method is checking if no-0 digit input is allowed
+    // If current display format is correct, method is checking if format will be correct after new input
     private void digitEntry(View v) {
 
         int selection = txt.getSelectionEnd();
@@ -213,7 +226,7 @@ public class DigitsInput implements View.OnClickListener {
         }
     }
 
-    // 0 digit input
+    // Method is checking if 0 input is allowed
     public void checkZero(View v) {
         String value = ((Button) v).getText().toString();
         int selection = txt.getSelectionEnd();
@@ -232,7 +245,6 @@ public class DigitsInput implements View.OnClickListener {
             }
 
             //otherwise, input not allowed
-
 
         }
         //cursor position as last, storage smaller than 2:

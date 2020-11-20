@@ -22,20 +22,29 @@ public class ResultInput implements View.OnClickListener {
 
 
     public void onClick(View v) {
-        //run wrongFormatChecker method to check if format is correct
-        calculating.wrongFormatChecker(storage.getStorage());
-
-        //if storage is empty, wait
-        if (storage.getStorage().isEmpty()) {
-            return;
-        }
         //if format is correct start counting
         if (Utility.containArithmeticSymbol(storage.getStorage()) && calculating.wrongFormatChecker(storage.getStorage()) == 0) {
-            storage.addAtPosition(storage.getStorage().length(), "=");
-            txt.setText(calculating.countResult(storage));
-            txt.setSelection(storage.getStorage().length());
-            //if format is wrong, display toast
-        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 1) {
+            correctFormat();
+
+            //if not, run wrongFormatToasts method
+        } else {
+            wrongFormatResultToasts();
+        }
+    }
+
+    //Method starts counting
+    public void correctFormat() {
+        storage.addAtPosition(storage.getStorage().length(), "=");
+        txt.setText(calculating.countResult(storage));
+        txt.setSelection(storage.getStorage().length());
+
+    }
+
+    //if format is wrong, method shows toasts
+    public void wrongFormatResultToasts() {
+
+
+        if (calculating.wrongFormatChecker(storage.getStorage()) == 1) {
             if (toast != null) {
                 toast.cancel();
             }

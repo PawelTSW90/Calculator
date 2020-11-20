@@ -31,10 +31,10 @@ public class BracketsInput implements View.OnClickListener {
                 }
                 //open bracket with "x", if there is a number before it
                 else if
-                    (bracketType().equals("openBracket") && Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection - 1)))){
+                (bracketType().equals("openBracket") && Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
                     storage.addAtPosition(selection, "×(");
                     txt.setSelection(selection + 2);
-                } else{
+                } else {
                     storage.addAtPosition(selection, "(");
                 }
                 // open bracket
@@ -62,7 +62,7 @@ public class BracketsInput implements View.OnClickListener {
             }
         }
 
-        if (closedBracket<openedBracket) {
+        if (closedBracket < openedBracket) {
             return "closeBracket";
         } else {
             return "openBracket";

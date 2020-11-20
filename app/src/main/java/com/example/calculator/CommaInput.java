@@ -23,10 +23,7 @@ public class CommaInput implements View.OnClickListener {
             this.txt.setText(storage.getStorage());
             txt.setSelection(2);
 
-        } else if (selection == 0) {
-            if (isCommaAllowed())
-                commaAllowed();
-        } else {
+        }  else {
             if (isCommaAllowed())
                 commaAllowed();
         }

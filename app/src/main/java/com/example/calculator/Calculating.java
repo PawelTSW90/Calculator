@@ -24,9 +24,9 @@ class Calculating {
     int wrongFormatChecker(String expression) {
 
         //regex check if arithmetic symbols format is correct
-        boolean formatCheck1 = Pattern.matches(".*[+,\\-×÷]{2,}.*", expression);
+        boolean formatCheck1 = Pattern.matches(".*[+,\\-×÷]{2,}.*|.*", expression);
         //regex check if commas format is correct
-        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+()×÷\\-])|\\D[,]|^[,].*", expression);
+        boolean formatCheck2 = Pattern.matches(".*(^|[+×÷\\-])([0-9]*,+[0-9]*,+[0-9]*)+.*($|[+()×÷\\-])|\\D[,]|^[,].*|.*\\(\\).*", expression);
         //regex check if last character is arithmetic symbol
         boolean formatCheck3 = Pattern.matches(".*[+,×÷\\-]$.*", expression);
         //regex check if every comma with brackets format is correct
@@ -62,6 +62,7 @@ class Calculating {
                 closedBrackets++;
             }
         }
+
         return openedBrackets == closedBrackets;
 
     }
@@ -80,8 +81,10 @@ class Calculating {
         for (int x = 0; x < exit.size(); x++) {
             //if character is nor number or dot, start calculating
             if (!Utility.isDouble(exit.get(x)) && !exit.get(x).contains(".") && !exit.get(x).isEmpty()) {
+
                 if (exit.get(x - 2).isEmpty() || exit.get(x - 1).isEmpty()) {
                     cantCount = true;
+                    break;
                     //adding two values
                 } else if (exit.get(x).equals("+")) {
                     BigDecimal value1, value2, sum;
