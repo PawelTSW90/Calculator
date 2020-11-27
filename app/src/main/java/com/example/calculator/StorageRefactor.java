@@ -19,19 +19,18 @@ public class StorageRefactor {
 
     //method is adding value, to designated position
     void addAtPosition(int position, String whichChar) {
-            int selection = txt.getSelectionEnd();
-            StringBuilder tempStorage = new StringBuilder(storage);
-            tempStorage = tempStorage.insert(position, whichChar);
-            storage = tempStorage.toString();
-            txt.setText(getStorage());
-            if (selection == 0) {
-                txt.setSelection(1);
-            } else
-                txt.setSelection(selection + 1);
+        int selection = txt.getSelectionEnd();
+        StringBuilder tempStorage = new StringBuilder(storage);
+        tempStorage = tempStorage.insert(position, whichChar);
+        storage = tempStorage.toString();
+        txt.setText(getStorage());
+        if (selection == 0) {
+            txt.setSelection(1);
+        } else
+            txt.setSelection(selection + 1);
 
 
     }
-
 
 
     String getStorage() {
@@ -45,7 +44,7 @@ public class StorageRefactor {
     //method is converting calculator input into Polish reverse notation
     ArrayList<String> refactorStorage() {
 
-
+        setStorage(storage.replace("π", "3,1415926536"));
         Stack<String> stack = new Stack<>();
         ArrayList<String> exit = new ArrayList<>();
         StringBuilder awaitingNumbers = new StringBuilder();
@@ -67,15 +66,16 @@ public class StorageRefactor {
                 if (stack.peek().equals("NEG")) {
                     exit.add("-" + awaitingNumbers.toString());
                     stack.pop();
+                    awaitingNumbers = new StringBuilder();
 
                 } else {
                     // move number from awaitingNumbers to exit...
-                    while (awaitingNumbers.length()!=0){
+                    while (awaitingNumbers.length() != 0) {
                         exit.add(awaitingNumbers.toString());
-                        awaitingNumbers.deleteCharAt(awaitingNumbers.length()-1);
+                        awaitingNumbers = new StringBuilder();
                     }
                 }
-                awaitingNumbers = new StringBuilder();
+
                 // move everything from stack to exit, until you get open bracket...
                 while (!stack.peek().equals("(")) {
                     exit.add(stack.pop());

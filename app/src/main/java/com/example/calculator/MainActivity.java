@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         final Button comma_button = findViewById(R.id.button_comma);
         comma_button.setOnClickListener(new CommaInput(txt, storage));
 
+        Button pi_button = findViewById(R.id.button_PI);
+        pi_button.setOnClickListener(new PInumber(txt, storage));
+
 
     }
 

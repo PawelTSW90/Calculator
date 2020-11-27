@@ -19,5 +19,6 @@
     <string name="button_brackets">()</string>
     <string name="button_delete">⌫</string>
     <string name="button_comma">,</string>
+    <string name="button_PI">π</string>
 
 </resources>

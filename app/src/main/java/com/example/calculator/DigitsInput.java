@@ -182,7 +182,7 @@ public class DigitsInput implements View.OnClickListener {
         int selection = txt.getSelectionEnd();
         String currentValue = ((Button) v).getText().toString();
 
-        //if cursor is at the beginning, add number
+        //if cursor is at zero, add number
         if ((selection == 0)) {
             storage.addAtPosition(0, currentValue);
         }
@@ -201,11 +201,15 @@ public class DigitsInput implements View.OnClickListener {
 
         }
 
-        //if previous currentValue is "0" and next currentValue is comma, replace zero with new digit if it's different than 0
+        //if previous character is "0" and next currentValue is comma, replace zero with new digit if it's different than 0
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0") && selection < storage.getStorage().length() && String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
             delete.deleteChar(selection - 1);
             storage.addAtPosition(selection - 1, currentValue);
             txt.setSelection(selection);
+        //if previous character is π, add "×" and current value
+        } else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("π")){
+            storage.addAtPosition(selection, "×"+currentValue);
+            txt.setSelection(selection+2);
         }
 
         //if previous character is not zero, insert new digit
@@ -220,7 +224,9 @@ public class DigitsInput implements View.OnClickListener {
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             delete.deleteChar(selection);
             storage.addAtPosition(selection - 1, currentValue);
-        } else {
+        }
+
+        else {
             storage.addAtPosition(selection, currentValue);
 
         }

@@ -29,9 +29,14 @@ public class BracketsInput implements View.OnClickListener {
                     storage.addAtPosition(selection, ")");
                     //open bracket input
                 }
-                //open bracket with "x", if there is a number before it
+                //open bracket with "x", if there is a number before
                 else if
                 (bracketType().equals("openBracket") && Utility.isDouble(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
+                    storage.addAtPosition(selection, "×(");
+                    txt.setSelection(selection + 2);
+                // open bracket with "x", if there is PI symbol before
+                } else if
+                (bracketType().equals("openBracket") && (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π"))) {
                     storage.addAtPosition(selection, "×(");
                     txt.setSelection(selection + 2);
                 } else {
