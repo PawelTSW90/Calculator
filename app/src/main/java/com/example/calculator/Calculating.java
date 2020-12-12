@@ -16,7 +16,6 @@ class Calculating {
     private final int DIGITS_SCALE_REACHED = 2;
     private final int COMMA_SCALE_REACHED = 3;
     private final int MAXIMUM_SCALE_REACHED = 4;
-    private final int PI_NUMBER_CHECK = 5;
     private final int COMMA_SCALE = 10;
     private final int DIGITS_SCALE = 15;
     private final int MAXIMUM_SCALE = 101;
@@ -33,7 +32,7 @@ class Calculating {
         //regex check if every comma with brackets format is correct
         boolean formatCheck4 = Pattern.matches(".*(\\D,\\D|\\d,\\D|\\D,\\d|,$|^,).*", expression);
         //regex check if PI number format is correct
-        boolean piNumberCheck = Pattern.matches(".*(\\dπ)|(π\\d)\\)|ππ|(,π|π,)|(π\\(|π\\)|\\)π).*", expression);
+        boolean piNumberCheck = Pattern.matches(".*(\\dπ)|(π\\d)\\)|.*ππ.*|(,π|π,)|(π\\(|π\\)|\\)π).*", expression);
         //regex check if 15 digit limit is reached
         boolean fifteenDigitsLimit = Pattern.matches(".*\\d{" + (DIGITS_SCALE + 1) + ",}.*", expression);
         //regex check if 10 digit limit after is reached

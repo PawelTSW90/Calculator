@@ -51,9 +51,19 @@ public class ArithmeticInput implements View.OnClickListener {
                 entryAllowed(v);
             }
             //if previous or current symbols are arithmetic, input not allowed
-        } else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1))) || (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection))))) {
-            //if previous, or current symbol is comma, input not allowed
-        } else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals(",") || String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
+        } else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
+
+        }
+        //if current symbol is arithmetic, replace it with new one
+        else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection)))) {
+            storage.setStorage(storage.getStorage().replace(String.valueOf(storage.getStorage().charAt(selection)), currentValue));
+            txt.setText(storage.getStorage());
+            txt.setSelection(selection);
+        }
+
+
+        //if previous, or current symbol is comma, input not allowed
+        else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals(",") || String.valueOf(storage.getStorage().charAt(selection)).equals(",")) {
         }
         //if previous symbol is opened bracket, and current symbol is minus, entry allowed
         else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("(")) {

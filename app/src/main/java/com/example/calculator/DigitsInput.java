@@ -52,7 +52,7 @@ public class DigitsInput implements View.OnClickListener {
     //Method displays toasts if format is not correct
     public boolean wrongFormatToasts() {
         boolean formatCorrect = true;
-        //if format is not correct:
+        //run wrongFormatChecker method to check format:
 
         //15 digits limit reached toast
         if (wrongFormatChecker() == RESPONSE_15_DIGITS_LIMIT_REACHED) {
@@ -80,8 +80,14 @@ public class DigitsInput implements View.OnClickListener {
             }
             toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
             toast.show();
+            //Wrong format toast
         } else if (wrongFormatChecker() == RESPONSE_WRONG_FORMAT_USED) {
             formatCorrect = false;
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(context, "Wrong format used", Toast.LENGTH_SHORT);
+            toast.show();
         }
 
         return formatCorrect;
@@ -90,7 +96,7 @@ public class DigitsInput implements View.OnClickListener {
     }
 
 
-    //Method blocking entering more than 15 digits between arithmetic operators or 10 digits after comma
+    //Method checks if displayed format is correct
     public int wrongFormatChecker() {
         int ENTRY_ALLOWED = 0;
         int selection = txt.getSelectionEnd();
@@ -128,6 +134,7 @@ public class DigitsInput implements View.OnClickListener {
         boolean tmpCharacterLimitAfterComma = Pattern.matches(".*,\\d{9,}.*", substring);
         boolean tmp100CharactersLimit = Pattern.matches(".{100,}", storage.getStorage());
         boolean tmpTwoCommas = Pattern.matches(".*,,.*", storage.getStorage());
+        boolean tmpTwoLambda = Pattern.matches(".*ππ.*", storage.getStorage());
 
         if (tmpCharacterLimit) {
             return RESPONSE_15_DIGITS_LIMIT_REACHED;
@@ -135,7 +142,7 @@ public class DigitsInput implements View.OnClickListener {
             return RESPONSE_LIMIT_AFTER_COMMA_REACHED;
         } else if (tmp100CharactersLimit) {
             return RESPONSE_TOTAL_CHARACTERS_LIMIT_REACHED;
-        } else if (tmpTwoCommas) {
+        } else if (tmpTwoCommas||tmpTwoLambda) {
             return RESPONSE_WRONG_FORMAT_USED;
         } else
 
@@ -206,10 +213,10 @@ public class DigitsInput implements View.OnClickListener {
             delete.deleteChar(selection - 1);
             storage.addAtPosition(selection - 1, currentValue);
             txt.setSelection(selection);
-        //if previous character is π, add "×" and current value
-        } else if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("π")){
-            storage.addAtPosition(selection, "×"+currentValue);
-            txt.setSelection(selection+2);
+            //if previous character is π, add "×" and current value
+        } else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π")) {
+            storage.addAtPosition(selection, "×" + currentValue);
+            txt.setSelection(selection + 2);
         }
 
         //if previous character is not zero, insert new digit
@@ -224,9 +231,7 @@ public class DigitsInput implements View.OnClickListener {
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
             delete.deleteChar(selection);
             storage.addAtPosition(selection - 1, currentValue);
-        }
-
-        else {
+        } else {
             storage.addAtPosition(selection, currentValue);
 
         }
@@ -256,10 +261,15 @@ public class DigitsInput implements View.OnClickListener {
         //cursor position as last, storage smaller than 2:
 
         else if (storage.getStorage().length() < 2 && selection == storage.getStorage().length()) {
+            //if previous character is lambda, add "x0"
+            if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π")) {
+                storage.addAtPosition(selection, value);
+                storage.addAtPosition(selection, "×");
+                //input allowed
+            } else {
+                storage.addAtPosition(selection, value);
+            }
 
-            //input allowed
-
-            storage.addAtPosition(selection, value);
 
         }
 
@@ -269,6 +279,12 @@ public class DigitsInput implements View.OnClickListener {
 
             //if previous character is 0, and there is arithmetic symbol two characters back, input not allowed
             if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 2))) && String.valueOf(storage.getStorage().charAt(selection - 1)).equals("0")) {
+            }
+            //if previous character is lambda, add "x0"
+            else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π")) {
+                storage.addAtPosition(selection, value);
+                storage.addAtPosition(selection, "×");
+
             } else {
                 //input allowed
                 storage.addAtPosition(selection, value);
@@ -282,6 +298,12 @@ public class DigitsInput implements View.OnClickListener {
 
                 // if current and previous characters are commas, input not allowed
             } else if (String.valueOf(storage.getStorage().charAt(selection)).equals(",") && String.valueOf(storage.getStorage().charAt(selection - 1)).equals(",")) {
+            }
+            //if previous character is lambda, add "x0"
+            else if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π")) {
+                storage.addAtPosition(selection, value);
+                storage.addAtPosition(selection, "×");
+
             } else {
 
                 // input allowed
