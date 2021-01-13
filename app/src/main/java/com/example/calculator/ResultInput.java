@@ -72,13 +72,6 @@ public class ResultInput implements View.OnClickListener {
             toast = Toast.makeText(context, "100 characters limit reached", Toast.LENGTH_SHORT);
             toast.show();
 
-        } else if (calculating.wrongFormatChecker(storage.getStorage()) == 5) {
-            if (toast != null) {
-                toast.cancel();
-            }
-            toast = Toast.makeText(context, "Dividing by zero not allowed", Toast.LENGTH_SHORT);
-            toast.show();
-
         }
 
     }

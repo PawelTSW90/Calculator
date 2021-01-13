@@ -1,5 +1,8 @@
 package com.example.calculator;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -7,10 +10,12 @@ import java.util.regex.Pattern;
 
 class Calculating {
     StorageRefactor storage;
+    Context context;
 
 
-    Calculating(StorageRefactor storage) {
+    Calculating(StorageRefactor storage, Context context) {
         this.storage = storage;
+        this.context = context;
 
     }
 
@@ -19,7 +24,6 @@ class Calculating {
     private final int DIGITS_SCALE_REACHED = 2;
     private final int COMMA_SCALE_REACHED = 3;
     private final int MAXIMUM_SCALE_REACHED = 4;
-    private final int DIVIDING_BY_ZERO = 5;
 
 
     private final int COMMA_SCALE = 10;
@@ -45,8 +49,6 @@ class Calculating {
         boolean tenDigitsAfterCommaLimit = Pattern.matches(".*,\\d{" + (COMMA_SCALE + 1) + ",}.*", expression);
         //regex check if total scale 100 or more characters is reached
         boolean maximumScaleReached = Pattern.matches(".{" + (MAXIMUM_SCALE) + ",}", expression);
-        //regex dividing by zero checker
-        boolean dividingByZero = Pattern.matches(".*(÷0$)|(÷0\\D).*", expression);
         //regex check
         if (formatCheck1 || formatCheck2 || formatCheck3 || formatCheck4 || piNumberCheck || !checkBrackets()) {
             return WRONG_FORMAT;
@@ -56,10 +58,7 @@ class Calculating {
             return COMMA_SCALE_REACHED;
         } else if (maximumScaleReached) {
             return MAXIMUM_SCALE_REACHED;
-        } else if(dividingByZero){
-            return DIVIDING_BY_ZERO;
         }
-
         else return RESPONSE_OK;
 
     }
@@ -132,16 +131,21 @@ class Calculating {
                     x = 0;
                     //dividing two values
                 } else if (Utility.whatSign(exit.get(x)) == 3) {
+                    try {
+                        BigDecimal value1, value2, dividing;
+                        value1 = new BigDecimal(exit.get(x - 2));
+                        value2 = new BigDecimal(exit.get(x - 1));
+                        dividing = value1.divide(value2, COMMA_SCALE, RoundingMode.HALF_UP);
+                        exit.set(x - 2, dividing.stripTrailingZeros().toPlainString());
+                        exit.remove(x - 1);
+                        exit.remove(x - 1);
+                        x = 0;
 
-                    BigDecimal value1, value2, dividing;
-                    value1 = new BigDecimal(exit.get(x - 2));
-                    value2 = new BigDecimal(exit.get(x - 1));
-                    dividing = value1.divide(value2, COMMA_SCALE, RoundingMode.HALF_UP);
-                    exit.set(x - 2, dividing.stripTrailingZeros().toPlainString());
-                    exit.remove(x - 1);
-                    exit.remove(x - 1);
-                    x = 0;
-
+                    } catch (ArithmeticException e){
+                        Toast toast = Toast.makeText(context, "Dividing by zero not allowed", Toast.LENGTH_SHORT);
+                        toast.show();
+                        cantCount = true;
+                    }
                 }
             }
         }

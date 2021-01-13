@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         EditText txt = findViewById(R.id.text_Edit);
         StorageRefactor storage = new StorageRefactor(txt);
-        Calculating calculating = new Calculating(storage);
+        Calculating calculating = new Calculating(storage, getApplicationContext());
         DeleteInput delete = new DeleteInput(txt, storage);
 
         //restore storage data after activity restart
