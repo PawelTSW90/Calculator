@@ -22,7 +22,7 @@ public class CommaInput implements View.OnClickListener {
             this.txt.setText(storage.getStorage());
             txt.setSelection(2);
 
-        }  else {
+        } else {
             if (isCommaAllowed())
                 commaAllowed();
         }
@@ -53,19 +53,28 @@ public class CommaInput implements View.OnClickListener {
         }
         //Forward Loop looking for comma between selection and first arithmetic symbol
         for (int x = Math.max(selection - 1, 0); x <= storage.getStorage().length() - 1; x++) {
-            if (String.valueOf(storage.getStorage().charAt(x)).equals(",")) {
+            if (!Utility.isDouble(String.valueOf(storage.getStorage().charAt(x)))) {
+
+                if (String.valueOf(storage.getStorage().charAt(x)).equals(",")) {
+                    isCommaForward = true;
+
+                }
+                break;
+
+            } else if (String.valueOf(storage.getStorage().charAt(x)).equals(",")) {
                 isCommaForward = true;
                 break;
             }
         }
         //if previous character is π, entry not allowed
-        if(!storage.getStorage().isEmpty() && selection >0){
-            if(String.valueOf(storage.getStorage().charAt(selection-1)).equals("π")){
+        if (!storage.getStorage().isEmpty() && selection > 0) {
+            if (String.valueOf(storage.getStorage().charAt(selection - 1)).equals("π")) {
                 piSymbol = true;
             }
-        // //if next character is π, entry not allowed
-        } if(storage.getStorage().length()>0 && selection !=storage.getStorage().length()){
-            if(String.valueOf(storage.getStorage().charAt(selection)).equals("π")){
+            // //if next character is π, entry not allowed
+        }
+        if (storage.getStorage().length() > 0 && selection != storage.getStorage().length()) {
+            if (String.valueOf(storage.getStorage().charAt(selection)).equals("π")) {
                 piSymbol = true;
             }
         }
@@ -74,6 +83,9 @@ public class CommaInput implements View.OnClickListener {
     }
 
     void commaAllowed() {
+        boolean isZeroAndCommaAllowed = true;
+
+
         //initialize selection position
         int selection = txt.getSelectionEnd();
 
@@ -82,11 +94,22 @@ public class CommaInput implements View.OnClickListener {
             storage.addAtPosition(0, "0,");
         }
 
-        //if previous character is arithmetic or PI symbol, add 0,
+        //if previous character is arithmetic or PI symbol, and there is no number with comma after it, add 0,
         else if (Utility.containArithmeticSymbol(String.valueOf(storage.getStorage().charAt(selection - 1)))) {
-            storage.addAtPosition(selection, "0,");
-            this.txt.setSelection(selection + 2);
+            for (int x = Math.max(selection - 1, 0); x <= storage.getStorage().length() - 1; x++) {
+                if (!Utility.isDouble(String.valueOf(storage.getStorage().charAt(x)))) {
+                    if (String.valueOf(storage.getStorage().charAt(x)).equals(",")) {
+                        isZeroAndCommaAllowed = false;
+                        break;
+                    }
+                }
+            }
+            if (isZeroAndCommaAllowed) {
+                storage.addAtPosition(selection, "0,");
+                this.txt.setSelection(selection + 2);
+            } else {
 
+            }
         } else {
             storage.addAtPosition(selection, ",");
             txt.setSelection(selection + 1);
