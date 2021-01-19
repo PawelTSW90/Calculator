@@ -145,6 +145,7 @@ class Calculating {
                         Toast toast = Toast.makeText(context, "Dividing by zero not allowed", Toast.LENGTH_SHORT);
                         toast.show();
                         cantCount = true;
+                        break;
                     }
                 }
             }
